@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIViewController {
+@objc extension UIViewController {
     public class func topViewController() -> UIViewController {
         return UIViewController.topViewController(withRoot: (UIApplication.shared.keyWindow?.rootViewController)!)
     }

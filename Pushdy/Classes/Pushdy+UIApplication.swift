@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import PushdyCore
 
-extension UIApplication {
+@objc extension UIApplication {
     @objc public func pushdyApplication(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let newDeviceToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         var notEqual = false

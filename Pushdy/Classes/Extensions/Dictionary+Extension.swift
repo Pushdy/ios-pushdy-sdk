@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Dictionary where Key: ExpressibleByStringLiteral, Value: Any {
+@objc extension Dictionary where Key: ExpressibleByStringLiteral, Value: Any {
     var jsonString: String? {
         if let dict = (self as AnyObject) as? [String:Any] {
             do {

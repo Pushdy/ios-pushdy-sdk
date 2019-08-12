@@ -8,7 +8,7 @@
 import Foundation
 import PushdyCore
 
-extension Pushdy {
+@objc extension Pushdy {
     internal static let ATTTRIBUTE_PREFIX = "PUSHDY_ATTR_"
     internal static let PREV_ATTTRIBUTE_PREFIX = "PUSHDY_PREV_ATTR_"
     

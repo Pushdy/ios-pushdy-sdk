@@ -11,12 +11,12 @@ import UIKit
 import PushdyCore
 
 
-public typealias PDYActionBlock = () -> Void
-public protocol PDYPushBannerActionProtocol {
+@objc public typealias PDYActionBlock = () -> Void
+@objc public protocol PDYPushBannerActionProtocol {
     func show(_ data:[String:Any], onTap:@escaping PDYActionBlock)
 }
 
-public class PDYNotificationView: UIView, PDYPushBannerActionProtocol {
+@objc public class PDYNotificationView: UIView, PDYPushBannerActionProtocol {
     
     @IBOutlet weak var titleLabel:UILabel?
     @IBOutlet weak var contentLabel:UILabel?

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension Pushdy {
+@objc extension Pushdy {
     public static func getClassWithProtocolInHierarchy(_ searchClass : AnyClass, protocolToFind : Protocol) -> AnyClass? {
         
         if !class_conformsToProtocol(searchClass, protocolToFind) {

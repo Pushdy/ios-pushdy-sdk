@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIImageView {
+@objc extension UIImageView {
     public func setImageUrl(_ url: URL, placeholder:UIImage?, completion:((UIImage) -> Void)?, failure:((Error) -> Void)?) {
         let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.frame = CGRect.init(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)

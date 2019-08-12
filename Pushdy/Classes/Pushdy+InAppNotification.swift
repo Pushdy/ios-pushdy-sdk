@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension Pushdy {
+@objc extension Pushdy {
     private static let PUSH_BANNER_HEIGHT:CGFloat = 65
     private static var _notificationView:UIView?
     private static var _defaultNotificationView:PDYNotificationView?

@@ -11,7 +11,7 @@ import UserNotifications
 import UserNotificationsUI
 
 @available(iOS 10.0, *)
-extension PDYNotificationHandler: UNUserNotificationCenterDelegate {
+@objc extension PDYNotificationHandler: UNUserNotificationCenterDelegate {
     
     // MARK: - UNUserNotificationCenterDelegate
     @available(iOS 10.0, *)

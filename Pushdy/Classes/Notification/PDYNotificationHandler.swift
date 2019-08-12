@@ -12,8 +12,8 @@ import PushdyCore
 import UserNotifications
 import UserNotificationsUI
 
-class PDYNotificationHandler: NSObject {
-    public typealias CompletionBlock = (_ result: UIBackgroundFetchResult?) -> Void
+@objc class PDYNotificationHandler: NSObject {
+   @objc public typealias CompletionBlock = (_ result: UIBackgroundFetchResult?) -> Void
     
     var fromInActiveState:Bool = false
     var enteredBackground:Bool = true

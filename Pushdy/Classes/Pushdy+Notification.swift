@@ -10,7 +10,7 @@ import UIKit
 import PushdyCore
 import UserNotifications
 
-extension Pushdy {    
+@objc extension Pushdy {    
     public static func registerForPushNotifications() {
         PDYNotificationHandler.shared.registerForPushNotifications()
     }

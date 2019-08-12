@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView {
+@objc extension UIView {
     @available(iOS 9.0, *)
     var safeTopAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {

@@ -8,7 +8,7 @@
 import Foundation
 import PushdyCore
 
-extension Pushdy {
+@objc extension Pushdy {
     internal static var isCreatingPlayer:Bool = false
     internal static var isEditingPlayer:Bool = false
     internal static var isFetchingAttributes:Bool = false
