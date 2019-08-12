@@ -1,5 +1,5 @@
 use_frameworks!
 
 target 'Pushdy_Example' do
-  pod 'Pushdy', :path => '../Pushdy.podspec'
+  pod 'PushdySDK', :path => '../PushdySDK.podspec'
 end

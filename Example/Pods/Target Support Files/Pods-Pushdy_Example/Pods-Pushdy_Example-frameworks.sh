@@ -162,11 +162,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/../../Pushdy/Frameworks/PushdyCore.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Pushdy/Pushdy.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PushdySDK/PushdySDK.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/../../Pushdy/Frameworks/PushdyCore.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Pushdy/Pushdy.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PushdySDK/PushdySDK.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

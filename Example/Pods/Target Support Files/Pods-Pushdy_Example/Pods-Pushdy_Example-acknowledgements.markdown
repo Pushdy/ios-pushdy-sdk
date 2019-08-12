@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## Pushdy
+## PushdySDK
 
 Copyright (c) 2019 dangthequan <dangthequan@live.com>
 

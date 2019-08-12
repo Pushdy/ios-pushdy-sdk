@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double PushdyVersionNumber;
-FOUNDATION_EXPORT const unsigned char PushdyVersionString[];
+FOUNDATION_EXPORT double PushdySDKVersionNumber;
+FOUNDATION_EXPORT const unsigned char PushdySDKVersionString[];
 

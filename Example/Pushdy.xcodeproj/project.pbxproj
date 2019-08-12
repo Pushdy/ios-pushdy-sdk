@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		025BAB642301659B00B0B2C7 /* PushdySDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 025BAB632301659B00B0B2C7 /* PushdySDK.podspec */; };
 		1C71390F7C6C48CC3DE0F847 /* Pods_Pushdy_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE2B7F30D2264929E0D0688 /* Pods_Pushdy_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -16,8 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		025BAB632301659B00B0B2C7 /* PushdySDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PushdySDK.podspec; path = ../PushdySDK.podspec; sourceTree = "<group>"; };
 		02D68BB522FA745F00E2747F /* Pushdy_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pushdy_Example.entitlements; sourceTree = "<group>"; };
-		20FDC93918CCED8515026FBB /* Pushdy.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Pushdy.podspec; path = ../Pushdy.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		32CD2244B8014AB9CB9DF944 /* Pods-Pushdy_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pushdy_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Pushdy_Tests/Pods-Pushdy_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F56D07AEC9D506BA951F325 /* Pods-Pushdy_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pushdy_Example.release.xcconfig"; path = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Pushdy_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pushdy_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +113,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				20FDC93918CCED8515026FBB /* Pushdy.podspec */,
+				025BAB632301659B00B0B2C7 /* PushdySDK.podspec */,
 				7204A9EC7D2CE402CAFD9BB3 /* README.md */,
 				7C5155A4D629DB1862E929BA /* LICENSE */,
 			);
@@ -211,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025BAB642301659B00B0B2C7 /* PushdySDK.podspec in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -228,12 +230,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example-frameworks.sh",
 				"${PODS_ROOT}/../../Pushdy/Frameworks/PushdyCore.framework",
-				"${BUILT_PRODUCTS_DIR}/Pushdy/Pushdy.framework",
+				"${BUILT_PRODUCTS_DIR}/PushdySDK/PushdySDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PushdyCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pushdy.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PushdySDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
