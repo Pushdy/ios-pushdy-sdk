@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 import PushdyCore
 
-@objc public typealias PushdyResultSuccessBlock = (NSDictionary) -> Void
-@objc public typealias PushdyFailureBlock = (NSError) -> Void
+public typealias PushdyResultSuccessBlock = (NSDictionary) -> Void
+public typealias PushdyFailureBlock = (NSError) -> Void
 
-@objc public protocol PushdyDelegate : NSObject {
+public protocol PushdyDelegate : NSObject {
     func hasAlreadyForReceivingNotification() -> Bool
     func onReceivedNotification(_ notification:[String:Any], fromState:String)
     func onNotificationOpened(_ notification:[String:Any], fromState:String)
@@ -74,7 +74,7 @@ public extension PushdyDelegate {
 
 @objc public class Pushdy : NSObject {
     
-    @objc public class AppState {
+    public class AppState {
         public static let kNotRunning:String = "not_running"
         public static let kActive:String = "active"
         public static let kInActive:String = "inactive"

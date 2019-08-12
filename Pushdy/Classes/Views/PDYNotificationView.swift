@@ -11,7 +11,7 @@ import UIKit
 import PushdyCore
 
 
-@objc public typealias PDYActionBlock = () -> Void
+public typealias PDYActionBlock = () -> Void
 @objc public protocol PDYPushBannerActionProtocol {
     func show(_ data:[String:Any], onTap:@escaping PDYActionBlock)
 }

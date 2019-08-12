@@ -59,22 +59,22 @@ import UIKit
         return UINib(nibName: xibName, bundle: nil).instantiate(withOwner:nil, options: nil)[0] as! UIView
     }
     
-    class func instantiate<T>(xibName: String, withType type:T.Type) -> T {
-        if let view = Bundle.main.loadNibNamed(xibName, owner: nil, options: nil)?.first as? T {
-            return view
-        }
-        
-        fatalError("Could not load view with type " + String(describing:type))
-    }
+//    class func instantiate<T>(xibName: String, withType type:T.Type) -> T {
+//        if let view = Bundle.main.loadNibNamed(xibName, owner: nil, options: nil)?.first as? T {
+//            return view
+//        }
+//        
+//        fatalError("Could not load view with type " + String(describing:type))
+//    }
     
-    class func instantiate<T>(forClass: AnyClass, withType type:T.Type) -> T {
-        let xibName = String(describing: forClass)
-        if let view = Bundle.main.loadNibNamed(xibName, owner: nil, options: nil)?.first as? T {
-            return view
-        }
-        
-        fatalError("Could not load view with type " + String(describing:type))
-    }
+//    class func instantiate<T>(forClass: AnyClass, withType type:T.Type) -> T {
+//        let xibName = String(describing: forClass)
+//        if let view = Bundle.main.loadNibNamed(xibName, owner: nil, options: nil)?.first as? T {
+//            return view
+//        }
+//
+//        fatalError("Could not load view with type " + String(describing:type))
+//    }
     
     @IBInspectable var shadowOffset: CGSize{
         get{

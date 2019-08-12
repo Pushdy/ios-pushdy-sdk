@@ -42,13 +42,13 @@ import PushdyCore
         PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_token", value: token)
     }
     
-    public static func setDeviceToken(_ token:Data) {
-        let tokenStr = token.reduce("", {$0 + String(format: "%02X", $1)})
-        if let prevToken = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {
-            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"device_token", value: prevToken)
-        }
-        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_token", value:tokenStr)
-    }
+//    public static func setDeviceToken(_ token:Data) {
+//        let tokenStr = token.reduce("", {$0 + String(format: "%02X", $1)})
+//        if let prevToken = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {
+//            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"device_token", value: prevToken)
+//        }
+//        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_token", value:tokenStr)
+//    }
     
     public static func getDeviceToken() -> String? {
         if let token = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {

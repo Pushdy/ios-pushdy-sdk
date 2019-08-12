@@ -13,7 +13,7 @@ import UserNotifications
 import UserNotificationsUI
 
 @objc class PDYNotificationHandler: NSObject {
-   @objc public typealias CompletionBlock = (_ result: UIBackgroundFetchResult?) -> Void
+    public typealias CompletionBlock = (_ result: UIBackgroundFetchResult?) -> Void
     
     var fromInActiveState:Bool = false
     var enteredBackground:Bool = true

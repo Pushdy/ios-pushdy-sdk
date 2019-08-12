@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc extension Array where Element: Any {
+extension Array where Element: Any {
 //    func asArrayDictionary() throws -> [[String: Any]] {
 //        var data: [[String: Any]] = []
 //        for element in self {

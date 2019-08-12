@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pushdy
+import PushdySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
