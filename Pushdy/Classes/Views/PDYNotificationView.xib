@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PDYNotificationView" customModule="Pushdy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-GR-AQs">
+                    <rect key="frame" x="68" y="0.0" width="277" height="65"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pre-9k-DnJ">
+                            <rect key="frame" x="18" y="0.0" width="259" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="2AU-NC-zc0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <color key="textColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Conent At Here. Push Conent At Here. Push Conent At Here.Push Conent At Here.Push Conent At Here" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eS-rV-WGq">
+                            <rect key="frame" x="0.0" y="22" width="277" height="43"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-1x-r7o">
+                            <rect key="frame" x="0.0" y="3" width="15" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="HsP-5d-FSe"/>
+                                <constraint firstAttribute="height" constant="15" id="w96-cC-xgX"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="6eS-rV-WGq" secondAttribute="trailing" id="5wB-e8-J3L"/>
+                        <constraint firstItem="6eS-rV-WGq" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" id="982-yb-7rS"/>
+                        <constraint firstItem="pre-9k-DnJ" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" constant="18" id="Agl-CW-OBa"/>
+                        <constraint firstItem="RHs-1x-r7o" firstAttribute="top" secondItem="TAP-GR-AQs" secondAttribute="top" constant="3" id="K5v-oy-LVD"/>
+                        <constraint firstItem="pre-9k-DnJ" firstAttribute="top" secondItem="TAP-GR-AQs" secondAttribute="top" id="Lg0-vo-JKA"/>
+                        <constraint firstItem="6eS-rV-WGq" firstAttribute="top" secondItem="pre-9k-DnJ" secondAttribute="bottom" constant="1" id="Lte-fc-62k"/>
+                        <constraint firstAttribute="trailing" secondItem="pre-9k-DnJ" secondAttribute="trailing" id="rPP-4g-VvY"/>
+                        <constraint firstAttribute="bottom" secondItem="6eS-rV-WGq" secondAttribute="bottom" id="s8Z-Fu-Sci"/>
+                        <constraint firstItem="RHs-1x-r7o" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" id="tDW-XK-WdN"/>
+                    </constraints>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-sD-wJd">
+                    <rect key="frame" x="12" y="11" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="VFS-9T-Zhy"/>
+                        <constraint firstAttribute="width" constant="44" id="nHp-qV-om9"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTQ-2r-drU" userLabel="TapBtn">
+                    <rect key="frame" x="0.0" y="0.0" width="376" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="tapPopup" destination="iN0-l3-epB" eventType="touchUpInside" id="kPS-Dh-v6E"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftx-RD-Izw" userLabel="CloseBtn">
+                    <rect key="frame" x="346" y="17.5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Otp-uJ-1gQ"/>
+                        <constraint firstAttribute="width" constant="30" id="UWp-jC-Lz4"/>
+                    </constraints>
+                    <state key="normal" image="ic_close.png"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="closePopup" destination="iN0-l3-epB" eventType="touchUpInside" id="Uw2-fT-ODN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="TAP-GR-AQs" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="JQn-Pt-DQ7"/>
+                <constraint firstItem="Ftx-RD-Izw" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="trailing" constant="1" id="PnG-iZ-Mez"/>
+                <constraint firstItem="TAP-GR-AQs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T98-Lc-9oN"/>
+                <constraint firstAttribute="trailing" secondItem="Ftx-RD-Izw" secondAttribute="trailing" constant="-1" id="cJR-Qn-s31"/>
+                <constraint firstItem="Oir-sD-wJd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="mSn-sp-aEY"/>
+                <constraint firstItem="Ftx-RD-Izw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nk9-6H-ie3"/>
+                <constraint firstAttribute="bottom" secondItem="Oir-sD-wJd" secondAttribute="bottom" constant="10" id="vQj-kg-eLd"/>
+                <constraint firstItem="TAP-GR-AQs" firstAttribute="leading" secondItem="Oir-sD-wJd" secondAttribute="trailing" constant="12" id="vaQ-VO-2oB"/>
+                <constraint firstItem="Oir-sD-wJd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="xiD-Bb-ukO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                    <color key="value" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="contentLabel" destination="6eS-rV-WGq" id="TeP-Bm-h37"/>
+                <outlet property="heightTitleConstaint" destination="2AU-NC-zc0" id="HGD-it-WOR"/>
+                <outlet property="iconIV" destination="Oir-sD-wJd" id="wAh-nX-qWE"/>
+                <outlet property="leadingContentConstaint" destination="vaQ-VO-2oB" id="KMD-XP-hHC"/>
+                <outlet property="titleLabel" destination="pre-9k-DnJ" id="vIM-Eq-xQp"/>
+                <outlet property="widthIconConstaint" destination="nHp-qV-om9" id="oLG-tb-pgc"/>
+            </connections>
+            <point key="canvasLocation" x="45.600000000000001" y="80.50974512743629"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_close.png" width="14.5" height="14.5"/>
+        <image name="ic_notification.png" width="10.5" height="12"/>
+    </resources>
+</document>

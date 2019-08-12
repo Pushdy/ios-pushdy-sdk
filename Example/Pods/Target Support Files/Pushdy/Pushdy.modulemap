@@ -1,0 +1,6 @@
+framework module Pushdy {
+  umbrella header "Pushdy-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - Pushdy (0.0.1)
+
+DEPENDENCIES:
+  - Pushdy (from `../Pushdy.podspec`)
+
+EXTERNAL SOURCES:
+  Pushdy:
+    :path: "../Pushdy.podspec"
+
+SPEC CHECKSUMS:
+  Pushdy: 0b1fefdf1292b1b925d28dfb7c1416a245435f14
+
+PODFILE CHECKSUM: 4b4b3a42c3b044c42ac328e2b22becca113293c0
+
+COCOAPODS: 1.7.2
