@@ -10,6 +10,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+Swift >= 4.2
+
 ## Installation
 
 Pushdy is available through [CocoaPods](https://cocoapods.org). To install
@@ -67,17 +69,69 @@ Pushdy.registerForPushNotifications()
 
 Get device token from pushdy
 
+
+```swift
+// Swift language
+Pushdy.getDeviceToken()
+```
+
+```objc
+// Objective-C language
+[Pushdy getDeviceToken];
+```
+
+
 - checkNotificationEnabling
 
 Check allowing notification or not
+
+
+```swift
+// Swift language
+Pushdy.checkNotificationEnabling { (enabled:Bool) in
+
+}
+```
+
+```objc
+// Objective-C language
+[Pushdy checkNotificationEnabling:^(BOOL enabled) {
+        
+}];
+```
+
 
 - setDeviceID
 
 Using your device id instead of Pushdy device id
 
+```swift
+// Swift language
+let yourDeviceID = ...
+Pushdy.setDeviceID(yourDeviceID)
+```
+
+```objc
+// Objective-C language
+NSString* yourDeviceID = ...;
+[Pushdy setDeviceID:yourDeviceID];
+```
+
+
 - getPendingNotification
 
 Get pending notification which is not handled
+
+```swift
+// Swift language
+Pushdy.getPendingNotification()
+```
+
+```objc
+// Objective-C language
+[Pushdy getPendingNotification];
+```
+
 
 **Pushdy Delegation**
 
@@ -189,7 +243,7 @@ And some other delegate methods...
 **Customize In App Notification Banner**
 
 We use PDYNotificationView view for default displaying in app push notification.
-Pushdy provides some method to ajust default notification view and set your custom view.
+Pushdy also provides some method to adjust default notification view and set your custom view.
 
 - setPushBannerAutoDismiss :
 
