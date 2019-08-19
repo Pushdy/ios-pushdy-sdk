@@ -99,19 +99,143 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
 }
 ```
 
-**pushdyHasAlreadyForHandlingNotification**
+
+-pushdyHasAlreadyForHandlingNotification :
 
 Determine that the application can handle push notification or not. Default is true. 
 If false, incoming push will be pushed to pending notifications and you can process pending notifications later.
 
-**pushdyOnReceivedNotification:fromState**
+```swift
+// Swift language
+func pushdyHasAlreadyForHandlingNotification() -> Bool {
+    var already = true
+    // Example: already = pass through login or tutorial/introdution screen
+    return already
+}
+```
+
+```objc
+// Objective-C language
+- (BOOL)pushdyHasAlreadyForHandlingNotification {
+    BOOL already = YES;
+    // Example: already = pass through login or tutorial/introdution screen
+    return already;
+}
+```
+
+
+-pushdyOnReceivedNotification:fromState :
 
 When the application received a notification, Pushdy will trigger this method.
 
-**pushdyOnNotificationOpened:fromState**
+```swift
+// Swift language
+func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: String) {
+        if fromState == "not_running" {
+            // Example: is_app_launched_from_push = true
+        }
+        else if fromState == "active" {
+            // Example: Play a sound to notitfy user
+        }
+        else if fromState == "inactive" {
+            // Example: Play a sound to notitfy user
+        }
+        else if fromState == "background" {
+            
+        }
+    }
+```
+
+```objc
+// Objective-C language
+- (void)pushdyOnReceivedNotification:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
+    if ([fromState isEqualToString:@"not_running"]) {
+        // Example: is_app_launched_from_push = true
+    }
+    else if ([fromState isEqualToString:@"active"]) {
+        // Example: Play a sound to notitfy user
+    }
+    else if ([fromState isEqualToString:@"inactive"]) {
+        // Example: Play a sound to notitfy user
+    }
+    else if ([fromState isEqualToString:@"background"]) {
+
+    }
+}
+```
+
+
+-pushdyOnNotificationOpened:fromState :
 
 When user tap push notification banner (system notification or in app notification banner), Pushdy will trigger this method.
 
+```swift
+// Swift language
+func pushdyOnNotificationOpened(_ notification: [String : Any], fromState: String) {
+     // Handle notification
+}
+```
+
+```objc
+// Objective-C language
+- (void)pushdyOnNotificationOpened:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
+    // Handle notification
+}
+```
+
+
+And some other delegate methods...
+
+**Customize In App Notification Banner**
+
+We use PDYNotificationView view for default displaying in app push notification.
+Pushdy provides some method to ajust default notification view and set your custom view.
+
+- setPushBannerAutoDismiss :
+
+Turn on/off auto dismiss for in app notification banner.
+
+```swift
+// Swift language
+Pushdy.setPushBannerAutoDismiss(true)
+```
+
+```objc
+// Objective-C language
+[Pushdy setPushBannerAutoDismiss:TRUE];
+```
+
+
+- setPushBannerDismissDuration : 
+
+Set auto dismiss duration for default custom view.
+
+```swift
+// Swift language
+Pushdy.setPushBannerDismissDuration(5) // 5 seconds
+```
+
+```objc
+// Objective-C language
+[Pushdy setPushBannerDismissDuration:5]; // 5 seconds
+```
+
+
+- setCustomPushBanner :
+
+Set custom notification banner view. Implementating PDYPushBannerActionProtocol protocol is required.
+
+```swift
+// Swift language
+let yourCustomView = ...
+Pushdy.setCustomPushBanner(yourCustomView)
+```
+
+```objc
+// Objective-C language
+UIView* yourCustomView = ...
+[Pushdy setCustomPushBanner:yourCustomView];
+```
 
 
 ## Author
