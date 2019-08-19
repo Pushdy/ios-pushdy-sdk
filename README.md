@@ -305,10 +305,12 @@ Pushdy SDK use media_url key for displaying thumbnail image from json push paylo
 
 If you want to custom your own key, use setCustomMediaKey method for override it.
 ```swift
+// Swift language
 PDYNotificationView.setCustomMediaKey("your_custom_media_key")
 ```
 
 ```objc
+// Objective-C language
 [PDYNotificationView setCustomMediaKey:@"your_custom_media_key"];
 ```
 
