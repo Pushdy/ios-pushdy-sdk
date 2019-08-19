@@ -291,6 +291,27 @@ UIView* yourCustomView = ...
 [Pushdy setCustomPushBanner:yourCustomView];
 ```
 
+*** Note: 
+
+Pushdy SDK use media_url key for displaying thumbnail image from json push payload as default.
+```ruby
+{
+   "aps" : {
+        ...
+   },
+   "media_url" : "https://domain.com/path/image.png"
+}
+```
+
+If you want to custom your own key, use setCustomMediaKey method for override it.
+```swift
+PDYNotificationView.setCustomMediaKey("your_custom_media_key")
+```
+
+```objc
+[PDYNotificationView setCustomMediaKey:@"your_custom_media_key"];
+```
+
 
 ## Author
 
