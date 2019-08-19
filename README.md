@@ -20,46 +20,79 @@ pod 'PushdySDK'
 ```
 
 ## Usage
+
+**Import**
+
+Import module in Swift language:
+```swift
+import PushdySDK
+```
+
+Import module in Objective-C language (You must generate brigde header to support Swift first):
+```objc
+#import <PushdySDK/PushdySDK-Swift.h>
+```
+
 **Initialization**
 
 In application:didFinishLaunchingWithOptions method, initialize Pushdy SDK as below:
 
-Swift language:
 ```swift
+// Swift language
 let clientKey = "your client key from Pushdy application"
 Pushdy.initWith(clientKey: clientKey, delegate: self, launchOptions: launchOptions)
 ```
 
-Objective-C language:
 ```objc
+// Objective-C language
 NSString *clientKey = @"your client key from Pushdy application";
 [Pushdy initWithClientKey:clientKey delegate:self launchOptions:launchOptions];
 ```
 
 Then you can call registerForPushNotifications method to register receiving push notification.
-Swift language:
+
 ```swift
+// Swift language
 Pushdy.registerForPushNotifications()
 ```
-Objective-C language:
+
 ```objc
+// Objective-C language
 [Pushdy registerForPushNotifications];
 ```
+
+**Methods**
+
+- getDeviceToken
+
+Get device token from pushdy
+
+- checkNotificationEnabling
+
+Check allowing notification or not
+
+- setDeviceID
+
+Using your device id instead of Pushdy device id
+
+- getPendingNotification
+
+Get pending notification which is not handled
 
 **Pushdy Delegation**
 
 For listen the Pushdy callback and adapt your logic with Pushdy, you must implement PushdyDelegate in your App Delegate
 
-Swift language:
 ```swift
+// Swift language
 import PushdySDK
 class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
 
 }
 ```
 
-Objective-C language:
 ```objc
+// Objective-C language
 #import <PushdySDK/PushdySDK-Swift.h> // You must generate brigde header first
 @interface AppDelegate : UIResponder <UIApplicationDelegate, PushdyDelegate> {
   
@@ -71,13 +104,15 @@ Objective-C language:
 Determine that the application can handle push notification or not. Default is true. 
 If false, incoming push will be pushed to pending notifications and you can process pending notifications later.
 
-**onReceivedNotification:fromState**
+**pushdyOnReceivedNotification:fromState**
 
 When the application received a notification, Pushdy will trigger this method.
 
-**onNotificationOpened:fromState**
+**pushdyOnNotificationOpened:fromState**
 
 When user tap push notification banner (system notification or in app notification banner), Pushdy will trigger this method.
+
+
 
 ## Author
 
