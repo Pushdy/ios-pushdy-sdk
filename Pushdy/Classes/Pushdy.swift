@@ -8,82 +8,41 @@
 
 import Foundation
 import UIKit
-import PushdyCore
 
 public typealias PushdyResultSuccessBlock = (NSDictionary) -> Void
 public typealias PushdyFailureBlock = (NSError) -> Void
 
-public protocol PushdyDelegate : NSObject {
-    func hasAlreadyForReceivingNotification() -> Bool
-    func onReceivedNotification(_ notification:[String:Any], fromState:String)
-    func onNotificationOpened(_ notification:[String:Any], fromState:String)
-    func onRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken:String)
-    func onFailedToRegisterForRemoteNotifications(_ error:NSError)
-    func onAddedPlayerSuccessfully(_ playerID:String)
-    func onFailedToAddPlayer(_ error:NSError)
-    func onEditedPlayerSuccessfully(_ playerID:String)
-    func onFailedToEditPlayer(_ playerID:String, error:NSError)
-    func onCreatedNewSessionSuccessfully(_ playerID:String)
-    func onFailedToCreateNewSession(_ playerID:String, error:NSError)
-    func onTrackedNotificationSuccessfully(_ notification:[String:Any])
-    func onFailedToTrackNotification(_ notification:[String:Any], error:NSError)
+@objc public protocol PushdyDelegate {
+    @objc optional func pushdyHasAlreadyForHandlingNotification() -> Bool
+    @objc optional func pushdyOnReceivedNotification(_ notification:[String:Any], fromState:String)
+    @objc optional func pushdyOnNotificationOpened(_ notification:[String:Any], fromState:String)
+    @objc optional func pushdyOnRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken:String)
+    @objc optional func pushdyOnFailedToRegisterForRemoteNotifications(_ error:NSError)
+    @objc optional func pushdyOnAddedPlayerSuccessfully(_ playerID:String)
+    @objc optional func pushdyOnFailedToAddPlayer(_ error:NSError)
+    @objc optional func pushdyOnEditedPlayerSuccessfully(_ playerID:String)
+    @objc optional func pushdyOnFailedToEditPlayer(_ playerID:String, error:NSError)
+    @objc optional func pushdyOnCreatedNewSessionSuccessfully(_ playerID:String)
+    @objc optional func pushdyOnFailedToCreateNewSession(_ playerID:String, error:NSError)
+    @objc optional func pushdyOnTrackedNotificationSuccessfully(_ notification:[String:Any])
+    @objc optional func pushdyOnFailedToTrackNotification(_ notification:[String:Any], error:NSError)
 }
 
-// A trick to force a protocol to optional protocol
-public extension PushdyDelegate {
-    func hasAlreadyForReceivingNotification() -> Bool {
-        return true
-    }
-    func onReceivedNotification(_ notification:[String:Any], fromState:String) {
-        
-    }
-    func onNotificationOpened(_ notification:[String:Any], fromState:String) {
-        
-    }
-    func onRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken:String) {
-        
-    }
-    func onFailedToRegisterForRemoteNotifications(_ error:NSError) {
-        
-    }
-    func onAddedPlayerSuccessfully(_ playerID:String) {
-        
-    }
-    func onFailedToAddPlayer(_ error:NSError) {
-        
-    }
-    func onEditedPlayerSuccessfully(_ playerID:String) {
-        
-    }
-    func onFailedToEditPlayer(_ playerID:String, error:NSError) {
-        
-    }
-    func onCreatedNewSessionSuccessfully(_ playerID:String) {
-        
-    }
-    func onFailedToCreateNewSession(_ playerID:String, error:NSError) {
-        
-    }
-    func onTrackedNotificationSuccessfully(_ notification:[String:Any]) {
-        
-    }
-    func onFailedToTrackNotification(_ notification:[String:Any], error:NSError) {
+@objc public class AppState : NSObject {
+    public static let kNotRunning:String = "not_running"
+    public static let kActive:String = "active"
+    public static let kInActive:String = "inactive"
+    public static let kBackground:String = "background"
+    
+    private override init() {
         
     }
 }
 
 @objc public class Pushdy : NSObject {
     
-    public class AppState {
-        public static let kNotRunning:String = "not_running"
-        public static let kActive:String = "active"
-        public static let kInActive:String = "inactive"
-        public static let kBackground:String = "background"
-    }
-    
     internal static var _clientKey:String?
     internal static var _launchOptions:[UIApplication.LaunchOptionsKey: Any]?
-    internal static var _deviceID:String?
     internal static var _playerID:String?
     internal static var _delegate:UIApplicationDelegate?
     
@@ -96,7 +55,15 @@ public extension PushdyDelegate {
         
     }
     
-    public static func initWith(clientKey:String, delegate:UIApplicationDelegate, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+    /**
+     Initialize and configure Pushdy with client key, app delegate and launchOptions.
+     
+     - Parameter clientKey: The client key which is got from Pushdy application.
+     - Parameter delegate: An UIApplicationDelegate instance.
+     - Parameter launchOptions: An app launching options dictionary.
+     
+     */
+    @objc public static func initWith(clientKey:String, delegate:UIApplicationDelegate, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         _clientKey = clientKey
         _launchOptions = launchOptions
         _delegate  = delegate
@@ -106,15 +73,15 @@ public extension PushdyDelegate {
         UIApplication.shared.delegate = delegate
         
         // Check and set pushdy delegage
-        if (!class_conformsToProtocol((delegate as AnyObject).classForCoder, PushdyDelegate.self as? Protocol)) {
+        if let _ = Pushdy.getClassWithProtocolInHierarchy((delegate as AnyObject).classForCoder, protocolToFind: PushdyDelegate.self) {
             _pushdyDelegate = delegate as? PushdyDelegate
         }
         
         // Handle pushdy logic
         self.checkFirstTimeOpenApp()
         
-        // Observe properties changed
-        self.observePropertiesChanged()
+        // Observe attributes's change
+        self.observeAttributesChanged()
     }
     
     // MARK: Pushdy Getter/Setter
@@ -122,11 +89,8 @@ public extension PushdyDelegate {
         return _clientKey
     }
     
-    public static func setDeviceID(_ deviceID:String) {
-        _deviceID = deviceID
-    }
-    
     public static func getDelegate() -> PushdyDelegate? {
+        NSLog("[Pushdy] _pushdyDelegate == nil => %ld", _pushdyDelegate == nil)
         return _pushdyDelegate
     }
     
@@ -151,10 +115,17 @@ public extension PushdyDelegate {
         setFirstTimeOpenApp(false)
     }
     
-    @objc internal static func observePropertiesChanged() {
+    /**
+     Observe attributes's change
+     */
+    @objc internal static func observeAttributesChanged() {
         Timer.scheduledTimer(timeInterval: UPDATE_ATTRIBUTES_INTERVAL, target: self, selector: #selector(self.updatePlayerIfNeeded), userInfo: nil, repeats: true)
     }
     
+    /**
+     Update player if attributes have changed.
+     
+     */
     @objc internal static func updatePlayerIfNeeded() {
         if !isCreatingPlayer && !isEditingPlayer {
             var shouldUpdate = false
@@ -173,6 +144,13 @@ public extension PushdyDelegate {
                         editPlayer()
                     })
                 }
+            }
+            else {
+                getAttributes(completion: { (result:[[String : Any]]?) in
+                    // Do no thing
+                }, failure: { (errorCode:Int, message:String?) in
+                    // Do nothing
+                })
             }
         }
     }

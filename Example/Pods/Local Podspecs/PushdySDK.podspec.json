@@ -1,6 +1,6 @@
 {
   "name": "PushdySDK",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "summary": "Pushdy SDK for iOS platform",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/Pushdy/ios-pushdy-sdk",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Pushdy/ios-pushdy-sdk.git",
-    "tag": "0.0.2"
+    "tag": "0.0.3"
   },
   "platforms": {
     "ios": "8.0"
@@ -24,7 +24,7 @@
     "4.2",
     "5.0"
   ],
-  "vendored_frameworks": "Pushdy/Frameworks/PushdyCore.framework",
+  "resources": "Resources/**/*.{png}",
   "xcconfig": {
     "OTHER_LDFLAGS": "-ObjC"
   },

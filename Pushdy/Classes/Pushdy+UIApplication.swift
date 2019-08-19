@@ -8,10 +8,9 @@
 
 import Foundation
 import UIKit
-import PushdyCore
 
-@objc extension UIApplication {
-    @objc public func pushdyApplication(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+public extension UIApplication {
+    @objc func pushdyApplication(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let newDeviceToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         var notEqual = false
         if let oldDeviceToken = Pushdy.getDeviceToken() {
@@ -20,8 +19,6 @@ import PushdyCore
         else {
             notEqual = true
         }
-        
-        print("[Pushdy] DEVICE TOKEN: \(newDeviceToken)")
         
         // Set new device token
         Pushdy.setDeviceToken(newDeviceToken)
@@ -32,7 +29,7 @@ import PushdyCore
         }
         
         // Forward to delegate
-        Pushdy.getDelegate()?.onRegisteredForRemoteNotificationsWithDeviceToken(newDeviceToken)
+        Pushdy.getDelegate()?.pushdyOnRegisteredForRemoteNotificationsWithDeviceToken?(newDeviceToken)
         
         // Call origin method
         if self.responds(to: #selector(UIApplication.pushdyApplication(_:didRegisterForRemoteNotificationsWithDeviceToken:))) {
@@ -40,9 +37,9 @@ import PushdyCore
         }
     }
     
-    @objc public func pushdyDidFailRegisterForRemoteNotifications(_ app : UIApplication, error : NSError) {
+    @objc func pushdyDidFailRegisterForRemoteNotifications(_ app : UIApplication, error : NSError) {
         // Forward to delegate
-        Pushdy.getDelegate()?.onFailedToRegisterForRemoteNotifications(error)
+        Pushdy.getDelegate()?.pushdyOnFailedToRegisterForRemoteNotifications?(error)
         
         // Call origin method
         if self.responds(to: #selector(UIApplication.pushdyDidFailRegisterForRemoteNotifications(_:error:))) {
@@ -85,14 +82,14 @@ import PushdyCore
 //        }
 //    }
     
-    @objc public func pushdyApplicationWillResignActive(_ application : UIApplication) {
+    @objc func pushdyApplicationWillResignActive(_ application : UIApplication) {
         PDYNotificationHandler.shared.handleWhenAppWillResignActive()
         if self.responds(to: #selector(UIApplication.pushdyApplicationWillResignActive(_:))) {
             self.pushdyApplicationWillResignActive(application)
         }
     }
     
-    @objc public func pushdyApplicationDidbecomeActive(_ application : UIApplication) {
+    @objc func pushdyApplicationDidbecomeActive(_ application : UIApplication) {
         PDYNotificationHandler.shared.handleWhenAppDidBecomeActive()
         if self.responds(to: #selector(UIApplication.pushdyApplicationDidbecomeActive(_:))) {
             self.pushdyApplicationDidbecomeActive(application)
@@ -107,8 +104,10 @@ import PushdyCore
     }
     
     @objc func pushdyApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        if PDYVersion.lessThan("10") {
-            PDYNotificationHandler.shared.handleNotification(userInfo: userInfo, inApplication: application, withCompletion: nil)
+        let lessThan10 = UIDevice.current.systemVersion.compare("10",
+                                               options: NSString.CompareOptions.numeric) == ComparisonResult.orderedAscending
+        if lessThan10 == true, let notification = userInfo as? [String:Any] {
+            PDYNotificationHandler.shared.handleNotification(notification, inApplication: application, withCompletion: nil)
         }
         if self.responds(to: #selector(UIApplication.pushdyApplication(_:didReceiveRemoteNotification:))) {
             self.pushdyApplication(application, didReceiveRemoteNotification: userInfo)
@@ -116,8 +115,10 @@ import PushdyCore
     }
     
     @objc func pushdyApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if PDYVersion.lessThan("10") {
-            PDYNotificationHandler.shared.handleNotification(userInfo: userInfo, inApplication: application, withCompletion: completionHandler)
+        let lessThan10 = UIDevice.current.systemVersion.compare("10",
+                                                                options: NSString.CompareOptions.numeric) == ComparisonResult.orderedAscending
+        if lessThan10 == true, let notification = userInfo as? [String:Any] {
+            PDYNotificationHandler.shared.handleNotification(notification, inApplication: application, withCompletion: completionHandler)
         }
         
         if self.responds(to: #selector(UIApplication.pushdyApplication(_:didReceiveRemoteNotification:fetchCompletionHandler:))) {
@@ -127,7 +128,7 @@ import PushdyCore
     
     @nonobjc static var appDelegateClass : AnyClass? = nil
     
-    public static func swizzle() {
+    internal static func swizzle() {
         if NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_6_0 { return }
         //struct Static { static var token: Int = 0 }
         if self !== UIApplication.self { return } /* Make sure this isn't a subclass */
@@ -149,7 +150,7 @@ import PushdyCore
         }
     }
     
-    @objc public func setPushdyDelegate(_ delegate : UIApplicationDelegate) {
+    @objc internal func setPushdyDelegate(_ delegate : UIApplicationDelegate) {
         if UIApplication.appDelegateClass != nil {
             self.setPushdyDelegate(delegate)
             return

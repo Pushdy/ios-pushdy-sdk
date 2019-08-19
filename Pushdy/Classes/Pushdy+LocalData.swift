@@ -6,13 +6,14 @@
 //
 
 import Foundation
-import PushdyCore
 
-@objc extension Pushdy {
+public extension Pushdy {
     internal static let ATTTRIBUTE_PREFIX = "PUSHDY_ATTR_"
     internal static let PREV_ATTTRIBUTE_PREFIX = "PUSHDY_PREV_ATTR_"
     
-    public static func isFirstTimeOpenApp() -> Bool {
+    internal static var _deviceID:String?
+    
+    internal static func isFirstTimeOpenApp() -> Bool {
         var firstTimeOpenApp = true
         if let firstTime = PDYStorage.getBool(key: "PUSHDY_FIRST_TIME_OPEN_APP") {
             firstTimeOpenApp = firstTime
@@ -20,22 +21,60 @@ import PushdyCore
         return firstTimeOpenApp
     }
     
-    public static func setFirstTimeOpenApp(_ firstTime:Bool) {
+    internal static func setFirstTimeOpenApp(_ firstTime:Bool) {
         PDYStorage.setBool(key: "PUSHDY_FIRST_TIME_OPEN_APP", value: firstTime)
     }
     
-    public static func getPlayerID() -> String? {
+    /**
+     Get player id
+     
+     - Returns: A player id string.
+     */
+    static func getPlayerID() -> String? {
         if let playerID = PDYStorage.getString(key: "PUSHDY_PLAYER_ID") {
             return playerID
         }
         return nil
     }
     
-    public static func setPlayerID(_ playerID:String) {
+    internal  static func setPlayerID(_ playerID:String) {
         PDYStorage.setString(key: "PUSHDY_PLAYER_ID", value: playerID)
     }
     
-    public static func setDeviceToken(_ token:String) {
+    /**
+     Get device id
+     
+     - Returns: A device id string.
+     */
+    @objc static func getDeviceID() -> String? {
+        if let _ = _deviceID {
+            return _deviceID!
+        }
+        if let deviceID = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_id") {
+            return deviceID
+        }
+        return PDYDeviceInfo.deviceID()
+    }
+    
+    /**
+     Set device id instead of Pushdy's device id
+     
+     */
+    @objc static func setDeviceID(_ deviceID:String) {
+        NSLog("deviceID %@", deviceID);
+        _deviceID = deviceID
+        if let prevDeviceID = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_id") {
+            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"device_id", value: prevDeviceID)
+        }
+        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_id", value: deviceID)
+    }
+    
+    /**
+     Set device token
+     
+     */
+    internal static func setDeviceToken(_ token:String) {
+        NSLog("deviceToken %@", token);
         if let prevToken = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {
             PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"device_token", value: prevToken)
         }
@@ -50,18 +89,32 @@ import PushdyCore
 //        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_token", value:tokenStr)
 //    }
     
-    public static func getDeviceToken() -> String? {
+    /**
+     Get device token
+     
+     - Returns: A device token string.
+     */
+    @objc static func getDeviceToken() -> String? {
         if let token = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {
             return token
         }
         return nil
     }
     
-    public static func setPushBannerAutoDismiss(_ auto:Bool) {
+    /**
+     Set InAppBanner's auto dismiss ability.
+     
+     */
+    @objc static func setPushBannerAutoDismiss(_ auto:Bool) {
         PDYStorage.setBool(key: "PUSHDY_PUSH_BANNER_AUTO_DISMISS", value: auto)
     }
     
-    public static func isPushBannerAutoDismiss() -> Bool {
+    /**
+     Check InAppBanner is auto dismiss or not.
+     
+     - Returns: A boolean value.
+     */
+    @objc static func isPushBannerAutoDismiss() -> Bool {
         var autoDismiss = true
         if let auto = PDYStorage.getBool(key: "PUSHDY_PUSH_BANNER_AUTO_DISMISS") {
             autoDismiss = auto
@@ -69,18 +122,32 @@ import PushdyCore
         return autoDismiss
     }
     
-    public static func getPushBannerDismissDuration() -> Double {
+    /**
+     Get InAppBanner's dismiss duration.
+     
+     - Returns: A duration value.
+     */
+    @objc static func getPushBannerDismissDuration() -> Double {
         if let duration = PDYStorage.getDouble(key: "PUSHDY_PUSH_BANNER_DISMISS_DURATION") {
             return duration
         }
         return 5
     }
     
-    public static func setPushBannerDismissDuration(_ duration:Double) {
+    /**
+     Set InAppBanner's dismiss duration.
+     
+     */
+    @objc static func setPushBannerDismissDuration(_ duration:Double) {
         PDYStorage.setDouble(key: "PUSHDY_PUSH_BANNER_DISMISS_DURATION", value: duration)
     }
     
-    public static func getAppVersion() -> String? {
+    /**
+     Get application version
+     
+     - Returns: A version string
+     */
+    @objc static func getAppVersion() -> String? {
         if let version = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"app_version") {
             
             return version
@@ -88,35 +155,55 @@ import PushdyCore
         return nil
     }
     
-    public static func setAppVersion(_ version:String) {
+    /**
+     Set application version
+    
+     */
+    @objc static func setAppVersion(_ version:String) {
         if let prevAppVersion = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"app_version") {
             PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"app_version", value: prevAppVersion)
         }
         PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"app_version", value: version)
     }
     
-    public static func getLanguage() -> String? {
+    /**
+     Get language
+     
+     - Returns: A language string
+     */
+    @objc static func getLanguage() -> String? {
         if let lang = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"language") {
             return lang
         }
         return nil
     }
     
-    public static func setLanguage(_ lang:String) {
+    /**
+     Set language
+     */
+    @objc static func setLanguage(_ lang:String) {
         if let prevLanguage = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"language") {
             PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"language", value: prevLanguage)
         }
         PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"language", value: lang)
     }
     
-    public static func getCountry() -> String? {
+    /**
+     Get country
+     
+     - Returns: A country value
+     */
+    @objc static func getCountry() -> String? {
         if let country = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"country") {
             return country
         }
         return nil
     }
     
-    public static func setCountry(_ country:String) {
+    /**
+     Set country
+     */
+    @objc static func setCountry(_ country:String) {
         if let prevCountry = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"country") {
             PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"country", value: prevCountry)
         }

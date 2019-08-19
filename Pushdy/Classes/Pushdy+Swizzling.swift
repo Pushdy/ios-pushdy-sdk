@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-@objc extension Pushdy {
-    public static func getClassWithProtocolInHierarchy(_ searchClass : AnyClass, protocolToFind : Protocol) -> AnyClass? {
+public extension Pushdy {
+    internal static func getClassWithProtocolInHierarchy(_ searchClass : AnyClass, protocolToFind : Protocol) -> AnyClass? {
         
         if !class_conformsToProtocol(searchClass, protocolToFind) {
             if searchClass.superclass() == nil { return nil}
@@ -21,7 +21,7 @@ import UIKit
         return searchClass
     }
     
-    public static func injectSelector(_ newClass : AnyClass, newSel : Selector, addToClass : AnyClass, makeLikeSel : Selector) {
+    internal static func injectSelector(_ newClass : AnyClass, newSel : Selector, addToClass : AnyClass, makeLikeSel : Selector) {
         var newMeth = class_getInstanceMethod(newClass, newSel)
         let imp = method_getImplementation(newMeth!)
         let methodTypeEncoding = method_getTypeEncoding(newMeth!)

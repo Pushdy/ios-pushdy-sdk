@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		025BAB632301659B00B0B2C7 /* PushdySDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PushdySDK.podspec; path = ../PushdySDK.podspec; sourceTree = "<group>"; };
+		025BAB632301659B00B0B2C7 /* PushdySDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PushdySDK.podspec; path = ../PushdySDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		02D68BB522FA745F00E2747F /* Pushdy_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pushdy_Example.entitlements; sourceTree = "<group>"; };
 		32CD2244B8014AB9CB9DF944 /* Pods-Pushdy_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pushdy_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Pushdy_Tests/Pods-Pushdy_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F56D07AEC9D506BA951F325 /* Pods-Pushdy_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pushdy_Example.release.xcconfig"; path = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -229,12 +229,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example-frameworks.sh",
-				"${PODS_ROOT}/../../Pushdy/Frameworks/PushdyCore.framework",
 				"${BUILT_PRODUCTS_DIR}/PushdySDK/PushdySDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PushdyCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PushdySDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,7 +343,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -405,6 +403,7 @@
 				CODE_SIGN_ENTITLEMENTS = Pushdy_Example.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SBRTA36BL6;
 				INFOPLIST_FILE = Pushdy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -414,8 +413,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vn.f19.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = 24hmoney_dev;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -427,6 +426,7 @@
 				CODE_SIGN_ENTITLEMENTS = Pushdy_Example.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SBRTA36BL6;
 				INFOPLIST_FILE = Pushdy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -435,8 +435,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vn.f19.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = 24hmoney_dev;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

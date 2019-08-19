@@ -15,12 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let clientKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2MzcwMjg2ODgxNCIsImFwcF9pZCI6InQxOV9kZXYiLCJpYXQiOjE1NDg5MDkxNTF9.2fQdZ3FmMZfATQj2iFGnPpON9Hxz3J_KQmUkInLqMTM"
         
         // Init Pushdy with client key
         Pushdy.initWith(clientKey: clientKey, delegate: self, launchOptions: launchOptions)
+        
+        print("Device ID \(Pushdy.getDeviceID())")
         
         // You can call registering push notification method here or anywhere
         Pushdy.registerForPushNotifications()
@@ -50,16 +52,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
     }
     
     // MARK: - PushdyDelegate
-    func onNotificationOpened(_ notification: [String : Any], fromState: String) {
-        print("onNotificationOpened notification=\(notification) fromState=\(fromState)")
+    func pushdyHasAlreadyForHandlingNotification() -> Bool {
+        var already = true
+        // Example: already = pass through login or tutorial/introdution screen
+        return already
     }
     
-    func onRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken: String) {
-        print("onRegisteredForRemoteNotificationsWithDeviceToken deviceToken=\(deviceToken)")
+    func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: String) {
+        if fromState == "not_running" {
+            // Example: is_app_launched_from_push = true
+        }
+        else if fromState == "active" {
+            // Example: Play a sound to notitfy user
+        }
+        else if fromState == "inactive" {
+            // Example: Play a sound to notitfy user
+        }
+        else if fromState == "background" {
+            
+        }
     }
     
-    func onFailedToRegisterForRemoteNotifications(_ error: NSError) {
-        print("onFailedToRegisterForRemoteNotifications error=\(error)")
+    func pushdyOnNotificationOpened(_ notification: [String : Any], fromState: String) {
+        // Handle notification
+    }
+    
+    func pushdyOnRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken: String) {
+        // Send device token to your own server
     }
 }
 

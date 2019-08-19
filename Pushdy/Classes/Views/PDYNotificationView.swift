@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import PushdyCore
 
 
 public typealias PDYActionBlock = () -> Void
@@ -28,11 +27,17 @@ public typealias PDYActionBlock = () -> Void
     
     var actionBlock:PDYActionBlock?
     
+    private static var _customMediaKey:String? = nil
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    public func setData(_ data:[String: Any]) {
+    @objc public static func setCustomMediaKey(_ key:String) {
+        PDYNotificationView._customMediaKey = key
+    }
+    
+    @objc public func setData(_ data:[String: Any]) {
         if let aps = data["aps"] as? [String:Any], let alert = aps["alert"] as? [String:Any] {
             if let title = alert["title"] as? String, !title.isEmpty {
                 self.titleLabel?.text = title
@@ -56,12 +61,13 @@ public typealias PDYActionBlock = () -> Void
             self.contentLabel?.text = ""
         }
         
-        if let icon = data["media_url"] as? UIImage {
+        let mediaKey = PDYNotificationView._customMediaKey == nil ? "media_url" : PDYNotificationView._customMediaKey!
+        if let icon = data[mediaKey] as? UIImage {
             self.iconIV?.image = icon
             self.widthIconConstaint?.constant = 44
             self.leadingContentConstaint?.constant = 12
         }
-        else if let icon = data["media_url"] as? String, !icon.isEmpty, icon.starts(with: "http") {
+        else if let icon = data[mediaKey] as? String, !icon.isEmpty, icon.starts(with: "http") {
             if let url = URL(string: icon) {
                 self.iconIV?.setImageUrl(url, placeholder: nil, completion: { (image:UIImage) in
                     PDYThread.perform(onUIThread: {
@@ -101,7 +107,7 @@ public typealias PDYActionBlock = () -> Void
         }
     }
     
-    public func show(_ data:[String:Any], onTap:@escaping PDYActionBlock) {
+    @objc public func show(_ data:[String:Any], onTap:@escaping PDYActionBlock) {
         if let window = UIApplication.shared.delegate?.window {
             let statusHeight = UIApplication.shared.statusBarFrame.height
             window?.addSubview(self)

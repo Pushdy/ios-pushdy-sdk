@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import PushdyCore
 
-@objc extension Pushdy {
+public extension Pushdy {
     internal static var isCreatingPlayer:Bool = false
     internal static var isEditingPlayer:Bool = false
     internal static var isFetchingAttributes:Bool = false
     
-    public static func createPlayer(params: [String : Any]?, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    static func createPlayer(params: [String : Any]?, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let player = PDYPlayer(clientKey:key, deviceID: _deviceID)
             try player.add(params: params, completion: completion, failure: failure)
@@ -23,7 +22,7 @@ import PushdyCore
         }
     }
     
-    public static func editPlayer(playerID:String, params: [String : Any], completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    static func editPlayer(playerID:String, params: [String : Any], completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let player = PDYPlayer(clientKey:key, deviceID: _deviceID)
             try player.edit(playerID: playerID, params: params, completion: completion, failure: failure)
@@ -33,7 +32,7 @@ import PushdyCore
         }
     }
     
-    public static func newSession(playerID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    static func newSession(playerID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let player = PDYPlayer(clientKey:key, deviceID: _deviceID)
             try player.newSession(playerID: playerID, completion: completion, failure: failure)
@@ -43,7 +42,7 @@ import PushdyCore
         }
     }
     
-    public static func trackOpened(notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    @objc static func trackOpened(notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let notification = PDYNotification(clientKey:key, deviceID: _deviceID)
             try notification.trackOpened(notificationID: notificationID, completion: completion, failure: failure)
@@ -69,11 +68,10 @@ import PushdyCore
                 if let dict = response as? [String:Any], let result = dict["success"] as? Bool, result == true {
                     if let playerID = dict["id"] as? String {
                         setPlayerID(playerID)
-                        getDelegate()?.onAddedPlayerSuccessfully(playerID)
+                        getDelegate()?.pushdyOnAddedPlayerSuccessfully?(playerID)
                     }
                 }
                 
-                NSLog("getDeviceToken() = \(getDeviceToken()), hasTokenBefore = \(hasTokenBefore)")
                 if let _ = getDeviceToken(), hasTokenBefore == false {
                     if isFetchedAttributes() {
                         editPlayer()
@@ -90,13 +88,13 @@ import PushdyCore
                 isCreatingPlayer = false
                 NSLog("[Pushdy] Failed to create player code="+String(errorCode)+", message="+(message ?? ""))
                 let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "Failed to create player code="+String(errorCode)+", message="+(message ?? "")])
-                getDelegate()?.onFailedToAddPlayer(error)
+                getDelegate()?.pushdyOnFailedToAddPlayer?(error)
             }
         }
         catch let error {
             isCreatingPlayer = false
             NSLog("[Pushdy] createPlayer raised an exception \(error)")
-            getDelegate()?.onFailedToAddPlayer(error as NSError)
+            getDelegate()?.pushdyOnFailedToAddPlayer?(error as NSError)
         }
     }
     
@@ -105,16 +103,16 @@ import PushdyCore
             do {
                 try newSession(playerID: playerID, completion: { (result:AnyObject?) in
                     NSLog("[Pushdy] Create new session successfully")
-                    getDelegate()?.onCreatedNewSessionSuccessfully(playerID)
+                    getDelegate()?.pushdyOnCreatedNewSessionSuccessfully?(playerID)
                 }, failure: { (errorCode:Int, message:String?) in
                     NSLog("[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? ""))
                     let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? "")])
-                    getDelegate()?.onFailedToCreateNewSession(playerID, error:error)
+                    getDelegate()?.pushdyOnFailedToCreateNewSession?(playerID, error:error)
                 })
             }
             catch let error {
                 NSLog("[Pushdy] newSession raised an exception \(error)")
-                getDelegate()?.onFailedToCreateNewSession(playerID, error:error as NSError)
+                getDelegate()?.pushdyOnFailedToCreateNewSession?(playerID, error:error as NSError)
             }
         }
         else {
@@ -122,7 +120,14 @@ import PushdyCore
         }
     }
     
-    internal static func getAttributes(completion:(([[String:Any]]?) -> Void)?, failure:((Int, String?) -> Void)?) {
+    /**
+     Get player's attributes
+     
+     - Parameter completion: A completion block.
+     - Parameter failure: A failure block.
+     
+     */
+    static func getAttributes(completion:(([[String:Any]]?) -> Void)?, failure:((Int, String?) -> Void)?) {
         isFetchingAttributes = true
         try? getAttributes(completion: { (response:AnyObject?) in
             isFetchingAttributes = false
@@ -155,27 +160,33 @@ import PushdyCore
             
             do {
                 isEditingPlayer = true
+                NSLog("[Pushdy] editPlayer params: \(params.jsonString)")
                 try editPlayer(playerID: playerID, params: params, completion: { (response:AnyObject?) in
                     isEditingPlayer = false
                     NSLog("[Pushdy] Edit player successfully")
-                    getDelegate()?.onEditedPlayerSuccessfully(playerID)
+                    getDelegate()?.pushdyOnEditedPlayerSuccessfully?(playerID)
                 }) { (errorCode:Int, message:String?) in
                     isEditingPlayer = false
                     NSLog("[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? ""))
                     let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? "")])
-                    getDelegate()?.onFailedToEditPlayer(playerID, error:error)
+                    getDelegate()?.pushdyOnFailedToEditPlayer?(playerID, error:error)
                 }
             }
             catch let error {
                 isEditingPlayer = false
                 NSLog("[Pushdy] editPlayer raised an exception \(error)")
-                getDelegate()?.onFailedToEditPlayer(playerID, error:error as NSError)
+                getDelegate()?.pushdyOnFailedToEditPlayer?(playerID, error:error as NSError)
             }
         }
     }
     
-    
-    internal static func trackOpeningPushNotification(_ data:[String:Any]) {
+    /**
+     Track opening push notification
+     
+     - Parameter data: A notification dictionary.
+     
+     */
+    static func trackOpeningPushNotification(_ data:[String:Any]) {
         // Track open push notification
         if let notificationID = data["_notification_id"] as? String {
             try? trackOpened(notificationID: notificationID, completion: { (response:AnyObject?) in
@@ -186,7 +197,7 @@ import PushdyCore
         }
     }
     
-    public static func getAttributes(completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    @objc static func getAttributes(completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let attribute = PDYAttribute(clientKey:key)
             try attribute.get(completion: completion, failure: failure)
@@ -196,7 +207,14 @@ import PushdyCore
         }
     }
     
-    public static func setAttribute(_ name:String, value:Any) {
+    /**
+     Set attribute
+     
+     - Parameter name: Attribute name
+     - Parameter value: Attribute value
+     
+     */
+    @objc static func setAttribute(_ name:String, value:Any) {
         if let currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX) {
             PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
         }
@@ -205,7 +223,14 @@ import PushdyCore
         editPlayer()
     }
     
-    public static func pushAttribute(_ name:String, value:Any) {
+    /**
+     Push attribute with array type
+     
+     - Parameter name: Attribute name
+     - Parameter value: Attribute value
+     
+     */
+    @objc static func pushAttribute(_ name:String, value:Any) {
         if var currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX) as? Array<Any> {
             PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
             currentValue.append(value)

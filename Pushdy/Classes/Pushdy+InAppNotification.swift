@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-@objc extension Pushdy {
+public extension Pushdy {
     private static let PUSH_BANNER_HEIGHT:CGFloat = 65
     private static var _notificationView:UIView?
     private static var _defaultNotificationView:PDYNotificationView?
@@ -22,7 +22,7 @@ import UIKit
         }
     }
 
-    internal static func showInAppNotification(_ data:[String: Any], onTap:@escaping PDYActionBlock) {
+    @objc static func showInAppNotification(_ data:[String: Any], onTap:@escaping PDYActionBlock) {
         if _customNotificationView == nil {
             if _notificationView == nil {
                 initDefaultNotificationView()
@@ -37,7 +37,7 @@ import UIKit
             _notificationView = _defaultNotificationView
         }
         else {
-            if (class_conformsToProtocol(_customNotificationView!.classForCoder, PDYPushBannerActionProtocol.self as? Protocol)) {
+            if let _ = Pushdy.getClassWithProtocolInHierarchy(_customNotificationView!.classForCoder, protocolToFind: PDYPushBannerActionProtocol.self) {
                 let newBlock:PDYActionBlock = { () -> Void in
                     onTap()
                     
@@ -50,11 +50,21 @@ import UIKit
         }
     }
     
-    public static func setCustomPushBanner(_ customView:UIView) throws {
-        if (!class_conformsToProtocol(customView.classForCoder, PDYPushBannerActionProtocol.self as? Protocol)) {
+    /**
+     Set custom push banner (in app banner)
+     
+     - Parameter customView: A custom view.
+     
+     - Throws: An exception if your custom view does not conform to PDYPushBannerActionProtocol
+     
+     */
+    @objc static func setCustomPushBanner(_ customView:UIView) throws {
+        if let _ = Pushdy.getClassWithProtocolInHierarchy(customView.classForCoder, protocolToFind: PDYPushBannerActionProtocol.self) {
+            _customNotificationView = customView
+        }
+        else {
             let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "\(NSStringFromClass(self)):\(#function):: Your custom push banner does not conform to PDYPushBannerActionProtocol. Please apply that protocol to your custom view."])
             throw error
         }
-        _customNotificationView = customView
     }
 }

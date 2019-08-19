@@ -8,7 +8,6 @@
 
 import UIKit
 import AudioToolbox
-import PushdyCore
 import UserNotifications
 import UserNotificationsUI
 
@@ -19,7 +18,6 @@ import UserNotificationsUI
     var enteredBackground:Bool = true
     var launchedByPush:Bool = false
     
-    var pendingPush:[AnyHashable : Any]?
     var needBanner:Bool = false
     var autoDismiss:Bool = true
     
@@ -89,102 +87,141 @@ import UserNotificationsUI
     }
     
     //MARK: - Handle Push Notification
-    func handleNotification(userInfo:[AnyHashable : Any], inApplication application:UIApplication, withCompletion completion:((UIBackgroundFetchResult) -> Void)?) {
+    func handleNotification(_ notification:[String : Any], inApplication application:UIApplication, withCompletion completion:((UIBackgroundFetchResult) -> Void)?) {
+        
+        if let completionHandler = completion {
+            completionHandler(UIBackgroundFetchResult.newData)
+        }
+        
+        // Check ready state
+        var readyForReceivingNotification = true
+        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.pushdyHasAlreadyForHandlingNotification?() {
+            readyForReceivingNotification = already
+        }
+        
+        NSLog("[Pushdy] handleNotification: %@, inApplication:withCompletion:, readyForReceivingNotification: %ld", notification, readyForReceivingNotification)
+        if !readyForReceivingNotification {
+            if let _ = notification["_notification_id"] as? String {
+                var pendingNotification = notification
+                pendingNotification["is_pending_notification"] = true
+                Pushdy.pushPendingNotification(pendingNotification)
+            }
+            return
+        }
+        
         if(application.applicationState == UIApplication.State.inactive) {
             // --- Handle push in inactive state ---
-            if let completionHandler = completion {
-                completionHandler(UIBackgroundFetchResult.newData)
-            }
-            self.handleNotificationInInactiveState(userInfo: userInfo)
+            self.handleNotificationInInactiveState(notification)
         } else if (application.applicationState == UIApplication.State.background) {
             // --- Handle push in background state --- //
-            if let completionHandler = completion {
-                completionHandler(UIBackgroundFetchResult.newData);
-            }
-            self.handleNotificationInBackgroundState(userInfo:userInfo)
+            self.handleNotificationInBackgroundState(notification)
         } else {
             // --- Handle push in active state --- //
-            if let completionHandler = completion {
-                completionHandler(UIBackgroundFetchResult.newData)
-            }
             let topViewController = UIViewController.topViewController()
             if topViewController.isVisible() {
-                self.handleNotificationInActiveState(userInfo: userInfo)
+                self.handleNotificationInActiveState(notification)
             }
             else {
-                self.handleNotificationInInactiveState(userInfo: userInfo)
+                self.handleNotificationInInactiveState(notification)
             }
         }
     }
     
-    func handleNotification(userInfo:[AnyHashable : Any], inActiveState activeState:Bool) {
+    func handleNotification(_ notification:[String : Any], inActiveState activeState:Bool) {
+        // Check ready state
+        var readyForReceivingNotification = true
+        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.pushdyHasAlreadyForHandlingNotification?() {
+            readyForReceivingNotification = already
+        }
+        
+        NSLog("[Pushdy] handleNotification: %@, inActiveState: %ld, readyForReceivingNotification: %ld", notification, activeState, readyForReceivingNotification)
+        
+        if !readyForReceivingNotification {
+            if let _ = notification["_notification_id"] as? String {
+                var pendingNotification = notification
+                pendingNotification["is_pending_notification"] = true
+                Pushdy.pushPendingNotification(pendingNotification)
+            }
+            return
+        }
+        
         if (activeState) {
             let topViewController = UIViewController.topViewController();
             if topViewController.isVisible() {
                 if (UIApplication.shared.applicationState == UIApplication.State.inactive) {
                     AudioServicesPlaySystemSound(1002);
-                    self.handleNotificationInInactiveState(userInfo: userInfo)
+                    self.handleNotificationInInactiveState(notification)
                 }
                 else {
-                    self.handleNotificationInActiveState(userInfo: userInfo)
+                    self.handleNotificationInActiveState(notification)
                 }
             }
         }
         else {
             // Handle push in background state
             if (self.fromInActiveState) {
-                self.handleNotificationInInactiveState(userInfo: userInfo)
+                self.handleNotificationInInactiveState(notification)
                 self.fromInActiveState = false
             }
             else {
-                self.handleNotificationInBackgroundState(userInfo: userInfo)
+                self.handleNotificationInBackgroundState(notification)
             }
         }
     }
     
-    func handleNotificationInActiveState(userInfo:[AnyHashable : Any]) {
+    func handleNotificationInActiveState(_ notification:[String : Any]) {
         if (self.launchedByPush) {
             self.launchedByPush = false
-            self.handleNotificationPayload(userInfo, needBanner:false, fromAppState:Pushdy.AppState.kNotRunning)
+            self.processNotificationPayload(notification, needBanner:false, fromAppState:AppState.kNotRunning)
         }else
         {
-            self.handleNotificationPayload(userInfo, needBanner:true, fromAppState:Pushdy.AppState.kActive)
+            self.processNotificationPayload(notification, needBanner:true, fromAppState:AppState.kActive)
         }
     }
     
-    func handleNotificationInBackgroundState(userInfo:[AnyHashable : Any]) {
-        self.handleNotificationPayload(userInfo, needBanner:false, fromAppState:Pushdy.AppState.kBackground)
+    func handleNotificationInBackgroundState(_ notification:[String : Any]) {
+        self.processNotificationPayload(notification, needBanner:false, fromAppState:AppState.kBackground)
     }
     
-    func handleNotificationInInactiveState(userInfo:[AnyHashable : Any]) {
-        self.handleNotificationPayload(userInfo, needBanner:false, fromAppState:Pushdy.AppState.kInActive)
+    func handleNotificationInInactiveState(_ notification:[String : Any]) {
+        self.processNotificationPayload(notification, needBanner:false, fromAppState:AppState.kInActive)
     }
     
-    func handleNotificationPayload(_ userInfo:[AnyHashable : Any], needBanner:Bool, fromAppState appState:String) {
-        // Check ready state
-        var readyForReceivingNotification = true
-        if let ready = Pushdy.getDelegate()?.hasAlreadyForReceivingNotification() {
-            readyForReceivingNotification = ready
-        }
-        if !readyForReceivingNotification {
-            return
+    func processNotificationPayload(_ notification:[String : Any], needBanner:Bool, fromAppState appState:String) {
+        if let pushdyDelegate = Pushdy.getDelegate() {
+            pushdyDelegate.pushdyOnReceivedNotification?(notification, fromState: appState)
         }
         
-        if let notification = userInfo as? [String:Any] {
-            Pushdy.getDelegate()?.onReceivedNotification(notification, fromState: appState)
-            
-            if appState == Pushdy.AppState.kActive {
-                if needBanner {
-                    Pushdy.showInAppNotification(notification, onTap: {
-                        Pushdy.getDelegate()?.onNotificationOpened(notification, fromState: appState)
-                    })
-                }
-                else {
-                    Pushdy.getDelegate()?.onNotificationOpened(notification, fromState: appState)
-                }
+        var shouldHandle = true
+        if appState == AppState.kActive {
+            if needBanner {
+                shouldHandle = false
+                Pushdy.showInAppNotification(notification, onTap: {
+                    NSLog("[Pushdy] Push Banner onTap: %@", notification);
+                    if let pushdyDelegate = Pushdy.getDelegate() {
+                        NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
+                        pushdyDelegate.pushdyOnNotificationOpened?(notification, fromState: appState)
+                    }
+                    self.removePendingNotification(notification)
+                })
             }
-            else {
-                Pushdy.getDelegate()?.onNotificationOpened(notification, fromState: appState)
+        }
+        
+        if shouldHandle {
+            if let pushdyDelegate = Pushdy.getDelegate() {
+                NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
+                pushdyDelegate.pushdyOnNotificationOpened?(notification, fromState: appState)
+            }
+            self.removePendingNotification(notification)
+        }
+    }
+    
+    
+    func removePendingNotification(_ notification:[String:Any]) {
+        // Remove pending notifiction after opened
+        if let isPending = notification["is_pending_notification"] as? Bool {
+            if isPending, let notificationID = notification["_notification_id"] as? String {
+                Pushdy.removePendingNotification(notificationID)
             }
         }
     }
