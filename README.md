@@ -158,28 +158,22 @@ Push value into a type of array attributer. You can set "commitImmediately" vari
 
 ```swift
 // Swift language
-// pushdyOnBeforeUpdatePlayer is PushdyDelegate's method which called before each time updating player's attributes, you can set/push your attributes in this method
-- (void)pushdyOnBeforeUpdatePlayer {
-    let books:[String] = [
-        "book_1",
-        "book_2"
-    ]
-    try? Pushdy.pushAttribute("bought_books", value: books)
+let books:[String] = [
+"book_1",
+"book_2"
+]
+try? Pushdy.pushAttribute("bought_books", value: books)
 
-    // Equivalent to
-    try? Pushdy.pushAttribute("bought_books", value: books, commitImmediately: false)
-}
+// Equivalent to
+try? Pushdy.pushAttribute("bought_books", value: books, commitImmediately: false)
 ```
 
 ```objc
 // Objective-C language
-// pushdyOnBeforeUpdatePlayer is PushdyDelegate's method which called before each time updating player's attributes, you can set/push your attributes in this method
-- (void)pushdyOnBeforeUpdatePlayer {
-    [Pushdy setAttribute:@"network_carrier" value:@"your_network_carrier" error:nil];
+[Pushdy setAttribute:@"network_carrier" value:@"your_network_carrier" error:nil];
 
-    // Equivalent to
-    [Pushdy setAttribute:@"network_carrier" value:@"your_network_carrier" commitImmediately:FALSE error:nil];
-}
+// Equivalent to
+[Pushdy setAttribute:@"network_carrier" value:@"your_network_carrier" commitImmediately:FALSE error:nil];
 ```
 
 **Pushdy Delegation**
