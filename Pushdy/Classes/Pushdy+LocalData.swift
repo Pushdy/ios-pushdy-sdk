@@ -303,4 +303,45 @@ public extension Pushdy {
         }
         return params
     }
+    
+    internal static func setLocalAttribValuesAfterSubmitted() {
+        if let attrsSchema = getAttributesSchema() {
+            for i in 0..<attrsSchema.count {
+                let attribute = attrsSchema[i]
+                if let name = attribute["name"] as? String {
+                    if let value = PDYStorage.get(key: ATTTRIBUTE_PREFIX+name) {
+                        PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: value)
+                    }
+                }
+            }
+        }
+    }
+    
+    internal static func addAttributeIntoSchema(_ attribute:[String:Any]) {
+        if let curStr = PDYStorage.getString(key: "PUSHDY_ATTRIBUTES_SCHEMA") {
+            if var curAttrSchema = curStr.asArrayOfDictionary() {
+                var isContain = false
+                for i in 0..<curAttrSchema.count {
+                    let item = curAttrSchema[i]
+                    if let attrName = attribute["name"] as? String, let itemAttrName = item["name"] as? String, attrName == itemAttrName {
+                        if let isDefault = attribute["default"] as? Bool {
+                            isContain = isDefault != true
+                        }
+                        else {
+                            isContain = true
+                        }
+                    }
+                }
+                
+                if isContain == false {
+                    PDYStorage.setString(key: "PUSHDY_PREV_ATTRIBUTES_SCHEMA", value: curStr)
+                    curAttrSchema.append(attribute)
+                    
+                    if let jsonStr = curAttrSchema.jsonString {
+                        PDYStorage.setString(key: "PUSHDY_ATTRIBUTES_SCHEMA", value: jsonStr)
+                    }
+                }
+            }
+        }
+    }
 }

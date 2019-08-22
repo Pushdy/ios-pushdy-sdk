@@ -21,7 +21,7 @@ import Foundation
 
 @objc public class PDYAttribute : PDYRequestObject {
     
-    public var types:[String] = [
+    public static var types:[String] = [
         AttributeType.kBoolean,
         AttributeType.kString,
         AttributeType.kArray,
@@ -42,7 +42,7 @@ import Foundation
     }
     
     @objc public func add(name:String, type:String, label:String?, completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock?) throws {
-        if !self.types.contains(type) {
+        if !PDYAttribute.types.contains(type) {
             let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "The \"type\" parameter is not valid"])
             throw error
         }

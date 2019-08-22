@@ -20,12 +20,15 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     @objc optional func pushdyOnFailedToRegisterForRemoteNotifications(_ error:NSError)
     @objc optional func pushdyOnAddedPlayerSuccessfully(_ playerID:String)
     @objc optional func pushdyOnFailedToAddPlayer(_ error:NSError)
+    @objc optional func pushdyOnBeforeUpdatePlayer()
     @objc optional func pushdyOnEditedPlayerSuccessfully(_ playerID:String)
     @objc optional func pushdyOnFailedToEditPlayer(_ playerID:String, error:NSError)
     @objc optional func pushdyOnCreatedNewSessionSuccessfully(_ playerID:String)
     @objc optional func pushdyOnFailedToCreateNewSession(_ playerID:String, error:NSError)
     @objc optional func pushdyOnTrackedNotificationSuccessfully(_ notification:[String:Any])
     @objc optional func pushdyOnFailedToTrackNotification(_ notification:[String:Any], error:NSError)
+    @objc optional func pushdyOnGetAttributesSuccessfully(_ attributes:[[String:Any]])
+    @objc optional func pushdyOnFailedToGetAttributes(_ error:NSError)
 }
 
 @objc public class AppState : NSObject {
@@ -77,6 +80,9 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             _pushdyDelegate = delegate as? PushdyDelegate
         }
         
+        // Check launch by push notification
+        self.checkLaunchingFromPushNotification()
+        
         // Handle pushdy logic
         self.checkFirstTimeOpenApp()
         
@@ -90,7 +96,6 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     }
     
     public static func getDelegate() -> PushdyDelegate? {
-        NSLog("[Pushdy] _pushdyDelegate == nil => %ld", _pushdyDelegate == nil)
         return _pushdyDelegate
     }
     
@@ -102,6 +107,14 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     
     
     //MARK: Internal Handler
+    internal static func checkLaunchingFromPushNotification() {
+        if let launchOptions = _launchOptions, let notification = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String : Any] {
+            PDYThread.perform(onBackGroundThread: {
+                Pushdy.trackOpeningPushNotification(notification)
+            }, after: 0.5)
+        }
+    }
+    
     internal static func checkFirstTimeOpenApp() {
         let firstTimeOpenApp = isFirstTimeOpenApp()
         // If first time open app, then create player
@@ -124,7 +137,6 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     
     /**
      Update player if attributes have changed.
-     
      */
     @objc internal static func updatePlayerIfNeeded() {
         if !isCreatingPlayer && !isEditingPlayer {

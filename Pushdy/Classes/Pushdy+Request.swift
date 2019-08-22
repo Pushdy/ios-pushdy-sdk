@@ -42,6 +42,26 @@ public extension Pushdy {
         }
     }
     
+    internal static func addAttribute(name:String, type:String, label:String?, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+        if let key = _clientKey {
+            let attribute = PDYAttribute(clientKey:key)
+            try attribute.add(name: name, type: type, label: label, completion: completion, failure: failure)
+        }
+        else {
+            throw clientKeyNotSetError()
+        }
+    }
+    
+    internal static func editAttribute(name:String, newName:String, label:String?, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+        if let key = _clientKey {
+            let attribute = PDYAttribute(clientKey:key)
+            try attribute.edit(name: name, newName: newName, label: label, completion: completion, failure: failure)
+        }
+        else {
+            throw clientKeyNotSetError()
+        }
+    }
+    
     @objc static func trackOpened(notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let notification = PDYNotification(clientKey:key, deviceID: _deviceID)
@@ -63,7 +83,7 @@ public extension Pushdy {
         do {
             isCreatingPlayer = true
             try createPlayer(params: params, completion: { (response:AnyObject?) in
-                NSLog("[Pushdy] Create player successfully")
+//                NSLog("[Pushdy] Create player successfully")
                 isCreatingPlayer = false
                 if let dict = response as? [String:Any], let result = dict["success"] as? Bool, result == true {
                     if let playerID = dict["id"] as? String {
@@ -86,14 +106,14 @@ public extension Pushdy {
                 }
             }) { (errorCode:Int, message:String?) in
                 isCreatingPlayer = false
-                NSLog("[Pushdy] Failed to create player code="+String(errorCode)+", message="+(message ?? ""))
+//                NSLog("[Pushdy] Failed to create player code="+String(errorCode)+", message="+(message ?? ""))
                 let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "Failed to create player code="+String(errorCode)+", message="+(message ?? "")])
                 getDelegate()?.pushdyOnFailedToAddPlayer?(error)
             }
         }
         catch let error {
             isCreatingPlayer = false
-            NSLog("[Pushdy] createPlayer raised an exception \(error)")
+//            NSLog("[Pushdy] createPlayer raised an exception \(error)")
             getDelegate()?.pushdyOnFailedToAddPlayer?(error as NSError)
         }
     }
@@ -102,16 +122,16 @@ public extension Pushdy {
         if let playerID = getPlayerID() {
             do {
                 try newSession(playerID: playerID, completion: { (result:AnyObject?) in
-                    NSLog("[Pushdy] Create new session successfully")
+//                    NSLog("[Pushdy] Create new session successfully")
                     getDelegate()?.pushdyOnCreatedNewSessionSuccessfully?(playerID)
                 }, failure: { (errorCode:Int, message:String?) in
-                    NSLog("[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? ""))
+//                    NSLog("[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? ""))
                     let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? "")])
                     getDelegate()?.pushdyOnFailedToCreateNewSession?(playerID, error:error)
                 })
             }
             catch let error {
-                NSLog("[Pushdy] newSession raised an exception \(error)")
+//                NSLog("[Pushdy] newSession raised an exception \(error)")
                 getDelegate()?.pushdyOnFailedToCreateNewSession?(playerID, error:error as NSError)
             }
         }
@@ -131,24 +151,30 @@ public extension Pushdy {
         isFetchingAttributes = true
         try? getAttributes(completion: { (response:AnyObject?) in
             isFetchingAttributes = false
+            print("[Pushdy] getAttributes response \(response)")
             var results:[[String:Any]]? = nil
             if let dict = response as? [String:Any], let result = dict["success"] as? Bool, result == true {
                 if let attributes = dict["data"] as? [[String:Any]] {
-                    print("[Pushdy] getAttributes attributes \(attributes)")
+//                    print("[Pushdy] getAttributes attributes \(attributes)")
                     results = attributes
                     setAttributesSchema(attributes)
                     setFetchedAttributes(true)
+                    getDelegate()?.pushdyOnGetAttributesSuccessfully?(attributes)
                 }
             }
             completion?(results)
         }, failure: { (errorCode:Int, message:String?) in
             isFetchingAttributes = false
             failure?(errorCode, message)
+            print("[Pushdy] getAttributes error message \(message)")
+            let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to get attributes code="+String(errorCode)+", message="+(message ?? "")])
+            getDelegate()?.pushdyOnFailedToGetAttributes?(error)
         })
     }
     
     internal static func editPlayer() {
         if let playerID = getPlayerID(), isEditingPlayer != true {
+            getDelegate()?.pushdyOnBeforeUpdatePlayer?()
             var params = [String:Any]()
             if let deviceToken = getDeviceToken() {
                 params[PDYParam.DeviceToken] = deviceToken
@@ -160,21 +186,22 @@ public extension Pushdy {
             
             do {
                 isEditingPlayer = true
-                NSLog("[Pushdy] editPlayer params: \(params.jsonString)")
+//                NSLog("[Pushdy] editPlayer params: \(params.jsonString)")
                 try editPlayer(playerID: playerID, params: params, completion: { (response:AnyObject?) in
                     isEditingPlayer = false
-                    NSLog("[Pushdy] Edit player successfully")
+//                    NSLog("[Pushdy] Edit player successfully")
+                    setLocalAttribValuesAfterSubmitted()
                     getDelegate()?.pushdyOnEditedPlayerSuccessfully?(playerID)
                 }) { (errorCode:Int, message:String?) in
                     isEditingPlayer = false
-                    NSLog("[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? ""))
+//                    NSLog("[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? ""))
                     let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? "")])
                     getDelegate()?.pushdyOnFailedToEditPlayer?(playerID, error:error)
                 }
             }
             catch let error {
                 isEditingPlayer = false
-                NSLog("[Pushdy] editPlayer raised an exception \(error)")
+//                NSLog("[Pushdy] editPlayer raised an exception \(error)")
                 getDelegate()?.pushdyOnFailedToEditPlayer?(playerID, error:error as NSError)
             }
         }
@@ -214,13 +241,54 @@ public extension Pushdy {
      - Parameter value: Attribute value
      
      */
-    @objc static func setAttribute(_ name:String, value:Any) {
-        if let currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX) {
-            PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
+    @objc static func setAttribute(_ name:String, value:Any) throws {
+        try setAttribute(name, value: value, commitImmediately: false)
+    }
+    
+    /**
+     Set attribute
+     
+     - Parameter name: Attribute name
+     - Parameter value: Attribute value
+     - Parameter commitImmediately: A boolean flag which indicate that the attribute can be submitted immediately or not
+     
+     */
+    @objc static func setAttribute(_ name:String, value:Any, commitImmediately:Bool) throws {
+        var typeStr = ""
+        if value is Array<Any> {
+            typeStr = AttributeType.kArray
         }
-        PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: value)
+        else if value is String {
+            typeStr = AttributeType.kString
+        }
+        else if value is Bool {
+            typeStr = AttributeType.kBoolean
+        }
+        else if value is Int || value is Double {
+            typeStr = AttributeType.kNumber
+        }
         
-        editPlayer()
+        if PDYAttribute.types.contains(typeStr) {
+            if let currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX) {
+                PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
+            }
+            PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: value)
+            
+//            let newAttrib:[String:Any] = [
+//                "name" : name,
+//                "default" : 0,
+//                "type" : typeStr
+//            ]
+//            addAttributeIntoSchema(newAttrib)
+//
+            if commitImmediately {
+                editPlayer()
+            }
+        }
+        else {
+            let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "Value type is not supported"])
+            throw error
+        }
     }
     
     /**
@@ -230,8 +298,19 @@ public extension Pushdy {
      - Parameter value: Attribute value
      
      */
-    @objc static func pushAttribute(_ name:String, value:Any) {
-        if var currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX) as? Array<Any> {
+    @objc static func pushAttribute(_ name:String, value:Any) throws {
+        try pushAttribute(name, value: value, commitImmediately: false)
+    }
+    
+    /**
+     Push attribute with array type
+     
+     - Parameter name: Attribute name
+     - Parameter value: Attribute value
+     - Parameter commitImmediately: A boolean flag which indicate that the attribute can be submitted immediately or not
+     */
+    @objc static func pushAttribute(_ name:String, value:Any, commitImmediately:Bool) throws {
+        if var currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX+name) as? Array<Any> {
             PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
             currentValue.append(value)
             PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: currentValue)
@@ -239,7 +318,16 @@ public extension Pushdy {
         else {
             PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: [value])
         }
+//
+//        let newAttrib:[String:Any] = [
+//            "name" : name,
+//            "default" : 0,
+//            "type" : AttributeType.kArray
+//        ]
+//        addAttributeIntoSchema(newAttrib)
         
-        editPlayer()
+        if commitImmediately {
+            editPlayer()
+        }
     }
 }

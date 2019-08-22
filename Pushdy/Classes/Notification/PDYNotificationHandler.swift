@@ -99,7 +99,7 @@ import UserNotificationsUI
             readyForReceivingNotification = already
         }
         
-        NSLog("[Pushdy] handleNotification: %@, inApplication:withCompletion:, readyForReceivingNotification: %ld", notification, readyForReceivingNotification)
+//        NSLog("[Pushdy] handleNotification: %@, inApplication:withCompletion:, readyForReceivingNotification: %ld", notification, readyForReceivingNotification)
         if !readyForReceivingNotification {
             if let _ = notification["_notification_id"] as? String {
                 var pendingNotification = notification
@@ -197,9 +197,9 @@ import UserNotificationsUI
             if needBanner {
                 shouldHandle = false
                 Pushdy.showInAppNotification(notification, onTap: {
-                    NSLog("[Pushdy] Push Banner onTap: %@", notification);
+//                    NSLog("[Pushdy] Push Banner onTap: %@", notification);
                     if let pushdyDelegate = Pushdy.getDelegate() {
-                        NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
+//                        NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
                         pushdyDelegate.pushdyOnNotificationOpened?(notification, fromState: appState)
                     }
                     self.removePendingNotification(notification)
@@ -209,10 +209,14 @@ import UserNotificationsUI
         
         if shouldHandle {
             if let pushdyDelegate = Pushdy.getDelegate() {
-                NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
+//                NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
                 pushdyDelegate.pushdyOnNotificationOpened?(notification, fromState: appState)
             }
             self.removePendingNotification(notification)
+            
+            PDYThread.perform(onBackGroundThread: {
+                Pushdy.trackOpeningPushNotification(notification)
+            }, after: 0.5)
         }
     }
     
