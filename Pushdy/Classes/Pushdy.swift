@@ -132,7 +132,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
      Observe attributes's change
      */
     @objc internal static func observeAttributesChanged() {
-        Timer.scheduledTimer(timeInterval: UPDATE_ATTRIBUTES_INTERVAL, target: self, selector: #selector(self.updatePlayerIfNeeded), userInfo: nil, repeats: true)
+        let timer = Timer.scheduledTimer(timeInterval: UPDATE_ATTRIBUTES_INTERVAL, target: self, selector: #selector(self.updatePlayerIfNeeded), userInfo: nil, repeats: true)
+        timer.fire()
     }
     
     /**
