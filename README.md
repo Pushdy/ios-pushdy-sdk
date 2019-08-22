@@ -10,6 +10,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+Swift >= 4.2
+
 ## Installation
 
 Pushdy is available through [CocoaPods](https://cocoapods.org). To install
@@ -67,17 +69,69 @@ Pushdy.registerForPushNotifications()
 
 Get device token from pushdy
 
+
+```swift
+// Swift language
+Pushdy.getDeviceToken()
+```
+
+```objc
+// Objective-C language
+[Pushdy getDeviceToken];
+```
+
+
 - checkNotificationEnabling
 
 Check allowing notification or not
+
+
+```swift
+// Swift language
+Pushdy.checkNotificationEnabling { (enabled:Bool) in
+
+}
+```
+
+```objc
+// Objective-C language
+[Pushdy checkNotificationEnabling:^(BOOL enabled) {
+        
+}];
+```
+
 
 - setDeviceID
 
 Using your device id instead of Pushdy device id
 
+```swift
+// Swift language
+let yourDeviceID = ...
+Pushdy.setDeviceID(yourDeviceID)
+```
+
+```objc
+// Objective-C language
+NSString* yourDeviceID = ...;
+[Pushdy setDeviceID:yourDeviceID];
+```
+
+
 - getPendingNotification
 
 Get pending notification which is not handled
+
+```swift
+// Swift language
+Pushdy.getPendingNotification()
+```
+
+```objc
+// Objective-C language
+[Pushdy getPendingNotification];
+```
+
 
 **Pushdy Delegation**
 
@@ -99,19 +153,166 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
 }
 ```
 
-**pushdyHasAlreadyForHandlingNotification**
+
+-pushdyHasAlreadyForHandlingNotification :
 
 Determine that the application can handle push notification or not. Default is true. 
 If false, incoming push will be pushed to pending notifications and you can process pending notifications later.
 
-**pushdyOnReceivedNotification:fromState**
+```swift
+// Swift language
+func pushdyHasAlreadyForHandlingNotification() -> Bool {
+    var already = true
+    // Example: already = pass through login or tutorial/introdution screen
+    return already
+}
+```
+
+```objc
+// Objective-C language
+- (BOOL)pushdyHasAlreadyForHandlingNotification {
+    BOOL already = YES;
+    // Example: already = pass through login or tutorial/introdution screen
+    return already;
+}
+```
+
+
+-pushdyOnReceivedNotification:fromState :
 
 When the application received a notification, Pushdy will trigger this method.
 
-**pushdyOnNotificationOpened:fromState**
+```swift
+// Swift language
+func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: String) {
+        if fromState == "not_running" {
+            // Example: is_app_launched_from_push = true
+        }
+        else if fromState == "active" {
+            // Example: Play a sound to notitfy user
+        }
+        else if fromState == "inactive" {
+            // Example: Play a sound to notitfy user
+        }
+        else if fromState == "background" {
+            
+        }
+    }
+```
+
+```objc
+// Objective-C language
+- (void)pushdyOnReceivedNotification:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
+    if ([fromState isEqualToString:@"not_running"]) {
+        // Example: is_app_launched_from_push = true
+    }
+    else if ([fromState isEqualToString:@"active"]) {
+        // Example: Play a sound to notitfy user
+    }
+    else if ([fromState isEqualToString:@"inactive"]) {
+        // Example: Play a sound to notitfy user
+    }
+    else if ([fromState isEqualToString:@"background"]) {
+
+    }
+}
+```
+
+
+-pushdyOnNotificationOpened:fromState :
 
 When user tap push notification banner (system notification or in app notification banner), Pushdy will trigger this method.
 
+```swift
+// Swift language
+func pushdyOnNotificationOpened(_ notification: [String : Any], fromState: String) {
+     // Handle notification
+}
+```
+
+```objc
+// Objective-C language
+- (void)pushdyOnNotificationOpened:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
+    // Handle notification
+}
+```
+
+
+And some other delegate methods...
+
+**Customize In App Notification Banner**
+
+We use PDYNotificationView view for default displaying in app push notification.
+Pushdy also provides some method to adjust default notification view and set your custom view.
+
+- setPushBannerAutoDismiss :
+
+Turn on/off auto dismiss for in app notification banner.
+
+```swift
+// Swift language
+Pushdy.setPushBannerAutoDismiss(true)
+```
+
+```objc
+// Objective-C language
+[Pushdy setPushBannerAutoDismiss:TRUE];
+```
+
+
+- setPushBannerDismissDuration : 
+
+Set auto dismiss duration for default custom view.
+
+```swift
+// Swift language
+Pushdy.setPushBannerDismissDuration(5) // 5 seconds
+```
+
+```objc
+// Objective-C language
+[Pushdy setPushBannerDismissDuration:5]; // 5 seconds
+```
+
+
+- setCustomPushBanner :
+
+Set custom notification banner view. Implementating PDYPushBannerActionProtocol protocol is required.
+
+```swift
+// Swift language
+let yourCustomView = ...
+Pushdy.setCustomPushBanner(yourCustomView)
+```
+
+```objc
+// Objective-C language
+UIView* yourCustomView = ...
+[Pushdy setCustomPushBanner:yourCustomView];
+```
+
+*** Note: 
+
+Pushdy SDK use media_url key for displaying thumbnail image from json push payload as default.
+```ruby
+{
+   "aps" : {
+        ...
+   },
+   "media_url" : "https://domain.com/path/image.png"
+}
+```
+
+If you want to custom your own key, use setCustomMediaKey method for override it.
+```swift
+// Swift language
+PDYNotificationView.setCustomMediaKey("your_custom_media_key")
+```
+
+```objc
+// Objective-C language
+[PDYNotificationView setCustomMediaKey:@"your_custom_media_key"];
+```
 
 
 ## Author
