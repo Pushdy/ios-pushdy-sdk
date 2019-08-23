@@ -96,8 +96,8 @@ public extension Pushdy {
      
      - Parameter resultBlock: A block which return checking result.
      */
-    @objc static func checkNotificationEnabling(_ resultBlock : ((Bool)->())? = nil) {
-        PDYNotificationHandler.shared.checkNotificationEnabling(resultBlock)
+    @objc static func checkNotificationEnabled(_ resultBlock : ((Bool)->())? = nil) {
+        PDYNotificationHandler.shared.checkNotificationEnabled(resultBlock)
     }
 }
 

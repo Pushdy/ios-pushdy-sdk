@@ -13,22 +13,22 @@ public typealias PushdyResultSuccessBlock = (NSDictionary) -> Void
 public typealias PushdyFailureBlock = (NSError) -> Void
 
 @objc public protocol PushdyDelegate {
-    @objc optional func pushdyHasAlreadyForHandlingNotification() -> Bool
-    @objc optional func pushdyOnReceivedNotification(_ notification:[String:Any], fromState:String)
-    @objc optional func pushdyOnNotificationOpened(_ notification:[String:Any], fromState:String)
-    @objc optional func pushdyOnRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken:String)
-    @objc optional func pushdyOnFailedToRegisterForRemoteNotifications(_ error:NSError)
-    @objc optional func pushdyOnAddedPlayerSuccessfully(_ playerID:String)
-    @objc optional func pushdyOnFailedToAddPlayer(_ error:NSError)
-    @objc optional func pushdyOnBeforeUpdatePlayer()
-    @objc optional func pushdyOnEditedPlayerSuccessfully(_ playerID:String)
-    @objc optional func pushdyOnFailedToEditPlayer(_ playerID:String, error:NSError)
-    @objc optional func pushdyOnCreatedNewSessionSuccessfully(_ playerID:String)
-    @objc optional func pushdyOnFailedToCreateNewSession(_ playerID:String, error:NSError)
-    @objc optional func pushdyOnTrackedNotificationSuccessfully(_ notification:[String:Any])
-    @objc optional func pushdyOnFailedToTrackNotification(_ notification:[String:Any], error:NSError)
-    @objc optional func pushdyOnGetAttributesSuccessfully(_ attributes:[[String:Any]])
-    @objc optional func pushdyOnFailedToGetAttributes(_ error:NSError)
+    @objc optional func readyForHandlingNotification() -> Bool
+    @objc optional func onNotificationReceived(_ notification:[String:Any], fromState:String)
+    @objc optional func onNotificationOpened(_ notification:[String:Any], fromState:String)
+    @objc optional func onRemoteNotificationRegistered(_ deviceToken:String)
+    @objc optional func onRemoteNotificationFailedToRegister(_ error:NSError)
+    @objc optional func onPlayerAdded(_ playerID:String)
+    @objc optional func onPlayerFailedToAdd(_ error:NSError)
+    @objc optional func onBeforeUpdatePlayer()
+    @objc optional func onPlayerEdited(_ playerID:String)
+    @objc optional func onPlayerFailedToEdit(_ playerID:String, error:NSError)
+    @objc optional func onNewSessionCreated(_ playerID:String)
+    @objc optional func onNewSessionFailedToCreate(_ playerID:String, error:NSError)
+    @objc optional func onNotificationTracked(_ notification:[String:Any])
+    @objc optional func onNotificationFailedToTrack(_ notification:[String:Any], error:NSError)
+    @objc optional func onAttributesReceived(_ attributes:[[String:Any]])
+    @objc optional func onAttributesFailedToReceive(_ error:NSError)
 }
 
 @objc public class AppState : NSObject {

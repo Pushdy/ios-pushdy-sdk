@@ -52,13 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
     }
     
     // MARK: - PushdyDelegate
-    func pushdyHasAlreadyForHandlingNotification() -> Bool {
+    func readyForHandlingNotification() -> Bool {
         var already = true
         // Example: already = pass through login or tutorial/introdution screen
         return already
     }
     
-    func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: String) {
+    func onNotificationReceived(_ notification: [String : Any], fromState: String) {
         if fromState == "not_running" {
             // Example: is_app_launched_from_push = true
         }
@@ -73,11 +73,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
         }
     }
     
-    func pushdyOnNotificationOpened(_ notification: [String : Any], fromState: String) {
+    func onNotificationOpened(_ notification: [String : Any], fromState: String) {
         // Handle notification
     }
     
-    func pushdyOnRegisteredForRemoteNotificationsWithDeviceToken(_ deviceToken: String) {
+    func onRemoteNotificationRegistered(_ deviceToken: String) {
         // Send device token to your own server
     }
 }

@@ -88,7 +88,7 @@ public extension Pushdy {
                 if let dict = response as? [String:Any], let result = dict["success"] as? Bool, result == true {
                     if let playerID = dict["id"] as? String {
                         setPlayerID(playerID)
-                        getDelegate()?.pushdyOnAddedPlayerSuccessfully?(playerID)
+                        getDelegate()?.onPlayerAdded?(playerID)
                     }
                 }
                 
@@ -108,13 +108,13 @@ public extension Pushdy {
                 isCreatingPlayer = false
 //                NSLog("[Pushdy] Failed to create player code="+String(errorCode)+", message="+(message ?? ""))
                 let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "Failed to create player code="+String(errorCode)+", message="+(message ?? "")])
-                getDelegate()?.pushdyOnFailedToAddPlayer?(error)
+                getDelegate()?.onPlayerFailedToAdd?(error)
             }
         }
         catch let error {
             isCreatingPlayer = false
 //            NSLog("[Pushdy] createPlayer raised an exception \(error)")
-            getDelegate()?.pushdyOnFailedToAddPlayer?(error as NSError)
+            getDelegate()?.onPlayerFailedToAdd?(error as NSError)
         }
     }
     
@@ -123,16 +123,16 @@ public extension Pushdy {
             do {
                 try newSession(playerID: playerID, completion: { (result:AnyObject?) in
 //                    NSLog("[Pushdy] Create new session successfully")
-                    getDelegate()?.pushdyOnCreatedNewSessionSuccessfully?(playerID)
+                    getDelegate()?.onNewSessionCreated?(playerID)
                 }, failure: { (errorCode:Int, message:String?) in
 //                    NSLog("[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? ""))
                     let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to create new session code="+String(errorCode)+", message="+(message ?? "")])
-                    getDelegate()?.pushdyOnFailedToCreateNewSession?(playerID, error:error)
+                    getDelegate()?.onNewSessionFailedToCreate?(playerID, error:error)
                 })
             }
             catch let error {
 //                NSLog("[Pushdy] newSession raised an exception \(error)")
-                getDelegate()?.pushdyOnFailedToCreateNewSession?(playerID, error:error as NSError)
+                getDelegate()?.onNewSessionFailedToCreate?(playerID, error:error as NSError)
             }
         }
         else {
@@ -159,7 +159,7 @@ public extension Pushdy {
                     results = attributes
                     setAttributesSchema(attributes)
                     setFetchedAttributes(true)
-                    getDelegate()?.pushdyOnGetAttributesSuccessfully?(attributes)
+                    getDelegate()?.onAttributesReceived?(attributes)
                 }
             }
             completion?(results)
@@ -168,13 +168,13 @@ public extension Pushdy {
             failure?(errorCode, message)
             print("[Pushdy] getAttributes error message \(message)")
             let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to get attributes code="+String(errorCode)+", message="+(message ?? "")])
-            getDelegate()?.pushdyOnFailedToGetAttributes?(error)
+            getDelegate()?.onAttributesFailedToReceive?(error)
         })
     }
     
     internal static func editPlayer() {
         if let playerID = getPlayerID(), isEditingPlayer != true {
-            getDelegate()?.pushdyOnBeforeUpdatePlayer?()
+            getDelegate()?.onBeforeUpdatePlayer?()
             var params = [String:Any]()
             if let deviceToken = getDeviceToken() {
                 params[PDYParam.DeviceToken] = deviceToken
@@ -191,18 +191,18 @@ public extension Pushdy {
                     isEditingPlayer = false
 //                    NSLog("[Pushdy] Edit player successfully")
                     setLocalAttribValuesAfterSubmitted()
-                    getDelegate()?.pushdyOnEditedPlayerSuccessfully?(playerID)
+                    getDelegate()?.onPlayerEdited?(playerID)
                 }) { (errorCode:Int, message:String?) in
                     isEditingPlayer = false
 //                    NSLog("[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? ""))
                     let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "[Pushdy] Failed to edit player code="+String(errorCode)+", message="+(message ?? "")])
-                    getDelegate()?.pushdyOnFailedToEditPlayer?(playerID, error:error)
+                    getDelegate()?.onPlayerFailedToEdit?(playerID, error:error)
                 }
             }
             catch let error {
                 isEditingPlayer = false
 //                NSLog("[Pushdy] editPlayer raised an exception \(error)")
-                getDelegate()?.pushdyOnFailedToEditPlayer?(playerID, error:error as NSError)
+                getDelegate()?.onPlayerFailedToEdit?(playerID, error:error as NSError)
             }
         }
     }

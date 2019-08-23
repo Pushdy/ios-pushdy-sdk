@@ -197,14 +197,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PushdyDelegate {
 ```
 
 
--pushdyHasAlreadyForHandlingNotification :
+-readyForHandlingNotification :
 
 Determine that the application can handle push notification or not. Default is true. 
 If false, incoming push will be pushed to pending notifications and you can process pending notifications later.
 
 ```swift
 // Swift language
-func pushdyHasAlreadyForHandlingNotification() -> Bool {
+func readyForHandlingNotification() -> Bool {
     var already = true
     // Example: already = pass through login or tutorial/introdution screen
     return already
@@ -213,21 +213,21 @@ func pushdyHasAlreadyForHandlingNotification() -> Bool {
 
 ```objc
 // Objective-C language
-- (BOOL)pushdyHasAlreadyForHandlingNotification {
+- (BOOL)readyForHandlingNotification {
     BOOL already = YES;
-    // Example: already = pass through login or tutorial/introdution screen
+    // Example: already = pass through login or tutorial/introduction screen
     return already;
 }
 ```
 
 
--pushdyOnReceivedNotification:fromState :
+-onNotificationReceived:fromState :
 
 When the application received a notification, Pushdy will trigger this method.
 
 ```swift
 // Swift language
-func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: String) {
+func onNotificationReceived(_ notification: [String : Any], fromState: String) {
         if fromState == "not_running" {
             // Example: is_app_launched_from_push = true
         }
@@ -245,7 +245,7 @@ func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: Str
 
 ```objc
 // Objective-C language
-- (void)pushdyOnReceivedNotification:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
+- (void)onNotificationReceived:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
     if ([fromState isEqualToString:@"not_running"]) {
         // Example: is_app_launched_from_push = true
     }
@@ -262,20 +262,20 @@ func pushdyOnReceivedNotification(_ notification: [String : Any], fromState: Str
 ```
 
 
--pushdyOnNotificationOpened:fromState :
+-onNotificationOpened:fromState :
 
 When user tap push notification banner (system notification or in app notification banner), Pushdy will trigger this method.
 
 ```swift
 // Swift language
-func pushdyOnNotificationOpened(_ notification: [String : Any], fromState: String) {
+func onNotificationOpened(_ notification: [String : Any], fromState: String) {
      // Handle notification
 }
 ```
 
 ```objc
 // Objective-C language
-- (void)pushdyOnNotificationOpened:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
+- (void)onNotificationOpened:(NSDictionary<NSString *,id> *)notification fromState:(NSString *)fromState {
     // Handle notification
 }
 ```

@@ -29,7 +29,7 @@ public extension UIApplication {
         }
         
         // Forward to delegate
-        Pushdy.getDelegate()?.pushdyOnRegisteredForRemoteNotificationsWithDeviceToken?(newDeviceToken)
+        Pushdy.getDelegate()?.onRemoteNotificationRegistered?(newDeviceToken)
         
         // Call origin method
         if self.responds(to: #selector(UIApplication.pushdyApplication(_:didRegisterForRemoteNotificationsWithDeviceToken:))) {
@@ -39,7 +39,7 @@ public extension UIApplication {
     
     @objc func pushdyDidFailRegisterForRemoteNotifications(_ app : UIApplication, error : NSError) {
         // Forward to delegate
-        Pushdy.getDelegate()?.pushdyOnFailedToRegisterForRemoteNotifications?(error)
+        Pushdy.getDelegate()?.onRemoteNotificationFailedToRegister?(error)
         
         // Call origin method
         if self.responds(to: #selector(UIApplication.pushdyDidFailRegisterForRemoteNotifications(_:error:))) {

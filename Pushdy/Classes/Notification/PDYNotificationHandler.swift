@@ -47,7 +47,7 @@ import UserNotificationsUI
         }
     }
     
-    func checkNotificationEnabling(_ resultBlock : ((Bool)->())? = nil){
+    func checkNotificationEnabled(_ resultBlock : ((Bool)->())? = nil){
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().getNotificationSettings(){ (setttings) in
                 switch setttings.authorizationStatus {
@@ -95,7 +95,7 @@ import UserNotificationsUI
         
         // Check ready state
         var readyForReceivingNotification = true
-        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.pushdyHasAlreadyForHandlingNotification?() {
+        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.readyForHandlingNotification?() {
             readyForReceivingNotification = already
         }
         
@@ -130,7 +130,7 @@ import UserNotificationsUI
     func handleNotification(_ notification:[String : Any], inActiveState activeState:Bool) {
         // Check ready state
         var readyForReceivingNotification = true
-        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.pushdyHasAlreadyForHandlingNotification?() {
+        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.readyForHandlingNotification?() {
             readyForReceivingNotification = already
         }
         
@@ -189,7 +189,7 @@ import UserNotificationsUI
     
     func processNotificationPayload(_ notification:[String : Any], needBanner:Bool, fromAppState appState:String) {
         if let pushdyDelegate = Pushdy.getDelegate() {
-            pushdyDelegate.pushdyOnReceivedNotification?(notification, fromState: appState)
+            pushdyDelegate.onNotificationReceived?(notification, fromState: appState)
         }
         
         var shouldHandle = true
@@ -200,7 +200,7 @@ import UserNotificationsUI
 //                    NSLog("[Pushdy] Push Banner onTap: %@", notification);
                     if let pushdyDelegate = Pushdy.getDelegate() {
 //                        NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
-                        pushdyDelegate.pushdyOnNotificationOpened?(notification, fromState: appState)
+                        pushdyDelegate.onNotificationOpened?(notification, fromState: appState)
                     }
                     self.removePendingNotification(notification)
                 })
@@ -210,7 +210,7 @@ import UserNotificationsUI
         if shouldHandle {
             if let pushdyDelegate = Pushdy.getDelegate() {
 //                NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
-                pushdyDelegate.pushdyOnNotificationOpened?(notification, fromState: appState)
+                pushdyDelegate.onNotificationOpened?(notification, fromState: appState)
             }
             self.removePendingNotification(notification)
             
