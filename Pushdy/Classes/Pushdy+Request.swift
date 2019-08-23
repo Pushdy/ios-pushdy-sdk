@@ -89,20 +89,33 @@ public extension Pushdy {
                     if let playerID = dict["id"] as? String {
                         setPlayerID(playerID)
                         getDelegate()?.onPlayerAdded?(playerID)
+                        
+                        if attributesHasChanged() {
+                            editPlayer()
+                        }
                     }
                 }
                 
+                var shouldEditPlayer = false
                 if let _ = getDeviceToken(), hasTokenBefore == false {
-                    if isFetchedAttributes() {
+                    shouldEditPlayer = true
+                }
+                
+                if isFetchedAttributes() {
+                    if shouldEditPlayer {
                         editPlayer()
                     }
-                    else {
-                        getAttributes(completion: { (result:[[String : Any]]?) in
+                }
+                else {
+                    getAttributes(completion: { (result:[[String : Any]]?) in
+                        if shouldEditPlayer {
                             editPlayer()
-                        }, failure: { (errorCode:Int, message:String?) in
+                        }
+                    }, failure: { (errorCode:Int, message:String?) in
+                        if shouldEditPlayer {
                             editPlayer()
-                        })
-                    }
+                        }
+                    })
                 }
             }) { (errorCode:Int, message:String?) in
                 isCreatingPlayer = false
@@ -155,7 +168,6 @@ public extension Pushdy {
             var results:[[String:Any]]? = nil
             if let dict = response as? [String:Any], let result = dict["success"] as? Bool, result == true {
                 if let attributes = dict["data"] as? [[String:Any]] {
-//                    print("[Pushdy] getAttributes attributes \(attributes)")
                     results = attributes
                     setAttributesSchema(attributes)
                     setFetchedAttributes(true)
@@ -180,8 +192,9 @@ public extension Pushdy {
                 params[PDYParam.DeviceToken] = deviceToken
             }
             
-            if let attrParams = convertAttributesToParams() {
-                params = params.merging(attrParams) { (_, new) in new }
+            if let changedAttrs = getChangedStack() {
+                print("[Pushdy] editPlayer changed attributes: \(changedAttrs)")
+                params = params.merging(changedAttrs) { (_, new) in new }
             }
             
             do {
@@ -191,6 +204,7 @@ public extension Pushdy {
                     isEditingPlayer = false
 //                    NSLog("[Pushdy] Edit player successfully")
                     setLocalAttribValuesAfterSubmitted()
+                    clearChangedStack()
                     getDelegate()?.onPlayerEdited?(playerID)
                 }) { (errorCode:Int, message:String?) in
                     isEditingPlayer = false
@@ -254,6 +268,9 @@ public extension Pushdy {
      
      */
     @objc static func setAttribute(_ name:String, value:Any, commitImmediately:Bool) throws {
+        let changed = isAttributeChanged(name, newValue: value)
+        if !changed { return }
+        
         var typeStr = ""
         if value is Array<Any> {
             typeStr = AttributeType.kArray
@@ -269,18 +286,13 @@ public extension Pushdy {
         }
         
         if PDYAttribute.types.contains(typeStr) {
-            if let currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX) {
-                PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
+            if let currentValue = getAttributeValue(name) {
+                setPrevAttributeValue(name, value: currentValue)
             }
-            PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: value)
+            setAttributeValue(name, value: value)
             
-//            let newAttrib:[String:Any] = [
-//                "name" : name,
-//                "default" : 0,
-//                "type" : typeStr
-//            ]
-//            addAttributeIntoSchema(newAttrib)
-//
+            pushToChangedStack(name, value: value)
+
             if commitImmediately {
                 editPlayer()
             }
@@ -310,21 +322,21 @@ public extension Pushdy {
      - Parameter commitImmediately: A boolean flag which indicate that the attribute can be submitted immediately or not
      */
     @objc static func pushAttribute(_ name:String, value:Any, commitImmediately:Bool) throws {
-        if var currentValue = PDYStorage.get(key: ATTTRIBUTE_PREFIX+name) as? Array<Any> {
-            PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: currentValue)
-            currentValue.append(value)
-            PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: currentValue)
+        var currentValue:Array<Any>?
+        if var values = getAttributeValue(name) as? Array<Any> {
+            setPrevAttributeValue(name, value: values)
+            values.append(value)
+            setAttributeValue(name, value: values)
+            currentValue = values
         }
         else {
-            PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: [value])
+            currentValue = [value]
+            setAttributeValue(name, value: [value])
         }
-//
-//        let newAttrib:[String:Any] = [
-//            "name" : name,
-//            "default" : 0,
-//            "type" : AttributeType.kArray
-//        ]
-//        addAttributeIntoSchema(newAttrib)
+        
+        if let _ = currentValue {
+            pushToChangedStack(name, value: currentValue!)
+        }
         
         if commitImmediately {
             editPlayer()

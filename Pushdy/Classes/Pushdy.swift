@@ -46,7 +46,6 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     
     internal static var _clientKey:String?
     internal static var _launchOptions:[UIApplication.LaunchOptionsKey: Any]?
-    internal static var _playerID:String?
     internal static var _delegate:UIApplicationDelegate?
     
     internal static var _pushdyDelegate:PushdyDelegate? = nil
@@ -122,7 +121,12 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             createPlayer()
         }
         else { // Else if not, then track new session
-            createNewSession()
+            if let _ = getPlayerID() {
+                createNewSession()
+            }
+            else {
+                createPlayer()
+            }
         }
         
         setFirstTimeOpenApp(false)

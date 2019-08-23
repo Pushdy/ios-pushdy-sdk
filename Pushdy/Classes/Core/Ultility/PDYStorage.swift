@@ -9,6 +9,12 @@
 import Foundation
 
 @objc public class PDYStorage : NSObject {
+    public static func clear(key:String) {
+        if let _ = UserDefaults.standard.object(forKey: key) {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+    }
+    
     public static func get(key:String) -> Any? {
         if let value = UserDefaults.standard.object(forKey: key) {
             return value

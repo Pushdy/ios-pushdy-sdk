@@ -10,6 +10,10 @@ import Foundation
 public extension Pushdy {
     internal static let ATTTRIBUTE_PREFIX = "PUSHDY_ATTR_"
     internal static let PREV_ATTTRIBUTE_PREFIX = "PUSHDY_PREV_ATTR_"
+    internal static let CHANGED_ATTRIBUTES_STACK = "PUSHDY_CHANGED_ATTRIBUTES_STACK"
+    internal static let ATTRIBUTES_SCHEMA = "PUSHDY_ATTRIBUTES_SCHEMA"
+    internal static let PREV_ATTRIBUTES_SCHEMA = "PUSHDY_PREV_ATTRIBUTES_SCHEMA"
+    
     
     internal static var _deviceID:String?
     
@@ -30,7 +34,7 @@ public extension Pushdy {
      
      - Returns: A player id string.
      */
-    static func getPlayerID() -> String? {
+    @objc static func getPlayerID() -> String? {
         if let playerID = PDYStorage.getString(key: "PUSHDY_PLAYER_ID") {
             return playerID
         }
@@ -224,24 +228,66 @@ public extension Pushdy {
     
     internal static func setAttributesSchema(_ attributes:[[String:Any]]) {
         if let jsonStr = attributes.jsonString {
-            if let currentJsonStr = PDYStorage.getString(key: "PUSHDY_ATTRIBUTES_SCHEMA") {
-                PDYStorage.setString(key: "PUSHDY_PREV_ATTRIBUTES_SCHEMA", value: currentJsonStr)
+            if let currentJsonStr = PDYStorage.getString(key: ATTRIBUTES_SCHEMA) {
+                PDYStorage.setString(key: PREV_ATTRIBUTES_SCHEMA, value: currentJsonStr)
             }
-            PDYStorage.setString(key: "PUSHDY_ATTRIBUTES_SCHEMA", value: jsonStr)
+            PDYStorage.setString(key: ATTRIBUTES_SCHEMA, value: jsonStr)
         }
     }
     
     internal static func getAttributesSchema() -> [[String:Any]]? {
-        if let jsonStr = PDYStorage.getString(key: "PUSHDY_ATTRIBUTES_SCHEMA") {
+        if let jsonStr = PDYStorage.getString(key: ATTRIBUTES_SCHEMA) {
             return jsonStr.asArrayOfDictionary()
         }
         return nil
     }
     
+    internal static func isAttributeChanged(_ name:String, newValue value:Any) -> Bool {
+        var changed:Bool = false
+        if let value = getAttributeValue(name) {
+            if let prevValue = getPrevAttributeValue(name) {
+                if value is String {
+                    changed = (value as! String) != (prevValue as! String)
+                }
+                else if value is Bool {
+                    changed = (value as! Bool) != (prevValue as! Bool)
+                }
+                else if value is Int {
+                    changed = (value as! Int) != (prevValue as! Int)
+                }
+                else if value is Double {
+                    changed = (value as! Double) != (prevValue as! Double)
+                }
+                else if value is Array<Any> {
+                    if prevValue is Array<Any> {
+                        if let valueStr = (value as! Array<Any>).jsonString, let prevValueStr = (prevValue as! Array<Any>).jsonString {
+                            changed = valueStr != prevValueStr
+                        }
+                    }
+                }
+                else if value is Dictionary<String, Any> {
+                    if prevValue is Dictionary<String, Any> {
+                        if let valueStr = (value as! Dictionary<String, Any>).jsonString, let prevValueStr = (prevValue as! Dictionary<String, Any>).jsonString {
+                            changed = valueStr != prevValueStr
+                        }
+                    }
+                }
+            }
+            else {
+                changed = true
+            }
+        }
+        else {
+            changed = true
+        }
+        return changed
+    }
+    
+    /** Old detect change method
     internal static func attributesHasChanged() -> Bool {
         var changed = false
-        if let curStr = PDYStorage.getString(key: "PUSHDY_ATTRIBUTES_SCHEMA"), let attrsSchema = curStr.asArrayOfDictionary() {
-            if let prevAttrStr = PDYStorage.getString(key: "PUSHDY_PREV_ATTRIBUTES_SCHEMA"), prevAttrStr != curStr {
+        if let curStr = PDYStorage.getString(key: ATTRIBUTES_SCHEMA), let attrsSchema = curStr.asArrayOfDictionary() {
+            if let prevAttrStr = PDYStorage.getString(key: PREV_ATTRIBUTES_SCHEMA), prevAttrStr != curStr {
                 changed = true
                 return changed
             }
@@ -249,33 +295,39 @@ public extension Pushdy {
             for i in 0..<attrsSchema.count {
                 let attribute = attrsSchema[i]
                 if let name = attribute["name"] as? String/*, let type = attribute["type"] as? String*/ {
-                    if let value = PDYStorage.get(key: ATTTRIBUTE_PREFIX+name), let prevValue = PDYStorage.get(key: PREV_ATTTRIBUTE_PREFIX+name) {
-                        if value is String {
-                            changed = (value as! String) != (prevValue as! String)
-                        }
-                        else if value is Bool {
-                            changed = (value as! Bool) != (prevValue as! Bool)
-                        }
-                        else if value is Int {
-                            changed = (value as! Int) != (prevValue as! Int)
-                        }
-                        else if value is Double {
-                            changed = (value as! Double) != (prevValue as! Double)
-                        }
-                        else if value is Array<Any> {
-                            if prevValue is Array<Any> {
-                                if let valueStr = (value as! Array<Any>).jsonString, let prevValueStr = (prevValue as! Array<Any>).jsonString {
-                                    changed = valueStr != prevValueStr
+                    if let value = PDYStorage.get(key: ATTTRIBUTE_PREFIX+name) {
+                        if let prevValue = PDYStorage.get(key: PREV_ATTTRIBUTE_PREFIX+name) {
+                            if value is String {
+                                changed = (value as! String) != (prevValue as! String)
+                            }
+                            else if value is Bool {
+                                changed = (value as! Bool) != (prevValue as! Bool)
+                            }
+                            else if value is Int {
+                                changed = (value as! Int) != (prevValue as! Int)
+                            }
+                            else if value is Double {
+                                changed = (value as! Double) != (prevValue as! Double)
+                            }
+                            else if value is Array<Any> {
+                                if prevValue is Array<Any> {
+                                    if let valueStr = (value as! Array<Any>).jsonString, let prevValueStr = (prevValue as! Array<Any>).jsonString {
+                                        changed = valueStr != prevValueStr
+                                    }
+                                }
+                            }
+                            else if value is Dictionary<String, Any> {
+                                if prevValue is Dictionary<String, Any> {
+                                    if let valueStr = (value as! Dictionary<String, Any>).jsonString, let prevValueStr = (prevValue as! Dictionary<String, Any>).jsonString {
+                                        changed = valueStr != prevValueStr
+                                    }
                                 }
                             }
                         }
-                        else if value is Dictionary<String, Any> {
-                            if prevValue is Dictionary<String, Any> {
-                                if let valueStr = (value as! Dictionary<String, Any>).jsonString, let prevValueStr = (prevValue as! Dictionary<String, Any>).jsonString {
-                                    changed = valueStr != prevValueStr
-                                }
-                            }
+                        else {
+                            changed = true
                         }
+                        
                     }
                 }
                 
@@ -287,7 +339,16 @@ public extension Pushdy {
         
         return changed
     }
+    **/
+    internal static func attributesHasChanged() -> Bool {
+        var changed = false
+        if let changedStack = getChangedStack() {
+            changed = !changedStack.isEmpty
+        }
+        return changed
+    }
     
+    /** Old convertAttributesToParams
     internal static func convertAttributesToParams() -> [String:Any]? {
         var params:[String:Any]? = nil
         if let attrsSchema = getAttributesSchema() {
@@ -302,6 +363,73 @@ public extension Pushdy {
             }
         }
         return params
+    }
+    **/
+    internal static func convertAttributesToParams() -> [String:Any]? {
+        if let changedStack = getChangedStack() {
+            var params:[String:Any] = [String:Any]()
+            for (key, value) in changedStack {
+                let isValidType = isValidAttributeType(key, value: value)
+                if isValidType {
+                    params[key] = value
+                }
+            }
+            return params
+        }
+        return nil
+    }
+    
+    internal static func clearChangedStack() {
+        PDYStorage.clear(key: CHANGED_ATTRIBUTES_STACK)
+    }
+    
+    internal static func getChangedStack() -> [String:Any]? {
+        return PDYStorage.get(key: CHANGED_ATTRIBUTES_STACK) as? [String:Any]
+    }
+    
+    internal static func pushToChangedStack(_ name:String, value:Any) {
+        // Don't check valid when push into stack, will check when submit
+//        let isValidType = isValidAttributeType(name, value: value)
+//        if isValidType == false { return }
+//
+        var changedStack:[String:Any]?
+        if var stack = PDYStorage.get(key: CHANGED_ATTRIBUTES_STACK) as? [String:Any] {
+            changedStack = stack
+        }
+        else {
+            changedStack = [String:Any]()
+        }
+        changedStack?[name] = value
+        PDYStorage.set(key: CHANGED_ATTRIBUTES_STACK, value: changedStack!)
+    }
+    
+    internal static func hasAttribute(_ name:String) -> [String:Any]? {
+        var attribute:[String:Any]?
+        if let curStr = PDYStorage.getString(key: ATTRIBUTES_SCHEMA) {
+            if var curAttrSchema = curStr.asArrayOfDictionary() {
+                for i in 0..<curAttrSchema.count {
+                    let item = curAttrSchema[i]
+                    if let itemAttrName = item["name"] as? String, name == itemAttrName {
+                        attribute = item
+                    }
+                    if attribute != nil { break }
+                }
+            }
+        }
+        return attribute
+    }
+    
+    internal static func isValidAttributeType(_ name:String, value:Any) -> Bool {
+        var isValid = false
+        if let attribute = hasAttribute(name), let type = attribute["type"] as? String {
+            if (type == AttributeType.kString && value is String) ||
+                (type == AttributeType.kArray && value is Array<Any>) ||
+                (type == AttributeType.kNumber && (value is Int || value is Double)) ||
+                (type == AttributeType.kBoolean && value is Bool) {
+                isValid = true
+            }
+        }
+        return isValid
     }
     
     internal static func setLocalAttribValuesAfterSubmitted() {
@@ -318,7 +446,7 @@ public extension Pushdy {
     }
     
     internal static func addAttributeIntoSchema(_ attribute:[String:Any]) {
-        if let curStr = PDYStorage.getString(key: "PUSHDY_ATTRIBUTES_SCHEMA") {
+        if let curStr = PDYStorage.getString(key: ATTRIBUTES_SCHEMA) {
             if var curAttrSchema = curStr.asArrayOfDictionary() {
                 var isContain = false
                 for i in 0..<curAttrSchema.count {
@@ -334,14 +462,32 @@ public extension Pushdy {
                 }
                 
                 if isContain == false {
-                    PDYStorage.setString(key: "PUSHDY_PREV_ATTRIBUTES_SCHEMA", value: curStr)
+                    PDYStorage.setString(key: PREV_ATTRIBUTES_SCHEMA, value: curStr)
                     curAttrSchema.append(attribute)
                     
                     if let jsonStr = curAttrSchema.jsonString {
-                        PDYStorage.setString(key: "PUSHDY_ATTRIBUTES_SCHEMA", value: jsonStr)
+                        PDYStorage.setString(key: ATTRIBUTES_SCHEMA, value: jsonStr)
                     }
                 }
             }
         }
     }
+    
+    internal static func getAttributeValue(_ name:String) -> Any? {
+        return PDYStorage.get(key: ATTTRIBUTE_PREFIX+name)
+    }
+    
+    internal static func setAttributeValue(_ name:String, value:Any) {
+        return PDYStorage.set(key: ATTTRIBUTE_PREFIX+name, value: value)
+    }
+    
+    internal static func getPrevAttributeValue(_ name:String) -> Any? {
+        return PDYStorage.get(key: PREV_ATTTRIBUTE_PREFIX+name)
+    }
+    
+    internal static func setPrevAttributeValue(_ name:String, value:Any) {
+        return PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: value)
+    }
+    
+    
 }

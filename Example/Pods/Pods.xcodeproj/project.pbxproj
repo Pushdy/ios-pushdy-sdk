@@ -62,7 +62,7 @@
 		0A60E147E79EC72505E89F1A231270D2 /* Pods-Pushdy_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pushdy_Example-frameworks.sh"; sourceTree = "<group>"; };
 		0F2DA959ECE28BFE2DC63CAC070CB02E /* Pushdy+LocalData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+LocalData.swift"; path = "Pushdy/Classes/Pushdy+LocalData.swift"; sourceTree = "<group>"; };
 		120EF5BB4847F49C4D8D2808DEE78E41 /* PDYNotificationHandler+UserNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "PDYNotificationHandler+UserNotification.swift"; sourceTree = "<group>"; };
-		1622CE63D0A147061A42E3DFDBF3F477 /* Pods_Pushdy_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Pushdy_Example.framework; path = "Pods-Pushdy_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1622CE63D0A147061A42E3DFDBF3F477 /* Pods_Pushdy_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pushdy_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F2BB4BE4B7737FB2724DD43611F9D8E /* PushdySDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PushdySDK.modulemap; sourceTree = "<group>"; };
 		2D4A1220156F3609FAC5C6DDF39BB507 /* PDYStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYStorage.swift; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -86,10 +86,10 @@
 		74E319ECAD837D7651F8D376C93F66A2 /* Pods-Pushdy_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pushdy_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		78CFBDADB6DC0FDFB4C3CDE6EE02AEC2 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		822701793CE5B9FFFC76EBD33FBD1EA0 /* Pods-Pushdy_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pushdy_Example-Info.plist"; sourceTree = "<group>"; };
-		8A8EA72FAB63C359A62756A46C78954F /* PushdySDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = PushdySDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PushdySDK.framework; path = PushdySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7C38E7F2BA8AE966AB7615E8D5F24A1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		8A8EA72FAB63C359A62756A46C78954F /* PushdySDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = PushdySDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushdySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7C38E7F2BA8AE966AB7615E8D5F24A1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A8488BEB64483DD499F44E641DCF7827 /* Pods-Pushdy_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Pushdy_Example-dummy.m"; sourceTree = "<group>"; };
 		B349D9A8ED7C2D2633C17CE2E5E1CAF7 /* PushdySDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PushdySDK.xcconfig; sourceTree = "<group>"; };
 		B4CBB784E7AC2F4334DFAC52E8B21B03 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		E4FA9EA425231F9E50B4973D74DA76F8 /* PDYNotificationHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotificationHandler.swift; sourceTree = "<group>"; };
 		EA94013B57C376F8DFAF5277EA8E482F /* UIView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		EBB01EF222C56460BA3D590CCCC123E5 /* PDYNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotification.swift; sourceTree = "<group>"; };
-		F1FD0D5244F9706CE054EE47EBC37FE9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		F1FD0D5244F9706CE054EE47EBC37FE9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F8444083A5E65BA6062BA123AEDBE6F0 /* PDYDeviceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYDeviceInfo.swift; sourceTree = "<group>"; };
 		F92FE0ACF101D50C12327BC82F174B36 /* Pods-Pushdy_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pushdy_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		F99A00C9A4F7B29872BAB455C4A5D2CD /* Pushdy+UIApplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+UIApplication.swift"; path = "Pushdy/Classes/Pushdy+UIApplication.swift"; sourceTree = "<group>"; };
@@ -229,7 +229,6 @@
 			children = (
 				3789BD4E131D73CD587598D4D865CADA /* PDYRequest.swift */,
 			);
-			name = Network;
 			path = Network;
 			sourceTree = "<group>";
 		};
@@ -266,7 +265,6 @@
 				5E946E5D432C55B4997F7BBE8B057111 /* PDYUUIDGenerator.swift */,
 				6B30F93FE02611DC5AE154E35E047C98 /* PDYVersion.swift */,
 			);
-			name = Ultility;
 			path = Ultility;
 			sourceTree = "<group>";
 		};
@@ -336,7 +334,6 @@
 				B69422255540C1EAE461EDB6AE02A958 /* PDYPlayer.swift */,
 				6D5827891F5E87156EAABF60621CBCEC /* PDYRequestObject.swift */,
 			);
-			name = Entities;
 			path = Entities;
 			sourceTree = "<group>";
 		};
@@ -591,8 +588,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
