@@ -108,9 +108,23 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     //MARK: Internal Handler
     internal static func checkLaunchingFromPushNotification() {
         if let launchOptions = _launchOptions, let notification = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String : Any] {
-            PDYThread.perform(onBackGroundThread: {
-                Pushdy.trackOpeningPushNotification(notification)
-            }, after: 0.5)
+            if let pushdyDelegate = getDelegate()  {
+                if let ready = pushdyDelegate.readyForHandlingNotification?(), ready == true {
+                    pushdyDelegate.onNotificationOpened?(notification, fromState: AppState.kNotRunning)
+                    
+                    PDYThread.perform(onBackGroundThread: {
+                        Pushdy.trackOpeningPushNotification(notification)
+                    }, after: 0.5)
+                }
+                else {
+                    Pushdy.pushPendingNotification(notification)
+                }
+            }
+            else {
+                PDYThread.perform(onBackGroundThread: {
+                    Pushdy.trackOpeningPushNotification(notification)
+                }, after: 0.5)
+            }
         }
     }
     
