@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class PDYNotification : PDYRequestObject {
+@objc public class PDYNotification : PDYEntity {
     
     override func router() -> String {
         return "/notification"

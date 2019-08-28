@@ -1,5 +1,5 @@
 //
-//  PDYObject.swift
+//  PDYEntity.swift
 //  PushdyCore
 //
 //  Created by quandt on 6/26/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class PDYRequestObject : NSObject {
+@objc public class PDYEntity : NSObject {
     var clientKey:String?
     var deviceID:String?
     
@@ -72,7 +72,7 @@ import Foundation
             PDYParam.AppVersion : PDYDeviceInfo.appVersion(),
             PDYParam.DeviceModel : PDYDeviceInfo.deviceModel(),
             PDYParam.DeviceType : PDYDeviceInfo.deviceType(),
-            PDYParam.DeviceOS : PDYDeviceInfo.deviceOS(),
+            PDYParam.DeviceOS : PDYDeviceInfo.systemVersion(),
             PDYParam.Platform : PDYDeviceInfo.platform(),
             PDYParam.DeviceID : self.deviceID ?? PDYDeviceInfo.deviceID()
         ]

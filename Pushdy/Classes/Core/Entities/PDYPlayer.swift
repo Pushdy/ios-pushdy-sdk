@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class PDYPlayer : PDYRequestObject {
+@objc public class PDYPlayer : PDYEntity {
     
     override func router() -> String {
         return "/player"

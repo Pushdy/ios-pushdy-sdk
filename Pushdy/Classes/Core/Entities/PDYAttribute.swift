@@ -19,7 +19,7 @@ import Foundation
     }
 }
 
-@objc public class PDYAttribute : PDYRequestObject {
+@objc public class PDYAttribute : PDYEntity {
     
     public static var types:[String] = [
         AttributeType.kBoolean,

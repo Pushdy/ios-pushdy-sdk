@@ -41,7 +41,7 @@ public class PDYDeviceInfo {
         return "1.0"
     }
     
-    public static func deviceOS() -> String {
+    public static func systemVersion() -> String {
         return UIDevice.current.systemVersion
     }
     

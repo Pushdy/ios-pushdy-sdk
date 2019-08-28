@@ -170,10 +170,12 @@ try? Pushdy.pushAttribute("bought_books", value: books, commitImmediately: false
 
 ```objc
 // Objective-C language
-[Pushdy setAttribute:@"network_carrier" value:@"your_network_carrier" error:nil];
+
+NSArray *books = @[@"book_1", @"book_2"];
+[Pushdy pushAttribute:@"bought_books" value:books error:nil];
 
 // Equivalent to
-[Pushdy setAttribute:@"network_carrier" value:@"your_network_carrier" commitImmediately:FALSE error:nil];
+[Pushdy pushAttribute:@"bought_books" value:books commitImmediately:FALSE error:nil];
 ```
 
 **Pushdy Delegation**
