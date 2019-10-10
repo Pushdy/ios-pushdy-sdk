@@ -54,7 +54,7 @@ public extension Pushdy {
         if let _ = _deviceID {
             return _deviceID!
         }
-        if let deviceID = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_id") {
+        if let deviceID = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.DeviceID) {
             return deviceID
         }
         return PDYDeviceInfo.deviceID()
@@ -65,12 +65,11 @@ public extension Pushdy {
      
      */
     @objc static func setDeviceID(_ deviceID:String) {
-        NSLog("deviceID %@", deviceID);
         _deviceID = deviceID
-        if let prevDeviceID = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_id") {
-            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"device_id", value: prevDeviceID)
+        if let prevDeviceID = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.DeviceID) {
+            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+PDYParam.DeviceID, value: prevDeviceID)
         }
-        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_id", value: deviceID)
+        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+PDYParam.DeviceID, value: deviceID)
     }
     
     /**
@@ -79,10 +78,10 @@ public extension Pushdy {
      */
     internal static func setDeviceToken(_ token:String) {
         NSLog("deviceToken %@", token);
-        if let prevToken = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {
-            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"device_token", value: prevToken)
+        if let prevToken = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.DeviceToken) {
+            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+PDYParam.DeviceToken, value: prevToken)
         }
-        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"device_token", value: token)
+        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+PDYParam.DeviceToken, value: token)
     }
     
 //    public static func setDeviceToken(_ token:Data) {
@@ -99,7 +98,7 @@ public extension Pushdy {
      - Returns: A device token string.
      */
     @objc static func getDeviceToken() -> String? {
-        if let token = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"device_token") {
+        if let token = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.DeviceToken) {
             return token
         }
         return nil
@@ -152,7 +151,7 @@ public extension Pushdy {
      - Returns: A version string
      */
     @objc static func getAppVersion() -> String? {
-        if let version = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"app_version") {
+        if let version = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.AppVersion) {
             
             return version
         }
@@ -164,10 +163,10 @@ public extension Pushdy {
     
      */
     @objc static func setAppVersion(_ version:String) {
-        if let prevAppVersion = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"app_version") {
-            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"app_version", value: prevAppVersion)
+        if let prevAppVersion = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.AppVersion) {
+            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+PDYParam.AppVersion, value: prevAppVersion)
         }
-        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"app_version", value: version)
+        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+PDYParam.AppVersion, value: version)
     }
     
     /**
@@ -176,7 +175,7 @@ public extension Pushdy {
      - Returns: A language string
      */
     @objc static func getLanguage() -> String? {
-        if let lang = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"language") {
+        if let lang = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.Language) {
             return lang
         }
         return nil
@@ -186,10 +185,10 @@ public extension Pushdy {
      Set language
      */
     @objc static func setLanguage(_ lang:String) {
-        if let prevLanguage = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"language") {
-            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"language", value: prevLanguage)
+        if let prevLanguage = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.Language) {
+            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+PDYParam.Language, value: prevLanguage)
         }
-        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"language", value: lang)
+        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+PDYParam.Language, value: lang)
     }
     
     /**
@@ -198,7 +197,7 @@ public extension Pushdy {
      - Returns: A country value
      */
     @objc static func getCountry() -> String? {
-        if let country = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"country") {
+        if let country = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.Country) {
             return country
         }
         return nil
@@ -208,10 +207,10 @@ public extension Pushdy {
      Set country
      */
     @objc static func setCountry(_ country:String) {
-        if let prevCountry = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+"country") {
-            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+"country", value: prevCountry)
+        if let prevCountry = PDYStorage.getString(key: ATTTRIBUTE_PREFIX+PDYParam.Country) {
+            PDYStorage.setString(key: PREV_ATTTRIBUTE_PREFIX+PDYParam.Country, value: prevCountry)
         }
-        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+"country", value: country)
+        PDYStorage.setString(key: ATTTRIBUTE_PREFIX+PDYParam.Country, value: country)
     }
     
     internal static func setFetchedAttributes(_ fetched:Bool) {
@@ -380,7 +379,7 @@ public extension Pushdy {
     }
     
     internal static func clearChangedStack() {
-        PDYStorage.clear(key: CHANGED_ATTRIBUTES_STACK)
+        PDYStorage.remove(key: CHANGED_ATTRIBUTES_STACK)
     }
     
     internal static func getChangedStack() -> [String:Any]? {

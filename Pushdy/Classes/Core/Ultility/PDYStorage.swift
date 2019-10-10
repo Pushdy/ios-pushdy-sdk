@@ -9,7 +9,7 @@
 import Foundation
 
 @objc public class PDYStorage : NSObject {
-    public static func clear(key:String) {
+    public static func remove(key:String) {
         if let _ = UserDefaults.standard.object(forKey: key) {
             UserDefaults.standard.removeObject(forKey: key)
         }
