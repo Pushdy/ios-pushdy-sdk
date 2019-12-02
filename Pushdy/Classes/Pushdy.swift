@@ -51,7 +51,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     internal static var _pushdyDelegate:PushdyDelegate? = nil
     
     internal static let UPDATE_ATTRIBUTES_INTERVAL:TimeInterval = 5*60 // 5 minutes
-    internal static var _badge_on_foreground:Bool? = false
+    internal static var _badge_on_foreground:Bool? = true
     
     // MARK: Pushdy Init
     private override init() {
