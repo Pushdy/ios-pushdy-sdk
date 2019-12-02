@@ -51,6 +51,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     internal static var _pushdyDelegate:PushdyDelegate? = nil
     
     internal static let UPDATE_ATTRIBUTES_INTERVAL:TimeInterval = 5*60 // 5 minutes
+    internal static var _badge_on_foreground:Bool? = false
     
     // MARK: Pushdy Init
     private override init() {
@@ -97,6 +98,14 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     public static func getDelegate() -> PushdyDelegate? {
         return _pushdyDelegate
     }
+
+    public static func getBadgeOnForeground() -> Bool {
+        return _badge_on_foreground!
+    }
+
+    public static func setBadgeOnForeground(badge_on_foreground:Bool) {
+        _badge_on_foreground = badge_on_foreground
+    }
     
     //MARK: Pusdy Error/Exception
     internal static func clientKeyNotSetError() -> Error {
@@ -110,6 +119,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         if let launchOptions = _launchOptions, let notification = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String : Any] {
             if let pushdyDelegate = getDelegate()  {
                 if let ready = pushdyDelegate.readyForHandlingNotification?(), ready == true {
+                    NSLog("[Pushdy] run 1")
                     pushdyDelegate.onNotificationOpened?(notification, fromState: AppState.kNotRunning)
                     
                     PDYThread.perform(onBackGroundThread: {
@@ -117,10 +127,12 @@ public typealias PushdyFailureBlock = (NSError) -> Void
                     }, after: 0.5)
                 }
                 else {
+                    NSLog("[Pushdy] run 2")
                     Pushdy.pushPendingNotification(notification)
                 }
             }
             else {
+                NSLog("[Pushdy] run 3")
                 PDYThread.perform(onBackGroundThread: {
                     Pushdy.trackOpeningPushNotification(notification)
                 }, after: 0.5)

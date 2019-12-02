@@ -218,11 +218,12 @@ public extension Pushdy {
     }
     
     internal static func isFetchedAttributes() -> Bool {
-        var fetchedAttributes = false
-        if let fetched = PDYStorage.getBool(key: "PUSHDY_FETCHED_ATTRIBUTES") {
-            fetchedAttributes = fetched
-        }
-        return fetchedAttributes
+        return true
+        //var fetchedAttributes = false
+        //if let fetched = PDYStorage.getBool(key: "PUSHDY_FETCHED_ATTRIBUTES") {
+        //    fetchedAttributes = fetched
+        //}
+        //return fetchedAttributes
     }
     
     internal static func setAttributesSchema(_ attributes:[[String:Any]]) {
@@ -237,6 +238,12 @@ public extension Pushdy {
     internal static func getAttributesSchema() -> [[String:Any]]? {
         if let jsonStr = PDYStorage.getString(key: ATTRIBUTES_SCHEMA) {
             return jsonStr.asArrayOfDictionary()
+        } else {
+            PDYStorage.setString(key: ATTRIBUTES_SCHEMA, value: ###"[{"name":"device_name","type":"string","label":"Device Name","default":false},{"name":"network_carrier","type":"string","label":"Network Carrier","default":false},{"name":"registered_at","type":"number","label":"Registered Date","default":false},{"name":"pv_schedule","type":"number","label":"Số lần xem mục Lịch đấu","default":false},{"name":"pv_highlight_video","type":"number","label":"Số lần xem mục Video highlight","default":false},{"name":"device_type","type":"string","label":"Device Type","default":true},{"name":"device_id","type":"string","label":"Device Id","default":true},{"name":"device_token","type":"string","label":"Device Token","default":true},{"name":"device_os","type":"string","label":"Device Os","default":true},{"name":"device_model","type":"string","label":"Device Model","default":true},{"name":"app_version","type":"string","label":"App Version","default":true},{"name":"mobile_number","type":"string","label":"Mobile Number","default":true},{"name":"language","type":"string","label":"Language","default":true},{"name":"country","type":"string","label":"Country","default":true},{"name":"name","type":"string","label":"Name","default":true},{"name":"gender","type":"string","label":"Gender","default":true},{"name":"custom_user_id","type":"string","label":"Custom User_id","default":true},{"name":"utm_source","type":"array","label":"Utm Source","default":true},{"name":"utm_campaign","type":"array","label":"Utm Campaign","default":true},{"name":"utm_medium","type":"array","label":"Utm Medium","default":true},{"name":"utm_term","type":"array","label":"Utm Term","default":true},{"name":"utm_content","type":"array","label":"Utm Content","default":true}]"###)
+
+            if let jsonStr2 = PDYStorage.getString(key: ATTRIBUTES_SCHEMA) {
+                return jsonStr2.asArrayOfDictionary()
+            }
         }
         return nil
     }

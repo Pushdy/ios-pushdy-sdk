@@ -170,12 +170,20 @@ import UserNotificationsUI
     }
     
     func handleNotificationInActiveState(_ notification:[String : Any]) {
-        if (self.launchedByPush) {
+        //if (self.launchedByPush || !Pushdy.getBadgeOnForeground()) {
+        if (self.launchedByPush){
+            NSLog("[Pushdy] handleNotificationInActiveState true")
             self.launchedByPush = false
             self.processNotificationPayload(notification, needBanner:false, fromAppState:AppState.kNotRunning)
         }else
         {
-            self.processNotificationPayload(notification, needBanner:true, fromAppState:AppState.kActive)
+            if (Pushdy.getBadgeOnForeground()){
+                NSLog("[Pushdy] handleNotificationInActiveState false 1")
+                self.processNotificationPayload(notification, needBanner:true, fromAppState:AppState.kActive)
+            } else {
+                NSLog("[Pushdy] handleNotificationInActiveState false 2")
+                self.processNotificationPayload(notification, needBanner:false, fromAppState:AppState.kActive)
+            }
         }
     }
     

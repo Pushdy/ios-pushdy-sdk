@@ -14,9 +14,13 @@ import Foundation
         return "/notification"
     }
     
-    @objc public func trackOpened(notificationID:String, completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock?) throws {
+    @objc public func trackOpened(playerID:String?, notificationID:String, completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock?) throws {
         let request = PDYRequest()
-        try request.put(url: self.url()+"/"+notificationID+"/track", headers: self.headers(), params: nil, completion: { (response:AnyObject?) in
+        var params:[String: Any] = ["platform": "ios"]
+        if playerID != nil {
+            params["player_id"] = playerID!
+        }
+        try request.put(url: self.url()+"/"+notificationID+"/track", headers: self.headers(), params: params, completion: { (response:AnyObject?) in
             completion?(response as AnyObject)
         }, failure: { (code:Int, message:String?) in
             failure?(code, message)

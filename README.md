@@ -338,13 +338,13 @@ UIView* yourCustomView = ...
 
 *** Note: 
 
-Pushdy SDK use media_url key for displaying thumbnail image from json push payload as default.
+Pushdy SDK use `_nms_image` key for displaying thumbnail image from json push payload as default.
 ```ruby
 {
    "aps" : {
         ...
    },
-   "media_url" : "https://domain.com/path/image.png"
+   "_nms_image" : "https://domain.com/path/image.png"
 }
 ```
 

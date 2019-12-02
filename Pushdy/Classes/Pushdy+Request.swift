@@ -62,10 +62,10 @@ public extension Pushdy {
         }
     }
     
-    @objc static func trackOpened(notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    @objc static func trackOpened(playerID:String?, notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
             let notification = PDYNotification(clientKey:key, deviceID: _deviceID)
-            try notification.trackOpened(notificationID: notificationID, completion: completion, failure: failure)
+            try notification.trackOpened(playerID: playerID, notificationID: notificationID, completion: completion, failure: failure)
         }
         else {
             throw clientKeyNotSetError()
@@ -230,7 +230,8 @@ public extension Pushdy {
     static func trackOpeningPushNotification(_ data:[String:Any]) {
         // Track open push notification
         if let notificationID = data["_notification_id"] as? String {
-            try? trackOpened(notificationID: notificationID, completion: { (response:AnyObject?) in
+            let playerID = getPlayerID()
+            try? trackOpened(playerID: playerID, notificationID: notificationID, completion: { (response:AnyObject?) in
                 print("[Pushdy] Tracked opening for push \(notificationID) successfully")
             }, failure: { (errorCode:Int, message:String?) in
                 print("[Pushdy] Failed to track opening for push \(notificationID) with error \(errorCode) : \(message)")

@@ -61,7 +61,7 @@ public typealias PDYActionBlock = () -> Void
             self.contentLabel?.text = ""
         }
         
-        let mediaKey = PDYNotificationView._customMediaKey == nil ? "media_url" : PDYNotificationView._customMediaKey!
+        let mediaKey = PDYNotificationView._customMediaKey == nil ? "_nms_image" : PDYNotificationView._customMediaKey!
         if let icon = data[mediaKey] as? UIImage {
             self.iconIV?.image = icon
             self.widthIconConstaint?.constant = 44
