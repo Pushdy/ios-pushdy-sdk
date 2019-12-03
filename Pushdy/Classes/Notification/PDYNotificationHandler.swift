@@ -1,6 +1,6 @@
 //
 //  PDYNotificationHandler.swift
-//  PushdyCore
+//  Pushdy
 //
 //  Created by quandt on 10/31/17.
 //  Copyright © 2019 Pushdy. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  PDYDeviceUUID.swift
-//  PushdyCore
+//  Pushdy
 //
 //  Created by quandt on 6/27/19.
 //  Copyright © 2019 Pushdy. All rights reserved.

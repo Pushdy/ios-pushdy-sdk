@@ -1,6 +1,6 @@
 //
 //  PDYThread.swift
-//  PushdyCore
+//  Pushdy
 //
 //  Created by quandt on 6/27/17.
 //  Copyright © 2019 Pushdy. All rights reserved.

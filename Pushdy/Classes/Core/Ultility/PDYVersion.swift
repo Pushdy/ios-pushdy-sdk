@@ -1,6 +1,6 @@
 //
 //  PDYVersion.swift
-//  PushdyCore
+//  Pushdy
 //
 //  Created by quandt on 10/3/18.
 //  Copyright © 2019 Pushdy. All rights reserved.
