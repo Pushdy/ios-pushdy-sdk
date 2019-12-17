@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PushdySDK'
-  s.version          = '0.0.5'
+  s.version          = '0.0.6'
   s.summary          = 'Pushdy SDK for iOS platform'
   
   # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = '8.0'
   
-  s.source_files = 'Pushdy/Classes/**/*'
+  s.source_files = 'Pushdy/Classes/**/*.{h,m,swift}'
   
   # s.resource_bundles = {
   #   'pushdy' => ['pushdy/Assets/*.png']
@@ -41,6 +41,6 @@ Pod::Spec.new do |s|
   # s.dependency 'AFNetworking', '~> 2.3'
   s.swift_versions = ['4.0', '4.2', '5.0']
   # s.vendored_frameworks = 'Pushdy/Frameworks/PushdyCore.framework'
-  # s.resources = "Resources/**/*.{png}"
+  s.resources = "Pushdy/Classes/**/*.{png,xib}"
   s.xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
 end
