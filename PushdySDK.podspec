@@ -41,6 +41,6 @@ Pod::Spec.new do |s|
   # s.dependency 'AFNetworking', '~> 2.3'
   s.swift_versions = ['4.0', '4.2', '5.0']
   # s.vendored_frameworks = 'Pushdy/Frameworks/PushdyCore.framework'
-  s.resources = "Pushdy/Classes/**/*.{png,xib}"
+  s.resources = "Pushdy/Classes/**/*.{png,xib,jpg}"
   s.xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
 end
