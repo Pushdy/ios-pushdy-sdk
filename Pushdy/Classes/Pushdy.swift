@@ -90,24 +90,22 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         self.observeAttributesChanged()
     }
 
-    @objc public static func initWith(clientKey:String, delegate:UIApplicationDelegate, delegaleHandler:PushdyDelegate, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+    @objc public static func initWith(clientKey:String, delegate:UIApplicationDelegate, delegaleHandler:AnyObject, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         _clientKey = clientKey
         _launchOptions = launchOptions
         _delegate  = delegate
-        
         // Swizzle application
         UIApplication.swizzle()
         UIApplication.shared.delegate = delegate
-        
         // Check and set pushdy delegage
-        _pushdyDelegate = delegaleHandler
-        
+        if let _ = Pushdy.getClassWithProtocolInHierarchy((delegaleHandler as AnyObject).classForCoder, protocolToFind: PushdyDelegate.self) {
+            _pushdyDelegate = delegaleHandler as? PushdyDelegate
+        }
+        // _pushdyDelegate = delegaleHandler
         // Check launch by push notification
         self.checkLaunchingFromPushNotification()
-        
         // Handle pushdy logic
         self.checkFirstTimeOpenApp()
-        
         // Observe attributes's change
         self.observeAttributesChanged()
     }
