@@ -4,20 +4,21 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PDYNotificationView" customModule="PushdySDK" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="352" height="65"/>
+            <rect key="frame" x="0.0" y="0.0" width="352" height="90"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-GR-AQs">
-                    <rect key="frame" x="68" y="0.0" width="254" height="65"/>
+                    <rect key="frame" x="68" y="0.0" width="254" height="90"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pre-9k-DnJ">
-                            <rect key="frame" x="18" y="0.0" width="236" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Push Title can be very long text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pre-9k-DnJ">
+                            <rect key="frame" x="39" y="8" width="207" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="2AU-NC-zc0"/>
                             </constraints>
@@ -25,22 +26,35 @@
                             <color key="textColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push Conent At Here. Push Conent At Here. Push Conent At Here.Push Conent At Here.Push Conent At Here" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eS-rV-WGq">
-                            <rect key="frame" x="0.0" y="22" width="254" height="43"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Push Conent At Here. Push Conent At Here. Push Conent At Here.Push Conent At Here.Push Conent At Here" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eS-rV-WGq">
+                            <rect key="frame" x="18" y="25" width="260" height="66"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_notification.png" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-1x-r7o">
-                            <rect key="frame" x="0.0" y="3" width="15" height="15"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bell.badge" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-1x-r7o">
+                            <rect key="frame" x="8" y="10" width="32" height="19"/>
+                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="HsP-5d-FSe"/>
                                 <constraint firstAttribute="height" constant="15" id="w96-cC-xgX"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTQ-2r-drU" userLabel="TapBtn">
+                            <rect key="frame" x="-69" y="-4" width="355" height="92"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="tapPopup" destination="iN0-l3-epB" eventType="touchUpInside" id="kPS-Dh-v6E"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="6eS-rV-WGq" secondAttribute="trailing" id="5wB-e8-J3L"/>
+                        <constraint firstItem="fTQ-2r-drU" firstAttribute="centerX" secondItem="TAP-GR-AQs" secondAttribute="centerX" id="6KF-xA-rAG"/>
                         <constraint firstItem="6eS-rV-WGq" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" id="982-yb-7rS"/>
                         <constraint firstItem="pre-9k-DnJ" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" constant="18" id="Agl-CW-OBa"/>
                         <constraint firstItem="RHs-1x-r7o" firstAttribute="top" secondItem="TAP-GR-AQs" secondAttribute="top" constant="3" id="K5v-oy-LVD"/>
@@ -49,32 +63,23 @@
                         <constraint firstAttribute="trailing" secondItem="pre-9k-DnJ" secondAttribute="trailing" id="rPP-4g-VvY"/>
                         <constraint firstAttribute="bottom" secondItem="6eS-rV-WGq" secondAttribute="bottom" id="s8Z-Fu-Sci"/>
                         <constraint firstItem="RHs-1x-r7o" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" id="tDW-XK-WdN"/>
+                        <constraint firstItem="fTQ-2r-drU" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="leading" constant="-50" id="znc-rH-jKV"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-sD-wJd">
-                    <rect key="frame" x="12" y="11" width="44" height="44"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-sD-wJd">
+                    <rect key="frame" x="9" y="12" width="68" height="68"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="VFS-9T-Zhy"/>
                         <constraint firstAttribute="width" constant="44" id="nHp-qV-om9"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTQ-2r-drU" userLabel="TapBtn">
-                    <rect key="frame" x="0.0" y="0.0" width="376" height="67"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="12"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="tapPopup" destination="iN0-l3-epB" eventType="touchUpInside" id="kPS-Dh-v6E"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftx-RD-Izw" userLabel="CloseBtn">
-                    <rect key="frame" x="322" y="0.0" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftx-RD-Izw" userLabel="CloseBtn">
+                    <rect key="frame" x="311" y="0.0" width="46" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="vAk-Jy-a6U"/>
                     </constraints>
-                    <state key="normal" image="ic_close.png"/>
+                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="x.circle" catalog="system"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="15"/>
@@ -93,11 +98,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Ftx-RD-Izw" secondAttribute="trailing" id="C5O-ct-r3V"/>
                 <constraint firstItem="TAP-GR-AQs" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="JQn-Pt-DQ7"/>
-                <constraint firstItem="fTQ-2r-drU" firstAttribute="centerY" secondItem="Oir-sD-wJd" secondAttribute="centerY" id="JTp-fy-r4N"/>
-                <constraint firstItem="fTQ-2r-drU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Qwq-x0-MyR"/>
                 <constraint firstItem="TAP-GR-AQs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T98-Lc-9oN"/>
-                <constraint firstItem="fTQ-2r-drU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZBI-ah-Uf1"/>
-                <constraint firstItem="Ftx-RD-Izw" firstAttribute="top" secondItem="fTQ-2r-drU" secondAttribute="top" id="dQH-lv-eMs"/>
                 <constraint firstItem="Ftx-RD-Izw" firstAttribute="leading" secondItem="TAP-GR-AQs" secondAttribute="trailing" id="k3I-Oe-vJp"/>
                 <constraint firstItem="Oir-sD-wJd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="mSn-sp-aEY"/>
                 <constraint firstAttribute="bottom" secondItem="Ftx-RD-Izw" secondAttribute="bottom" constant="35" id="p9R-yQ-2Zl"/>
@@ -135,12 +136,12 @@
                 <outlet property="titleLabel" destination="pre-9k-DnJ" id="vIM-Eq-xQp"/>
                 <outlet property="widthIconConstaint" destination="nHp-qV-om9" id="oLG-tb-pgc"/>
             </connections>
-            <point key="canvasLocation" x="45.600000000000001" y="80.50974512743629"/>
+            <point key="canvasLocation" x="44.799999999999997" y="91.754122938530742"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_close.png" width="14.5" height="14.5"/>
-        <image name="ic_notification.png" width="10.5" height="12"/>
+        <image name="bell.badge" catalog="system" width="128" height="128"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
         <systemColor name="lightTextColor">
             <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
