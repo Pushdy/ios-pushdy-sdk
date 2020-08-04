@@ -41,7 +41,7 @@ public typealias PDYActionBlock = () -> Void
         if let aps = data["aps"] as? [String:Any], let alert = aps["alert"] as? [String:Any] {
             if let title = alert["title"] as? String, !title.isEmpty {
                 self.titleLabel?.text = title
-                self.heightTitleConstaint?.constant = 21
+                // self.heightTitleConstaint?.constant = 21
             }
             else {
                 self.titleLabel?.text = ""
@@ -64,16 +64,16 @@ public typealias PDYActionBlock = () -> Void
         let mediaKey = PDYNotificationView._customMediaKey == nil ? "_nms_image" : PDYNotificationView._customMediaKey!
         if let icon = data[mediaKey] as? UIImage {
             self.iconIV?.image = icon
-            self.widthIconConstaint?.constant = 44
-            self.leadingContentConstaint?.constant = 12
+//            self.widthIconConstaint?.constant = 44
+//            self.leadingContentConstaint?.constant = 12
         }
         else if let icon = data[mediaKey] as? String, !icon.isEmpty, icon.starts(with: "http") {
             if let url = URL(string: icon) {
                 self.iconIV?.setImageUrl(url, placeholder: nil, completion: { (image:UIImage) in
                     PDYThread.perform(onUIThread: {
                         self.iconIV?.image = image
-                        self.widthIconConstaint?.constant = 44
-                        self.leadingContentConstaint?.constant = 12
+//                        self.widthIconConstaint?.constant = 44
+//                        self.leadingContentConstaint?.constant = 12
                     })
                 }, failure: { (error:Error) in
                     PDYThread.perform(onUIThread: {
@@ -115,7 +115,9 @@ public typealias PDYActionBlock = () -> Void
             self.actionBlock = onTap
             NSObject.cancelPreviousPerformRequests(withTarget: self)
             UIView.animate(withDuration: 0.25, animations: {
-                self.frame = CGRect(x: 0, y: statusHeight, width: self.frame.size.width, height: self.frame.size.height)
+                // Cannot set it to 90 so I set it by this hard code
+                let frameFixedHeight = 90
+                self.frame = CGRect(x: 0, y: statusHeight, width: self.frame.size.width, height: CGFloat(frameFixedHeight))
                 self.alpha = 1.0
             }) { (completed:Bool) in
                 if (Pushdy.isPushBannerAutoDismiss()) {
