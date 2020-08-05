@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+enum MyError: Error {
+    case runtimeError(String)
+}
+
 @objc extension UIImageView {
     public func setImageUrl(_ url: URL, placeholder:UIImage?, completion:((UIImage) -> Void)?, failure:((Error) -> Void)?) {
         let activityIndicator = UIActivityIndicatorView(style: .gray)
@@ -25,12 +30,20 @@ import UIKit
                 return
             }
             
-            let image = UIImage(data: data!)
-            DispatchQueue.main.async(execute: { () -> Void in
-                activityIndicator.removeFromSuperview()
-                self.image = image
-            })
-            completion?(image!)
+            if let data = data {
+              let image = UIImage(data: data)
+              DispatchQueue.main.async(execute: { () -> Void in
+                  activityIndicator.removeFromSuperview()
+                  self.image = image
+              })
+              if let image = image {
+                completion?(image)
+              } else {
+                failure?(MyError.runtimeError("Cannot convert data to UIImage"))
+              }
+            } else {
+              failure?(MyError.runtimeError("Image Data is empty"))
+            }
         }).resume()
     }
     
