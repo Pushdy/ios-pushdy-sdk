@@ -19,8 +19,11 @@ public typealias PDYActionBlock = () -> Void
     let PADDING = 10
     let ContentViewWidth = 275
     let ContentViewOriginX = 80
+    let TitleHeight = CGFloat(28)
+    let TitleHeightExpanded = CGFloat(86)
   
-    @IBOutlet weak var titleLabel:UILabel?
+    @IBOutlet weak var titleLabel: UITextView!
+    // @IBOutlet weak var titleLabel:UILabel?
     @IBOutlet weak var contentLabel:UILabel?
     @IBOutlet weak var iconIV:UIImageView?
     @IBOutlet weak var contentView: UIView!
@@ -111,31 +114,40 @@ public typealias PDYActionBlock = () -> Void
   
     @objc public func showTitle(title: String) {
       self.titleLabel?.text = title
-      self.heightTitleConstaint?.constant = 21
-      self.heightIconConstaint?.constant = 21
-      
-      // move body down
-      // set body line height to 3
     }
 
     @objc public func hideTitle() {
       self.titleLabel?.text = ""
-      self.heightTitleConstaint?.constant = 0
-      self.heightIconConstaint?.constant = 0
-      
-      // move body up
-      // set body line height to 4
     }
   
+    // TODO: If you're a master in auto-layout, plz use it instead, I don't know how to use autolayout so hard coding was chosen
     @objc public func showBody(content: String) {
       self.contentLabel?.text = content
-      // set title line height to 1
+      
+      // set title line height to 1 lines
+      // self.titleLabel?.numberOfLines = 1
+      if let fr = self.titleLabel?.frame {
+        self.titleLabel?.frame = CGRect(
+          x: fr.origin.x,
+          y: fr.origin.y,
+          width: fr.size.width,
+          height: TitleHeight
+        )
+      }
     }
 
     @objc public func hideBody() {
       self.contentLabel?.text = ""
-      // set title line height to 3
-      self.heightTitleConstaint?.constant = 21 * 3
+      // set title line height to 4
+//      self.titleLabel?.numberOfLines = 4
+      if let fr = self.titleLabel?.frame {
+        self.titleLabel?.frame = CGRect(
+          x: fr.origin.x,
+          y: fr.origin.y,
+          width: fr.size.width,
+          height: TitleHeightExpanded
+        )
+      }
     }
 
     @objc public func close() {
