@@ -16,12 +16,17 @@ public typealias PDYActionBlock = () -> Void
 }
 
 @objc public class PDYNotificationView: UIView, PDYPushBannerActionProtocol {
-    
+    let PADDING = 10
+    let ContentViewWidth = 275
+    let ContentViewOriginX = 80
+  
     @IBOutlet weak var titleLabel:UILabel?
     @IBOutlet weak var contentLabel:UILabel?
     @IBOutlet weak var iconIV:UIImageView?
-    
+    @IBOutlet weak var contentView: UIView!
+  
     @IBOutlet weak var heightTitleConstaint:NSLayoutConstraint?
+    @IBOutlet weak var heightIconConstaint:NSLayoutConstraint?
     @IBOutlet weak var widthIconConstaint:NSLayoutConstraint?
     @IBOutlet weak var leadingContentConstaint:NSLayoutConstraint?
     
@@ -40,63 +45,99 @@ public typealias PDYActionBlock = () -> Void
     @objc public func setData(_ data:[String: Any]) {
         if let aps = data["aps"] as? [String:Any], let alert = aps["alert"] as? [String:Any] {
             if let title = alert["title"] as? String, !title.isEmpty {
-                self.titleLabel?.text = title
-                // self.heightTitleConstaint?.constant = 21
+                showTitle(title: title)
             }
             else {
-                self.titleLabel?.text = ""
-                self.heightTitleConstaint?.constant = 0
+                hideTitle()
             }
             
             if let content = alert["body"] as? String, !content.isEmpty {
-                self.contentLabel?.text = content
+                showBody(content: content)
             }
             else {
-                self.contentLabel?.text = ""
+              hideBody()
             }
         }
         else {
             self.titleLabel?.text = ""
-            self.heightTitleConstaint?.constant = 0
             self.contentLabel?.text = ""
         }
         
         let mediaKey = PDYNotificationView._customMediaKey == nil ? "_nms_image" : PDYNotificationView._customMediaKey!
         if let icon = data[mediaKey] as? UIImage {
-            self.iconIV?.image = icon
-//            self.widthIconConstaint?.constant = 44
-//            self.leadingContentConstaint?.constant = 12
+          self.showIconIV(image: icon)
         }
         else if let icon = data[mediaKey] as? String, !icon.isEmpty, icon.starts(with: "http") {
             if let url = URL(string: icon) {
                 self.iconIV?.setImageUrl(url, placeholder: nil, completion: { (image:UIImage) in
                     PDYThread.perform(onUIThread: {
-                        self.iconIV?.image = image
-//                        self.widthIconConstaint?.constant = 44
-//                        self.leadingContentConstaint?.constant = 12
+                      self.showIconIV(image: image)
                     })
                 }, failure: { (error:Error) in
                     PDYThread.perform(onUIThread: {
-                      self.iconIV?.image = nil
-                      self.widthIconConstaint?.constant = 0
-                      self.leadingContentConstaint?.constant = 0
+                      self.hideIconIV()
                     })
                 })
             }
             else {
-                self.iconIV?.image = nil
-                self.widthIconConstaint?.constant = 0
-                self.leadingContentConstaint?.constant = 0
+              self.hideIconIV()
             }
         }
         else {
-            self.iconIV?.image = nil
-            self.widthIconConstaint?.constant = 0
-            self.leadingContentConstaint?.constant = 0
+          self.hideIconIV()
         }
         
     }
-    
+  
+    @objc public func hideIconIV() {
+      self.iconIV?.image = nil
+      self.contentView.frame = CGRect(
+        x: PADDING,
+        y: 0,
+        width: ContentViewWidth + ContentViewOriginX - PADDING,
+        height: 90
+      )
+    }
+
+    @objc public func showIconIV(image: UIImage) {
+      self.iconIV?.image = image
+      self.contentView.frame = CGRect(
+        x: ContentViewOriginX,
+        y: 0,
+        width: ContentViewWidth,
+        height: 90
+      )
+    }
+  
+    @objc public func showTitle(title: String) {
+      self.titleLabel?.text = title
+      self.heightTitleConstaint?.constant = 21
+      self.heightIconConstaint?.constant = 21
+      
+      // move body down
+      // set body line height to 3
+    }
+
+    @objc public func hideTitle() {
+      self.titleLabel?.text = ""
+      self.heightTitleConstaint?.constant = 0
+      self.heightIconConstaint?.constant = 0
+      
+      // move body up
+      // set body line height to 4
+    }
+  
+    @objc public func showBody(content: String) {
+      self.contentLabel?.text = content
+      // set title line height to 1
+    }
+
+    @objc public func hideBody() {
+      self.contentLabel?.text = ""
+      // set title line height to 3
+      self.heightTitleConstaint?.constant = 21 * 3
+    }
+
     @objc public func close() {
         let statusHeight = UIApplication.shared.statusBarFrame.height
         UIView.animate(withDuration: 0.25, animations: {

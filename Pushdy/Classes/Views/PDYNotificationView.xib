@@ -18,31 +18,28 @@
                     <rect key="frame" x="10" y="0.0" width="355" height="90"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-sD-wJd">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-sD-wJd">
                             <rect key="frame" x="10" y="12" width="60" height="68"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="68" id="Cqr-RH-Q8m"/>
-                                <constraint firstAttribute="width" constant="60" id="xUR-0K-Vib"/>
-                            </constraints>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="6"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <view contentMode="scaleToFill" id="TAP-GR-AQs" userLabel="ContentView">
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-GR-AQs" userLabel="ContentView">
                             <rect key="frame" x="80" y="0.0" width="275" height="90"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Push Title can be a very long text here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pre-9k-DnJ">
-                                    <rect key="frame" x="25" y="8" width="216" height="22"/>
+                                    <rect key="frame" x="22" y="8" width="226" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <color key="textColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eS-rV-WGq">
-                                    <rect key="frame" x="0.0" y="22" width="266" height="71"/>
+                                    <rect key="frame" x="0.0" y="22" width="248" height="70"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <string key="text">Hãng xe tỷ phú Phạm Nhật Vượng vừa có thoả thuận lịch sử, lại rò rỉ tin mới về tivi. Hãng xe tỷ phú Phạm Nhật Vượng vừa có thoả thuận lịch sử, lại rò rỉ tin mới về tivi. Hãng xe tỷ phú Phạm Nhật Vượng vừa có thoả thuận lịch sử, lại rò rỉ tin mới về tivi</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -78,12 +75,9 @@
                                 <action selector="tapPopup" destination="iN0-l3-epB" eventType="touchUpInside" id="kPS-Dh-v6E"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftx-RD-Izw" userLabel="CloseBtn">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftx-RD-Izw" userLabel="CloseBtn">
                             <rect key="frame" x="315" y="0.0" width="40" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="36" id="B4e-Dp-4CL"/>
-                                <constraint firstAttribute="width" constant="40" id="s3o-M3-IB4"/>
-                            </constraints>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" image="ic_close.png"/>
                             <userDefinedRuntimeAttributes>
@@ -100,12 +94,6 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemGray6Color"/>
-                    <constraints>
-                        <constraint firstItem="Oir-sD-wJd" firstAttribute="leading" secondItem="vgB-IB-R45" secondAttribute="leading" constant="10" id="IMA-xl-wqG"/>
-                        <constraint firstAttribute="trailing" secondItem="Ftx-RD-Izw" secondAttribute="trailing" id="JUa-S8-J3t"/>
-                        <constraint firstItem="Ftx-RD-Izw" firstAttribute="top" secondItem="vgB-IB-R45" secondAttribute="top" id="VmY-ju-wyG"/>
-                        <constraint firstItem="Oir-sD-wJd" firstAttribute="top" secondItem="vgB-IB-R45" secondAttribute="top" constant="12" id="XDf-iN-Khv"/>
-                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                             <size key="value" width="1" height="2"/>
@@ -134,6 +122,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="contentLabel" destination="6eS-rV-WGq" id="TeP-Bm-h37"/>
+                <outlet property="contentView" destination="TAP-GR-AQs" id="Koe-xh-WwH"/>
                 <outlet property="iconIV" destination="Oir-sD-wJd" id="wAh-nX-qWE"/>
                 <outlet property="titleLabel" destination="pre-9k-DnJ" id="vIM-Eq-xQp"/>
             </connections>
