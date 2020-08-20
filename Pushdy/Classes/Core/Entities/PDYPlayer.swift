@@ -41,4 +41,29 @@ import Foundation
             failure?(code, message)
         })
     }
+
+    // TODO: Throw error
+    @objc public func trackOpened(playerID:String?, notificationIds:[String], completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock?) throws {
+      if notificationIds.isEmpty {
+        print("ERROR: PDYNotification: notificationIDs list is empty")
+        return
+      }
+      if playerID == nil {
+        print("ERROR: PDYNotification: playerID isBlank")
+        return
+      }
+      
+      let request = PDYRequest()
+      let params:[String: Any] = [
+        "platform": "ios",
+        "notifications": notificationIds,
+      ]
+    
+      let reqUrl = try self.url() + "/" + playerID! + "/track"
+      try request.put(url: reqUrl, headers: self.headers(), params: params, completion: { (response:AnyObject?) in
+          completion?(response as AnyObject)
+      }, failure: { (code:Int, message:String?) in
+          failure?(code, message)
+      })
+    }
 }

@@ -13,7 +13,7 @@ public extension Pushdy {
     internal static let CHANGED_ATTRIBUTES_STACK = "PUSHDY_CHANGED_ATTRIBUTES_STACK"
     internal static let ATTRIBUTES_SCHEMA = "PUSHDY_ATTRIBUTES_SCHEMA"
     internal static let PREV_ATTRIBUTES_SCHEMA = "PUSHDY_PREV_ATTRIBUTES_SCHEMA"
-    
+    internal static let PENDING_TRACKING_OPEN_IDS = "PENDING_TRACKING_OPEN_IDS"
     
     internal static var _deviceID:String?
     
@@ -216,6 +216,19 @@ public extension Pushdy {
     internal static func setFetchedAttributes(_ fetched:Bool) {
         PDYStorage.setBool(key: "PUSHDY_FETCHED_ATTRIBUTES", value:fetched)
     }
+  
+  @objc static func getPendingTrackOpenNotiIds() -> [String] {
+      if let str = PDYStorage.getString(key: PENDING_TRACKING_OPEN_IDS) {
+          return str.split(separator: ",").map(String.init)
+      }
+      else {
+        return []
+      }
+  }
+  
+  internal static func setPendingTrackOpenNotiIds(_ items:[String]) {
+    PDYStorage.setString(key: PENDING_TRACKING_OPEN_IDS, value: items.joined(separator: ","))
+  }
     
     internal static func isFetchedAttributes() -> Bool {
         return true

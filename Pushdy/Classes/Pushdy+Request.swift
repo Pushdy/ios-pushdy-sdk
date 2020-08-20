@@ -61,16 +61,17 @@ public extension Pushdy {
             throw clientKeyNotSetError()
         }
     }
-    
-    @objc static func trackOpened(playerID:String?, notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
-        if let key = _clientKey {
-            let notification = PDYNotification(clientKey:key, deviceID: _deviceID)
-            try notification.trackOpened(playerID: playerID, notificationID: notificationID, completion: completion, failure: failure)
-        }
-        else {
-            throw clientKeyNotSetError()
-        }
-    }
+
+  // Moved to Pushdy+Tracking.swift
+//    @objc static func trackOpened(playerID:String?, notificationID:String, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+//        if let key = _clientKey {
+//            let notification = PDYNotification(clientKey:key, deviceID: _deviceID)
+//            try notification.trackOpened(playerID: playerID, notificationID: notificationID, completion: completion, failure: failure)
+//        }
+//        else {
+//            throw clientKeyNotSetError()
+//        }
+//    }
     
     internal static func createPlayer() {
         var params = [String:Any]()
@@ -220,24 +221,25 @@ public extension Pushdy {
             }
         }
     }
-    
-    /**
-     Track opening push notification
-     
-     - Parameter data: A notification dictionary.
-     
-     */
-    static func trackOpeningPushNotification(_ data:[String:Any]) {
-        // Track open push notification
-        if let notificationID = data["_notification_id"] as? String {
-            let playerID = getPlayerID()
-            try? trackOpened(playerID: playerID, notificationID: notificationID, completion: { (response:AnyObject?) in
-                print("[Pushdy] Tracked opening for push \(notificationID) successfully")
-            }, failure: { (errorCode:Int, message:String?) in
-                print("[Pushdy] Failed to track opening for push \(notificationID) with error \(errorCode) : \(message)")
-            })
-        }
-    }
+  
+  // Moved to Pushdy+Tracking.swift
+//    /**
+//     Track opening push notification
+//
+//     - Parameter data: A notification dictionary.
+//
+//     */
+//    static func trackOpeningPushNotification(_ data:[String:Any]) {
+//        // Track open push notification
+//        if let notificationID = data["_notification_id"] as? String {
+//            let playerID = getPlayerID()
+//            try? trackOpened(playerID: playerID, notificationID: notificationID, completion: { (response:AnyObject?) in
+//                print("[Pushdy] Tracked opening for push \(notificationID) successfully")
+//            }, failure: { (errorCode:Int, message:String?) in
+//                print("[Pushdy] Failed to track opening for push \(notificationID) with error \(errorCode) : \(message)")
+//            })
+//        }
+//    }
     
     @objc static func getAttributes(completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
         if let key = _clientKey {
@@ -344,3 +346,4 @@ public extension Pushdy {
         }
     }
 }
+

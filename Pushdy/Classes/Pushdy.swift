@@ -142,9 +142,9 @@ public typealias PushdyFailureBlock = (NSError) -> Void
                     NSLog("[Pushdy] run 1")
                     pushdyDelegate.onNotificationOpened?(notification, fromState: AppState.kNotRunning)
                     
-                    PDYThread.perform(onBackGroundThread: {
+                    // PDYThread.perform(onBackGroundThread: {
                         Pushdy.trackOpeningPushNotification(notification)
-                    }, after: 0.5)
+                    // }, after: 0.5)
                 }
                 else {
                     NSLog("[Pushdy] run 2")
@@ -153,9 +153,9 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             }
             else {
                 NSLog("[Pushdy] run 3")
-                PDYThread.perform(onBackGroundThread: {
+                // PDYThread.perform(onBackGroundThread: {
                     Pushdy.trackOpeningPushNotification(notification)
-                }, after: 0.5)
+                // }, after: 0.5)
             }
         }
     }
