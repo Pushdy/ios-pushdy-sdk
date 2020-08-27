@@ -88,6 +88,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         
         // Observe attributes's change
         self.observeAttributesChanged()
+      
+        self.restoreDataFromStorage()
     }
 
     @objc public static func initWith(clientKey:String, delegate:UIApplicationDelegate, delegaleHandler:AnyObject, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -108,6 +110,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         self.checkFirstTimeOpenApp()
         // Observe attributes's change
         self.observeAttributesChanged()
+      
+        self.restoreDataFromStorage()
     }
     
     // MARK: Pushdy Getter/Setter
@@ -184,6 +188,20 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     @objc internal static func observeAttributesChanged() {
         let timer = Timer.scheduledTimer(timeInterval: UPDATE_ATTRIBUTES_INTERVAL, target: self, selector: #selector(self.updatePlayerIfNeeded), userInfo: nil, repeats: true)
         timer.fire()
+    }
+  
+    @objc internal static func restoreDataFromStorage() {
+        self.restorePendingTrackingOpenedItems()
+    }
+  
+    @objc internal static func restorePendingTrackingOpenedItems() {
+        let items: [String] = getPendingTrackOpenNotiIds()
+        if (items.count > 0) {
+            print("[Pushdy] restorePendingTrackingOpenedItems: Restored items: " + items.joined(separator: ","))
+            pendingTrackingOpenedItems.append(contentsOf: items)
+        } else {
+            print("[Pushdy] restorePendingTrackingOpenedItems: No pending tracking open")
+        }
     }
     
     /**
