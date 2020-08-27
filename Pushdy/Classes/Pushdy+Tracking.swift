@@ -8,7 +8,7 @@
 import Foundation
 
 public extension Pushdy {
-  private static var pendingTrackingOpenedItems:[String] = []
+  public static var pendingTrackingOpenedItems:[String] = []
   
   
   /**
