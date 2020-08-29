@@ -80,6 +80,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             _pushdyDelegate = delegate as? PushdyDelegate
         }
         
+        self.restorePrimaryDataFromStorage()
+        
         // Check launch by push notification
         self.checkLaunchingFromPushNotification()
         
@@ -89,7 +91,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         // Observe attributes's change
         self.observeAttributesChanged()
       
-        self.restoreDataFromStorage()
+        self.restoreSecondaryDataFromStorage()
     }
 
     @objc public static func initWith(clientKey:String, delegate:UIApplicationDelegate, delegaleHandler:AnyObject, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -104,6 +106,9 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             _pushdyDelegate = delegaleHandler as? PushdyDelegate
         }
         // _pushdyDelegate = delegaleHandler
+        
+        self.restorePrimaryDataFromStorage()
+        
         // Check launch by push notification
         self.checkLaunchingFromPushNotification()
         // Handle pushdy logic
@@ -111,7 +116,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         // Observe attributes's change
         self.observeAttributesChanged()
       
-        self.restoreDataFromStorage()
+        self.restoreSecondaryDataFromStorage()
     }
     
     // MARK: Pushdy Getter/Setter
@@ -137,29 +142,57 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         return error
     }
     
+    internal static func readyForHandlingNotification() -> Bool {
+        if let pushdyDelegate = Pushdy.getDelegate()  {
+            if let ready = pushdyDelegate.readyForHandlingNotification?() {
+                return ready
+            }
+        }
+
+        // Default must be true
+        return true
+    }
     
     //MARK: Internal Handler
     internal static func checkLaunchingFromPushNotification() {
         if let launchOptions = _launchOptions, let notification = launchOptions[UIApplication.LaunchOptionsKey.remoteNotification] as? [String : Any] {
             if let pushdyDelegate = getDelegate()  {
-                if let ready = pushdyDelegate.readyForHandlingNotification?(), ready == true {
-                    NSLog("[Pushdy] run 1")
+                // let ready = self.readyForHandlingNotification() // my new code: ready is true if no delegation defined, but I don't know why we cannot go to dest page when open app by push.
+                let ready = pushdyDelegate.readyForHandlingNotification?()   // original code: I don't know why we must check delegate without default value, but it work.
+                if ready == true {
+                    NSLog("[Pushdy] run 1: onNotificationOpened")
                     pushdyDelegate.onNotificationOpened?(notification, fromState: AppState.kNotRunning)
                     
-                    // PDYThread.perform(onBackGroundThread: {
+                     PDYThread.perform(onBackGroundThread: {
                         Pushdy.trackOpeningPushNotification(notification)
-                    // }, after: 0.5)
+                     }, after: 0.5)
                 }
                 else {
-                    NSLog("[Pushdy] run 2")
+                    /*
+                                In case of pending notification:
+                                1. User will manually get pending notification from queue
+                                2. Remove it from queue
+                                3. TODO: Tracking open push
+                                */
+                    NSLog("[Pushdy] run 2: not ready > pushPendingNotification to exete later")
                     Pushdy.pushPendingNotification(notification)
+                    
+                    /*
+                                I dont know why the single tracking version (PushdySDK@0.0.10) can track when we open push from closed state
+                                In this version (PushdySDK@0.2.0) we need to force call it here
+                                But be careful it can lead to duplication in notification ID, because I'm not clear why previos version can do track successfully in this case.
+                                */
+                    // Consider launching from push is also open push
+                     PDYThread.perform(onBackGroundThread: {
+                        Pushdy.trackOpeningPushNotification(notification)
+                     }, after: 0.5)
                 }
             }
             else {
-                NSLog("[Pushdy] run 3")
-                // PDYThread.perform(onBackGroundThread: {
+                NSLog("[Pushdy] run 3: do nothing but track")
+                 PDYThread.perform(onBackGroundThread: {
                     Pushdy.trackOpeningPushNotification(notification)
-                // }, after: 0.5)
+                 }, after: 0.5)
             }
         }
     }
@@ -190,17 +223,23 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         timer.fire()
     }
   
-    @objc internal static func restoreDataFromStorage() {
+    // These data is important data and need to be prepared to ensure Pushdy work correctly
+    @objc internal static func restorePrimaryDataFromStorage() {
         self.restorePendingTrackingOpenedItems()
+    }
+
+    // If your data is not important or can be loaded later, use this fn to restore to ensure Pushdy starting time
+    @objc internal static func restoreSecondaryDataFromStorage() {
+        
     }
   
     @objc internal static func restorePendingTrackingOpenedItems() {
         let items: [String] = getPendingTrackOpenNotiIds()
         if (items.count > 0) {
-            print("[Pushdy] restorePendingTrackingOpenedItems: Restored items: " + items.joined(separator: ","))
+            NSLog("[Pushdy] restorePendingTrackingOpenedItems: Restored items: " + items.joined(separator: ","))
             pendingTrackingOpenedItems.append(contentsOf: items)
         } else {
-            print("[Pushdy] restorePendingTrackingOpenedItems: No pending tracking open")
+            NSLog("[Pushdy] restorePendingTrackingOpenedItems: No pending tracking open")
         }
     }
     

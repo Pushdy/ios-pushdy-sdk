@@ -55,5 +55,15 @@ import UIKit
             bgBlock?()
         }
     }
+  
+  
+  public class func performCancelable(onBackGroundThread bgBlock: ExecuteBlock?, after delay:Double) -> DispatchWorkItem {
+      let task = DispatchWorkItem {
+        bgBlock?()
+      }
+      DispatchQueue.main.asyncAfter(deadline:.now() + delay, execute: task)
+      // task.cancel()
+      return task
+  }
     
 }

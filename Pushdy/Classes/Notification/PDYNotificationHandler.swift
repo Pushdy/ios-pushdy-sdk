@@ -94,12 +94,13 @@ import UserNotificationsUI
         }
         
         // Check ready state
-        var readyForReceivingNotification = true
-        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.readyForHandlingNotification?() {
-            readyForReceivingNotification = already
-        }
+//        var readyForReceivingNotification = true
+//        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.readyForHandlingNotification?() {
+//            readyForReceivingNotification = already
+//        }
+        let readyForReceivingNotification = Pushdy.readyForHandlingNotification()
         
-//        NSLog("[Pushdy] handleNotification: %@, inApplication:withCompletion:, readyForReceivingNotification: %ld", notification, readyForReceivingNotification)
+        NSLog("[Pushdy] handleNotification 1: %@, inApplication:withCompletion:, readyForReceivingNotification: %ld", notification, readyForReceivingNotification)
         if !readyForReceivingNotification {
             if let _ = notification["_notification_id"] as? String {
                 var pendingNotification = notification
@@ -127,14 +128,20 @@ import UserNotificationsUI
         }
     }
     
+    /*
+     Triggered when:
+     - FG > Receive push
+     - ...
+     */
     func handleNotification(_ notification:[String : Any], inActiveState activeState:Bool) {
         // Check ready state
-        var readyForReceivingNotification = true
-        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.readyForHandlingNotification?() {
-            readyForReceivingNotification = already
-        }
+//        var readyForReceivingNotification = true
+//        if let pusdyDelegate = Pushdy.getDelegate(), let already = pusdyDelegate.readyForHandlingNotification?() {
+//            readyForReceivingNotification = already
+//        }
+        let readyForReceivingNotification = Pushdy.readyForHandlingNotification()
         
-        NSLog("[Pushdy] handleNotification: %@, inActiveState: %ld, readyForReceivingNotification: %ld", notification, activeState, readyForReceivingNotification)
+        NSLog("[Pushdy] handleNotification 2: %@, inActiveState: %ld, readyForReceivingNotification: %ld", notification, activeState, readyForReceivingNotification)
         
         if !readyForReceivingNotification {
             if let _ = notification["_notification_id"] as? String {
@@ -196,10 +203,12 @@ import UserNotificationsUI
     }
     
     func processNotificationPayload(_ notification:[String : Any], needBanner:Bool, fromAppState appState:String) {
+        NSLog("processNotificationPayload: appState: ", appState)
         if let pushdyDelegate = Pushdy.getDelegate() {
             pushdyDelegate.onNotificationReceived?(notification, fromState: appState)
         }
         
+        // Should show notification when app is active?
         var shouldHandle = true
         if appState == AppState.kActive {
             if needBanner {
@@ -215,6 +224,7 @@ import UserNotificationsUI
             }
         }
         
+        // If it's not Foreground state, do tracking + remove from pending
         if shouldHandle {
             if let pushdyDelegate = Pushdy.getDelegate() {
 //                NSLog("[Pushdy] onNotificationOpened: %@, fromState: %@", notification, appState);
@@ -223,6 +233,7 @@ import UserNotificationsUI
             self.removePendingNotification(notification)
             
             PDYThread.perform(onBackGroundThread: {
+                // track Opening PushNotification already perform a delay task, we should not put a delay task into a delay task I don't know why it didnt work
                 Pushdy.trackOpeningPushNotification(notification)
             }, after: 0.5)
         }

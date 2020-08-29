@@ -9,7 +9,7 @@ import Foundation
 
 public extension Pushdy {
   public static var pendingTrackingOpenedItems:[String] = []
-  
+  public static var pendingTask:DispatchWorkItem? = nil
   
   /**
    Track opening push notification
@@ -20,6 +20,8 @@ public extension Pushdy {
   static func trackOpeningPushNotification(_ data:[String:Any]) {
       // Track open push notification
     // self.trackOpenedNow(data)
+    
+    // If you use trackOpenedLazy, you must delay trackOpeningPushNotification a little bit while click push to open app
     self.trackOpenedLazy(data)
   }
   
@@ -66,28 +68,42 @@ public extension Pushdy {
    * - [x] Restore this queue when app open / app open by notification => Avoid overriten
    * - [x] In case of schedule is running => Cancel the prev schedule if you fire new schedule
    *
+   *  iOS has a special running policy:
+     *     - A pending task is scheduled will be pause when you put your app to BG > Resuming app will resume scheduled task, it lead to the issue bellow
+     *     - If a schedule task is paused in BG > Click open new Push > You need to ensure you can track all pendingTrackingOpenedItems and the newly clicked ID (that's why we delay lazy tracking 0.5s to ensure previous scheduled task will be complete first)
+     *     - delay 0.5s would not be a solution in case of slow network
+     *     - iOS might still fire requests in background, then it log to console after resume? => Check on Charles proxy ?
+     *     - The solution is to add notifcation right before the task started to run, not started to schedule
+   *
    *    For more detail, please read the comment in Android-pushdy-sdk
    */
   static func trackOpenedLazy(_ data:[String:Any]) {
-    print("[Pushdy] trackOpenedLazy save notiId={$notificationID} to tracking queue pendingTrackingOpenedItems(before): ", self.pendingTrackingOpenedItems)
-    
     if let notificationID = data["_notification_id"] as? String {
+      NSLog("[Pushdy] trackOpenedLazy save notiId=\(notificationID) to tracking queue pendingTrackingOpenedItems(before): \(pendingTrackingOpenedItems.joined(separator: ", "))")
+        
       // Save to queue + localStorage
-      pendingTrackingOpenedItems.append(notificationID)
-      setPendingTrackOpenNotiIds(pendingTrackingOpenedItems)
       // Delay flushing queue
       // Empty queue on success
       // NOTE: You must do this in non-blocking mode to ensure program will continue to run without any dependant on this code
-      let delayInMs:Int = Int.random(in: 1...125) * 1000
-      self.trackOpenedWithRetry(delayInMs: delayInMs)
+      let delayInMs:Int = Int.random(in: 4...15) * 1000
+//        PDYThread.perform(
+//            onBackGroundThread: {
+                self.pendingTrackingOpenedItems.append(notificationID)
+                setPendingTrackOpenNotiIds(pendingTrackingOpenedItems)
+                self.trackOpenedWithRetry(delayInMs: delayInMs, clickedNotificationId: notificationID)
+//            },
+//            after: pendingTask != nil
+//                ? Double(5000)    // Delay if there was a pending task
+//                : Double(0)      // Execute imme if no pending task
+//        )
     } else {
-      print("[Pushdy] trackOpenedLazy was skip because of empty notificationID")
+      NSLog("[Pushdy] trackOpenedLazy was skip because of empty notificationID")
     }
   }
   
-  static func trackOpenedWithRetry(delayInMs: Int) {
+  static func trackOpenedWithRetry(delayInMs: Int, clickedNotificationId: String? = nil) {
     let verbose = true
-    if (verbose) { print("[Pushdy] trackOpenedWithRetry: delayInMs: \(delayInMs) ") }
+    if (verbose) { NSLog("[Pushdy] trackOpenedWithRetry: delayInMs: \(delayInMs) ") }
 
     // Delay flushing queue
     // Empty queue on success
@@ -95,32 +111,43 @@ public extension Pushdy {
     // Tested in background: This Timer still run when app is in background, not sure for Xiaomi 3
     // Tested in closed state then open by push:
 
-//    PDYThread.perform(onBackGroundThread: {
-//      doTaskDelay()
-//    }, after: Double(delayInMs / 1000))
+    if (self.pendingTask != nil){
+      self.pendingTask?.cancel()
+    }
+    self.pendingTask = PDYThread.performCancelable(onBackGroundThread: {
+      // Only add id right before the task start to avoid data interference
+//        if clickedNotificationId != nil {
+//            self.pendingTrackingOpenedItems.append(clickedNotificationId ?? "")
+//            setPendingTrackOpenNotiIds(pendingTrackingOpenedItems)
+//            if (verbose) { NSLog("[Pushdy] performCancelable: Add notiId(\(String(describing: clickedNotificationId))) | Queue(after)= \(pendingTrackingOpenedItems.joined(separator: ", "))") }
+//        }
+        self.__doTaskDelay()
+    }, after: Double(delayInMs / 1000))
 
-    NSObject.cancelPreviousPerformRequests(withTarget: self)
-    self.perform(#selector(__doTaskDelay), with: nil, afterDelay: Double(delayInMs / 1000))
+//    NSObject.cancelPreviousPerformRequests(withTarget: self)
+//    self.perform(#selector(__doTaskDelay), with: nil, afterDelay: Double(delayInMs / 1000))
   }
   
   @objc static func __doTaskDelay() {
     let verbose = true
-    if (verbose) { print("[Pushdy] trackOpenedWithRetry: Process tracking queue after delay ${delayInMs}s | Ids= \(pendingTrackingOpenedItems.joined(separator: ", "))") }
+    if (verbose) { NSLog("[Pushdy] trackOpenedWithRetry: Process tracking queue after delay | Ids= \(pendingTrackingOpenedItems.joined(separator: ", "))") }
 
     if let playerID = getPlayerID() {
         // NOTE: If api request was failed, we don't intend to fire again, ignore it
       try? trackOpenedList(playerID: playerID, notificationIds: pendingTrackingOpenedItems, completion: { (response:AnyObject?) in
-        if (verbose) { print("[Pushdy] trackOpenedWithRetry: successfully: ", pendingTrackingOpenedItems) }
+        if (verbose) { NSLog("[Pushdy] trackOpenedWithRetry: successfully: ", pendingTrackingOpenedItems) }
         // Empty queue on success
         pendingTrackingOpenedItems = []
         setPendingTrackOpenNotiIds(pendingTrackingOpenedItems)
+        self.pendingTask = nil
       }, failure: { (errorCode:Int, message:String?) in
-        if (verbose) { print("[Pushdy] trackOpenedWithRetry: error: \(errorCode) , message: \(String(describing: message))") }
+        if (verbose) { NSLog("[Pushdy] trackOpenedWithRetry: error: \(errorCode) , message: \(String(describing: message))") }
+        self.pendingTask = nil
       })
     } else {
       // retry after 10 seconds
       self.trackOpenedWithRetry(delayInMs: 10000)
-      if (verbose) { print("[Pushdy] trackOpenedWithRetry: playerID empty, trying to retry after ${10}s") }
+      if (verbose) { NSLog("[Pushdy] trackOpenedWithRetry: playerID empty, trying to retry after ${10}s") }
     }
   }
 }
