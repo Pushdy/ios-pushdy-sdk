@@ -99,5 +99,20 @@ public extension Pushdy {
     @objc static func checkNotificationEnabled(_ resultBlock : ((Bool)->())? = nil) {
         PDYNotificationHandler.shared.checkNotificationEnabled(resultBlock)
     }
+    
+    @objc static func setApplicationIconBadgeNumber(_ count: Int) {
+        // RCTSharedApplication().applicationIconBadgeNumber = count
+        
+        // You can "remove" the app badge icon by setting it to 0:
+        // Swift < 3.0
+        // UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        // Swift 3.0+
+        UIApplication.shared.applicationIconBadgeNumber = count
+    }
+    
+    @objc static func getApplicationIconBadgeNumber() -> Int {
+        // return RCTSharedApplication().applicationIconBadgeNumber
+        return UIApplication.shared.applicationIconBadgeNumber
+    }
 }
 
