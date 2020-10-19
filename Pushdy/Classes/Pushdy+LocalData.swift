@@ -263,7 +263,7 @@ public extension Pushdy {
     
     internal static func isAttributeChanged(_ name:String, newValue value:Any) -> Bool {
         var changed:Bool = false
-        if let value = getAttributeValue(name) {
+        // if let value = getAttributeValue(name) {
             if let prevValue = getPrevAttributeValue(name) {
                 if value is String {
                     changed = (value as! String) != (prevValue as! String)
@@ -295,10 +295,10 @@ public extension Pushdy {
             else {
                 changed = true
             }
-        }
-        else {
-            changed = true
-        }
+//        }
+//        else {
+//            changed = true
+//        }
         return changed
     }
     
