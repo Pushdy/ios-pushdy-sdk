@@ -213,6 +213,7 @@ import UserNotificationsUI
         if appState == AppState.kActive {
             if needBanner {
                 shouldHandle = false
+                // showInAppNotification behavior depend on _useCustomInAppBanner
                 Pushdy.showInAppNotification(notification, onTap: {
 //                    NSLog("[Pushdy] Push Banner onTap: %@", notification);
                     if let pushdyDelegate = Pushdy.getDelegate() {

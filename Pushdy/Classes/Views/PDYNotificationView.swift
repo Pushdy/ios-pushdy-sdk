@@ -164,7 +164,7 @@ public typealias PDYActionBlock = () -> Void
         if let window = UIApplication.shared.delegate?.window {
             let statusHeight = UIApplication.shared.statusBarFrame.height
             window?.addSubview(self)
-            self.setData(data)
+            self.setData(data) // Handle dynamic UI in setData
             self.actionBlock = onTap
             NSObject.cancelPreviousPerformRequests(withTarget: self)
             UIView.animate(withDuration: 0.25, animations: {

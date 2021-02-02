@@ -14,6 +14,15 @@ public extension Pushdy {
     private static var _defaultNotificationView:PDYNotificationView?
     private static var _customNotificationView:UIView?
 
+    /*
+     _useSdkHandler == true: Pushdy will use built-in InAppBanner to handle how inappbanner show and it's interaction
+     _useSdkHandler == false: Pushdy will pass data into another handler, that handler will handle in app banner UI, but interaction still handled by SDK. Eg: Use JS thread to show banner on react-native
+     */
+    private static var _useSdkHandler: Bool = true
+    private static var _customBannerData: [String: Any] = [:]
+    private static var _customBannerActions: PDYActionBlock? = nil
+    
+    
     // MARK: - Push Notification View
     internal static func initDefaultNotificationView() {
         if let window = UIApplication.shared.delegate?.window as? UIWindow {
@@ -22,7 +31,27 @@ public extension Pushdy {
         }
     }
 
+    /// showInAppNotification depend on
     @objc static func showInAppNotification(_ data:[String: Any], onTap:@escaping PDYActionBlock) {
+        if !_useSdkHandler {
+            let newBlock:PDYActionBlock = { () -> Void in
+                onTap()
+                
+                // Track open push notification
+                trackOpeningPushNotification(data)
+            }
+            
+            // Store data to execute it later
+            _customBannerData = data
+            _customBannerActions = newBlock
+            
+            // Schedule to clean
+            cleanCustomBannerData(delay: 0.1 + Pushdy.getPushBannerDismissDuration())
+            
+            // Stop execution
+            return
+        }
+        
         if _customNotificationView == nil {
             if _notificationView == nil {
                 initDefaultNotificationView()
@@ -65,6 +94,25 @@ public extension Pushdy {
         else {
             let error = NSError(domain:"", code:-1, userInfo:[ NSLocalizedDescriptionKey: "\(NSStringFromClass(self)):\(#function):: Your custom push banner does not conform to PDYPushBannerActionProtocol. Please apply that protocol to your custom view."])
             throw error
+        }
+    }
+    
+    static func useSDKHandler(_ enabled: Bool) -> Void {
+        _useSdkHandler = enabled
+    }
+    
+    static func handleCustomInAppBannerPressed(_ notificationId: String) -> Void {
+        // trigger actions
+        _customBannerActions?()
+        
+        // clean
+        cleanCustomBannerData(delay: 0.1)
+    }
+    
+    static func cleanCustomBannerData(delay: Double) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            _customBannerData = [:]
+            _customBannerActions = nil
         }
     }
 }
