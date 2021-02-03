@@ -202,9 +202,18 @@ import UserNotificationsUI
         self.processNotificationPayload(notification, needBanner:false, fromAppState:AppState.kInActive)
     }
     
+    /// It's was triggered when:
+    /// - FG: Received push
+    /// - BG: Open push
+    /// - Please see above funtions to know all the cases
+    ///
+    /// Test case: cause lag app:
+    /// - Drag status bar to go Inactive State, then receive push  ==> No push was shown or handled ?  ==> App lag
     func processNotificationPayload(_ notification:[String : Any], needBanner:Bool, fromAppState appState:String) {
-        NSLog("processNotificationPayload: appState: ", appState)
-        if let pushdyDelegate = Pushdy.getDelegate() {
+        NSLog("processNotificationPayload: appState: " + appState)
+        if let pushdyDelegate = Pushdy.getDelegate(), appState == AppState.kActive {
+            // Only fire onNotificationReceived when our app is in active state,
+            // If app is not active, notification was handled by OS or rich-push-notification extension
             pushdyDelegate.onNotificationReceived?(notification, fromState: appState)
         }
         
