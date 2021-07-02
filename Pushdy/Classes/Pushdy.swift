@@ -119,6 +119,16 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         self.restoreSecondaryDataFromStorage()
     }
     
+    /**
+     Module react-native-pushdy need to initWith without Handler at function RNPushy.registerSdk
+     so that we need to set delegate handler later.
+     */
+    @objc public static func setDelegateHandler(delegateHandler: AnyObject) {
+        if let _ = Pushdy.getClassWithProtocolInHierarchy((delegateHandler as AnyObject).classForCoder, protocolToFind: PushdyDelegate.self) {
+            _pushdyDelegate = delegateHandler as? PushdyDelegate
+        }
+    }
+    
     // MARK: Pushdy Getter/Setter
     public static func getClientKey() -> String? {
         return _clientKey
@@ -190,6 +200,12 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             }
             else {
                 NSLog("[Pushdy] run 3: do nothing but track")
+                /**
+                 Because new react native pushdy need to intilize at appDidFinishLauchingWithOptions
+                 so that will have a case that doesn't having delegateHandler yet.
+                 We need to push this imcoming notificationOpened to pending Opened notification.
+                 */
+                Pushdy.pushPendingNotification(notification);
                  PDYThread.perform(onBackGroundThread: {
                     Pushdy.trackOpeningPushNotification(notification)
                  }, after: 0.5)
