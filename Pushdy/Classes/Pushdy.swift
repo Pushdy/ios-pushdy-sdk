@@ -159,8 +159,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             }
         }
 
-        // Default must be true
-        return true
+        // by default this case should be false cause delegate handle may be not set at start.
+        return false
     }
     
     //MARK: Internal Handler
