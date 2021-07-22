@@ -47,6 +47,24 @@ import Foundation
         }
     }
     
+    /**
+     Now Pushdy can be used by extension and the app so that we need shared the value between them
+     */
+    public static func getSharedInt(key:String) -> Int? {
+        let defaults = UserDefaults(suiteName: "group.vn.f19.com");
+        let intValue = defaults?.integer(forKey: key);
+        return intValue;
+    }
+    
+    /**
+     Now Pushdy can be used by extension and the app so that we need shared the value between them
+     */
+    public static func setSharedInt(key:String, value: Int) {
+        let defaults = UserDefaults(suiteName: "group.vn.f19.com");
+        defaults?.set(value, forKey: key);
+        defaults?.synchronize();
+    }
+    
     public static func getInt(key:String, includeInKeyChain:Bool = false) -> Int? {
         if let value = UserDefaults.standard.object(forKey: key), let intValue = value as? Int {
             return intValue

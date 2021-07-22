@@ -11,7 +11,7 @@ import UserNotifications
 
 public extension Pushdy {
     private static var _pendingNotifications:[[String:Any]] = [[String:Any]]()
-    
+    internal static let PUSHDY_CACHED_BADGE = "PUSHDY_CACHED_BADGE";
     /**
      Get all pending notifications which is not handled.
      
@@ -107,12 +107,41 @@ public extension Pushdy {
         // Swift < 3.0
         // UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         // Swift 3.0+
-        UIApplication.shared.applicationIconBadgeNumber = count
+        /**
+         Need to update cache badge value. Because we will use set count by .badge in mutate content
+         later. And setApplicationIconBadgeNumber doesn't work in background. So that, Remind it.
+         */
+        Pushdy.updateCachedBadgeValue(count);
+        UIApplication.shared.applicationIconBadgeNumber = count;
     }
     
     @objc static func getApplicationIconBadgeNumber() -> Int {
         // return RCTSharedApplication().applicationIconBadgeNumber
-        return UIApplication.shared.applicationIconBadgeNumber
+//        return UIApplication.shared.applicationIconBadgeNumber
+        /**
+         Now we use cache value instead of UIApplication.shared.applicationIconBadgeNumber.
+         Because PushdySDK can be use in extension so that UIApplication.shared will not work.
+         */
+        return PDYStorage.getSharedInt(key: PUSHDY_CACHED_BADGE) ?? 0;
+    }
+    
+    @available(iOS 10.0, *)
+    @objc static func handleBadgeCountWithNotificationRequest(_ replacementContent: UNMutableNotificationContent) -> UNMutableNotificationContent {
+        if((replacementContent.badge) != nil){
+            return replacementContent;
+        }
+        var badgeCount = Pushdy.getApplicationIconBadgeNumber();
+        badgeCount += 1;
+        if (badgeCount < 0) {
+            badgeCount = 0;
+        }
+        replacementContent.badge = NSNumber(value: badgeCount);
+        Pushdy.updateCachedBadgeValue(badgeCount);
+        return replacementContent;
+    }
+    
+    @objc static func updateCachedBadgeValue(_ value: Int) {
+        PDYStorage.setSharedInt(key: PUSHDY_CACHED_BADGE, value: value);
     }
 }
 
