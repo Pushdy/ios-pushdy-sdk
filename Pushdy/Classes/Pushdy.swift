@@ -85,8 +85,9 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         // Check launch by push notification
         self.checkLaunchingFromPushNotification()
         
-        // Handle pushdy logic
-        self.checkFirstTimeOpenApp()
+        // Handle pushdy logic this function may lead to wrong trigger session when app is using by user.
+        // Some case make appDidFinishLauchingWithOptions call without opening the app.
+        // self.checkFirstTimeOpenApp()
         
         // Observe attributes's change
         self.observeAttributesChanged()

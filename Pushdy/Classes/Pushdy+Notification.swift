@@ -132,8 +132,9 @@ public extension Pushdy {
         }
         var badgeCount = Pushdy.getApplicationIconBadgeNumber();
         badgeCount += 1;
-        if (badgeCount < 0) {
-            badgeCount = 0;
+        if (badgeCount <= 0) {
+            // because update badge = 0 will cause clear notification center.
+            badgeCount = 1;
         }
         replacementContent.badge = NSNumber(value: badgeCount);
         Pushdy.updateCachedBadgeValue(badgeCount);
