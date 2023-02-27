@@ -47,6 +47,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     internal static var _clientKey:String?
     internal static var _launchOptions:[UIApplication.LaunchOptionsKey: Any]?
     internal static var _delegate:UIApplicationDelegate?
+    internal static var _applicationId: String = getApplicationId()
     
     internal static var _pushdyDelegate:PushdyDelegate? = nil
     
@@ -55,7 +56,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
     
     // MARK: Pushdy Init
     private override init() {
-        
+
     }
     
     /**
