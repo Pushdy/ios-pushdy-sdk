@@ -150,5 +150,55 @@ public extension Pushdy {
       if (verbose) { NSLog("[Pushdy] trackOpenedWithRetry: playerID empty, trying to retry after ${10}s") }
     }
   }
+
+  @objc static func trackEvent(eventName: String, params: NSObject, immediate: Bool = false, completion:PDYRequest.CompletionBlock?, failure:PDYRequest.FailureBlock?) throws {
+    if let playerID = getPlayerID() {
+			let event: NSObject = [
+				"event": eventName,
+				"properties": params,
+				"created_at": Int(Date().timeIntervalSince1970),
+				"player_id": playerID
+			] as NSObject
+			NSLog("[Pushdy] trackEvent: \(event)");
+
+      var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
+      pendingEvents.append(event)
+			if (immediate) {
+				pushPendingEvents()
+			} else {
+				pendingEvents.append(event)
+				setPendingTrackEvents(pendingEvents)
+			}
+    } else {
+      NSLog("[Pushdy] trackEvent: playerID empty");
+    }
+  }
+
+	@objc static func pushPendingEvents() {
+    if let playerID = getPlayerID() {
+      let Event = PDYEvent(clientKey:_clientKey ?? "", deviceID: _deviceID);
+      let pendingEvents: [NSObject] = getPendingTrackEvents(count: 50);
+      if (pendingEvents.count > 0) {
+        NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
+          try? Event.pushPendingEvents(events: pendingEvents, application_id: _applicationId, playerID: playerID, completion: { (response:AnyObject?) in
+          NSLog("[Pushdy] pushPendingEvents: successfully: \(response)")
+          // remove 50 events from pendingEvents
+          var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
+          if pendingEvents.count > 50 {
+            pendingEvents.removeFirst(50)
+          } else {
+              pendingEvents = [];
+          }
+          setPendingTrackEvents(pendingEvents)
+        }, failure: { (errorCode:Int, message:String?) in
+          NSLog("[Pushdy] pushPendingEvents: error: \(errorCode) , message: \(String(describing: message))")
+        })
+      } else {
+        NSLog("[Pushdy] pushPendingEvents: pendingEvents empty");
+      }
+    } else {
+      NSLog("[Pushdy] pushPendingEvents: playerID empty");
+    }
+  }
 }
 

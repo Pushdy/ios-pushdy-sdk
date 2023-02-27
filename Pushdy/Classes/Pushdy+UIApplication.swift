@@ -87,6 +87,11 @@ public extension UIApplication {
         if self.responds(to: #selector(UIApplication.pushdyApplicationWillResignActive(_:))) {
             self.pushdyApplicationWillResignActive(application)
         }
+        
+        // push pending events to Pushdy server when app was come to foreground again
+        PDYThread.perform(onBackGroundThread: {
+            Pushdy.pushPendingEvents()
+        }, after: 0.5)
     }
     
     @objc func pushdyApplicationDidbecomeActive(_ application : UIApplication) {
@@ -101,6 +106,11 @@ public extension UIApplication {
         if self.responds(to: #selector(UIApplication.pushdyApplicationDidEnterBackground(_:))) {
             self.pushdyApplicationDidEnterBackground(application)
         }
+        
+        // push pending events to Pushdy server when app was come to foreground again
+        PDYThread.perform(onBackGroundThread: {
+            Pushdy.pushPendingEvents()
+        }, after: 0.5)
     }
     
     @objc func pushdyApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {

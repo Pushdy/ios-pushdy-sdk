@@ -14,6 +14,9 @@ public extension Pushdy {
     internal static let ATTRIBUTES_SCHEMA = "PUSHDY_ATTRIBUTES_SCHEMA"
     internal static let PREV_ATTRIBUTES_SCHEMA = "PUSHDY_PREV_ATTRIBUTES_SCHEMA"
     internal static let PENDING_TRACKING_OPEN_IDS = "PENDING_TRACKING_OPEN_IDS"
+    internal static let PENDING_TRACKING_EVENTS = "PENDING_TRACKING_EVENTS"
+    internal static let APPLICATION_ID = "PUSHDY_APPLICATION_ID"
+    
     
     internal static var _deviceID:String?
     
@@ -225,10 +228,56 @@ public extension Pushdy {
         return []
       }
   }
+
+    
   
   internal static func setPendingTrackOpenNotiIds(_ items:[String]) {
     PDYStorage.setString(key: PENDING_TRACKING_OPEN_IDS, value: items.joined(separator: ","))
   }
+
+    @objc static func setPendingTrackEvents(_ items:[NSObject]) {
+        if let jsonStr = items.jsonString {
+            PDYStorage.setString(key: PENDING_TRACKING_EVENTS, value: jsonStr)
+        }
+    }
+
+    @objc static func getPendingTrackEvents(count: Int) -> [NSObject] {
+        if let jsonStr = PDYStorage.getString(key: PENDING_TRACKING_EVENTS) {
+            if let events = jsonStr.asArrayOfDictionary() {
+                if events.count > count {
+                    let newEvents = events[0..<count]
+                    return newEvents.map { $0 as NSObject }
+                }
+                else {
+                    return events.map { $0 as NSObject }
+                }
+            }
+        }
+        return []
+    }
+
+    @objc static func removePendingTrackingEvents(_ count: Int) {
+        if let jsonStr = PDYStorage.getString(key: PENDING_TRACKING_EVENTS) {
+            if let events = jsonStr.asArrayOfDictionary() {
+                if events.count > count {
+                    let newEvents = Array(events[count...])
+                    
+                    PDYStorage.setString(key: PENDING_TRACKING_EVENTS, value: newEvents.jsonString ?? "")
+                }
+                else {
+                    PDYStorage.remove(key: PENDING_TRACKING_EVENTS)
+                }
+            }
+        }
+    }
+
+    @objc static func setApplicationId(_ appId:String) {
+        PDYStorage.setString(key: APPLICATION_ID, value: appId)
+    }
+
+    @objc static func getApplicationId() -> String {
+        return PDYStorage.getString(key: APPLICATION_ID) ?? "";
+    }
     
     internal static func isFetchedAttributes() -> Bool {
         return true
