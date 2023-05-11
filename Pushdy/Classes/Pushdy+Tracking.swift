@@ -162,9 +162,8 @@ public extension Pushdy {
 			NSLog("[Pushdy] trackEvent: \(event)");
 
       var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
-      pendingEvents.append(event)
 			if (immediate) {
-				pushPendingEvents()
+                try? pushPendingEvents()
 			} else {
 				pendingEvents.append(event)
 				setPendingTrackEvents(pendingEvents)
@@ -174,14 +173,14 @@ public extension Pushdy {
     }
   }
 
-	@objc static func pushPendingEvents() {
+	@objc static func pushPendingEvents() throws {
     if let playerID = getPlayerID() {
       let Event = PDYEvent(clientKey:_clientKey ?? "", deviceID: _deviceID);
       let pendingEvents: [NSObject] = getPendingTrackEvents(count: 50);
       if (pendingEvents.count > 0) {
         NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
           try? Event.pushPendingEvents(events: pendingEvents, application_id: _applicationId, playerID: playerID, completion: { (response:AnyObject?) in
-          NSLog("[Pushdy] pushPendingEvents: successfully: \(response)")
+              NSLog("[Pushdy] pushPendingEvents: successfully: \(String(describing: response))")
           // remove 50 events from pendingEvents
           var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
           if pendingEvents.count > 50 {
