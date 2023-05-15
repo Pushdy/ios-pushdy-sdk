@@ -10,6 +10,7 @@ import Foundation
 public extension Pushdy {
   public static var pendingTrackingOpenedItems:[String] = []
   public static var pendingTask:DispatchWorkItem? = nil
+  public static var PATCH_SIZE = 20
   
   /**
    Track opening push notification
@@ -176,15 +177,15 @@ public extension Pushdy {
 	@objc static func pushPendingEvents() throws {
     if let playerID = getPlayerID() {
       let Event = PDYEvent(clientKey:_clientKey ?? "", deviceID: _deviceID);
-      let pendingEvents: [NSObject] = getPendingTrackEvents(count: 50);
+      let pendingEvents: [NSObject] = getPendingTrackEvents(count: PATCH_SIZE);
       if (pendingEvents.count > 0) {
         NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
           try? Event.pushPendingEvents(events: pendingEvents, application_id: _applicationId, playerID: playerID, completion: { (response:AnyObject?) in
               NSLog("[Pushdy] pushPendingEvents: successfully: \(String(describing: response))")
-          // remove 50 events from pendingEvents
+          // remove PATCH_SIZE events from pendingEvents
           var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
-          if pendingEvents.count > 50 {
-            pendingEvents.removeFirst(50)
+          if pendingEvents.count > PATCH_SIZE {
+            pendingEvents.removeFirst(PATCH_SIZE)
           } else {
               pendingEvents = [];
           }

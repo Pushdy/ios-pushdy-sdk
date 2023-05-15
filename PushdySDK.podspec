@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PushdySDK'
-  s.version          = '0.5.2'
+  s.version          = '0.5.3'
   s.summary          = 'Pushdy SDK for iOS platform'
   
   # This description is used to generate tags and improve search results.
