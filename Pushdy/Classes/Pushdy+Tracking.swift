@@ -179,9 +179,9 @@ public extension Pushdy {
       let Event = PDYEvent(clientKey:_clientKey ?? "", deviceID: _deviceID);
       let pendingEvents: [NSObject] = getPendingTrackEvents(count: PATCH_SIZE);
       if (pendingEvents.count > 0) {
-        NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
+//        NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
           try? Event.pushPendingEvents(events: pendingEvents, application_id: _applicationId, playerID: playerID, completion: { (response:AnyObject?) in
-              NSLog("[Pushdy] pushPendingEvents: successfully: \(String(describing: response))")
+//              NSLog("[Pushdy] pushPendingEvents: successfully: \(String(describing: response))")
           // remove PATCH_SIZE events from pendingEvents
           var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
           if pendingEvents.count > PATCH_SIZE {
@@ -191,13 +191,13 @@ public extension Pushdy {
           }
           setPendingTrackEvents(pendingEvents)
         }, failure: { (errorCode:Int, message:String?) in
-          NSLog("[Pushdy] pushPendingEvents: error: \(errorCode) , message: \(String(describing: message))")
+//          NSLog("[Pushdy] pushPendingEvents: error: \(errorCode) , message: \(String(describing: message))")
         })
       } else {
-        NSLog("[Pushdy] pushPendingEvents: pendingEvents empty");
+//        NSLog("[Pushdy] pushPendingEvents: pendingEvents empty");
       }
     } else {
-      NSLog("[Pushdy] pushPendingEvents: playerID empty");
+//      NSLog("[Pushdy] pushPendingEvents: playerID empty");
     }
   }
 }
