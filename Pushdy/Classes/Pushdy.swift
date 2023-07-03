@@ -266,30 +266,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
      */
     @objc internal static func updatePlayerIfNeeded() {
         if !isCreatingPlayer && !isEditingPlayer {
-            var shouldUpdate = false
-            if attributesHasChanged() {
-                shouldUpdate = true
-            }
-            
-            if shouldUpdate {
-                if isFetchedAttributes() {
-                    editPlayer()
-                }
-                else {
-                    getAttributes(completion: { (result:[[String : Any]]?) in
-                        editPlayer()
-                    }, failure: { (errorCode:Int, message:String?) in
-                        editPlayer()
-                    })
-                }
-            }
-            else {
-                getAttributes(completion: { (result:[[String : Any]]?) in
-                    // Do no thing
-                }, failure: { (errorCode:Int, message:String?) in
-                    // Do nothing
-                })
-            }
+            // Force edit player
+            editPlayer()
         }
     }
     
