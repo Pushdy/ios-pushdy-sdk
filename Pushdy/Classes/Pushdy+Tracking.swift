@@ -163,11 +163,10 @@ public extension Pushdy {
 			NSLog("[Pushdy] trackEvent: \(event)");
 
       var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
-			if (immediate) {
-                try? pushPendingEvents()
-			} else {
-				pendingEvents.append(event)
-				setPendingTrackEvents(pendingEvents)
+			pendingEvents.append(event)
+			setPendingTrackEvents(pendingEvents)
+      if (immediate) {
+        try? pushPendingEvents()
 			}
     } else {
       NSLog("[Pushdy] trackEvent: playerID empty");
