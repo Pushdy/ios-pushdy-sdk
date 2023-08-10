@@ -160,7 +160,6 @@ public extension Pushdy {
 				"created_at": Int(Date().timeIntervalSince1970),
 				"player_id": playerID
 			] as NSObject
-			NSLog("[Pushdy] trackEvent: \(event)");
 
       var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
 			pendingEvents.append(event)
