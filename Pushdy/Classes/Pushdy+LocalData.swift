@@ -16,7 +16,8 @@ public extension Pushdy {
     internal static let PENDING_TRACKING_OPEN_IDS = "PENDING_TRACKING_OPEN_IDS"
     internal static let PENDING_TRACKING_EVENTS = "PENDING_TRACKING_EVENTS"
     internal static let APPLICATION_ID = "PUSHDY_APPLICATION_ID"
-    
+    internal static let PUSHDY_BANNER_KEY = "PUSHDY_BANNER"
+
     
     internal static var _deviceID:String?
     
@@ -31,6 +32,19 @@ public extension Pushdy {
     internal static func setFirstTimeOpenApp(_ firstTime:Bool) {
         PDYStorage.setBool(key: "PUSHDY_FIRST_TIME_OPEN_APP", value: firstTime)
     }
+
+      /**
+     Get banner data
+     
+     - Returns: A player id string.
+     */
+    @objc static func getAllBanners() -> Any? {
+        if let banners = PDYStorage.get(key: PUSHDY_BANNER_KEY) {
+            return banners
+        }
+        return nil
+    }
+    
     
     /**
      Get player id
