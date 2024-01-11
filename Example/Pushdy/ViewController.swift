@@ -8,6 +8,7 @@
 
 import UIKit
 import PushdySDK
+import Bagel
 
 //struct ResponseData: Decodable {
 //   let id: Int
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
     }
     
     @objc func didTapButton(){
+        Bagel.start();
         print("TapButton");
         //Pushdy.subscribe();
         Pushdy.trackBanner(bannerId: "a506b0ce-1b8b-440f-b415-1acc3ade855d", type: "impression");

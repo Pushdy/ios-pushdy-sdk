@@ -205,7 +205,7 @@ public typealias PushdyFailureBlock = (NSError) -> Void
                 let dataParams: [String: Any]  = [
                     "imp": [
                         "b": [
-                            bannerId: [bannerTrackingData["imp"] ?? 0]
+                            bannerId: bannerTrackingData["imp"] ?? 0
                         ]
                     ],
                     "click": [
