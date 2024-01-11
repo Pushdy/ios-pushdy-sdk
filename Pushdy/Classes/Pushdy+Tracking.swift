@@ -10,6 +10,7 @@ import Foundation
 public extension Pushdy {
   public static var pendingTrackingOpenedItems:[String] = []
   public static var pendingTask:DispatchWorkItem? = nil
+  public static var PATCH_SIZE = 20
   
   /**
    Track opening push notification
@@ -159,45 +160,42 @@ public extension Pushdy {
 				"created_at": Int(Date().timeIntervalSince1970),
 				"player_id": playerID
 			] as NSObject
-			NSLog("[Pushdy] trackEvent: \(event)");
 
       var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
-      pendingEvents.append(event)
-			if (immediate) {
-				pushPendingEvents()
-			} else {
-				pendingEvents.append(event)
-				setPendingTrackEvents(pendingEvents)
+			pendingEvents.append(event)
+			setPendingTrackEvents(pendingEvents)
+      if (immediate) {
+        try? pushPendingEvents()
 			}
     } else {
       NSLog("[Pushdy] trackEvent: playerID empty");
     }
   }
 
-	@objc static func pushPendingEvents() {
+	@objc static func pushPendingEvents() throws {
     if let playerID = getPlayerID() {
       let Event = PDYEvent(clientKey:_clientKey ?? "", deviceID: _deviceID);
-      let pendingEvents: [NSObject] = getPendingTrackEvents(count: 50);
+      let pendingEvents: [NSObject] = getPendingTrackEvents(count: PATCH_SIZE);
       if (pendingEvents.count > 0) {
-        NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
+//        NSLog("[Pushdy] pushPendingEvents: \(pendingEvents)");
           try? Event.pushPendingEvents(events: pendingEvents, application_id: _applicationId, playerID: playerID, completion: { (response:AnyObject?) in
-          NSLog("[Pushdy] pushPendingEvents: successfully: \(response)")
-          // remove 50 events from pendingEvents
+//              NSLog("[Pushdy] pushPendingEvents: successfully: \(String(describing: response))")
+          // remove PATCH_SIZE events from pendingEvents
           var pendingEvents: [NSObject] = getPendingTrackEvents(count: 999);
-          if pendingEvents.count > 50 {
-            pendingEvents.removeFirst(50)
+          if pendingEvents.count > PATCH_SIZE {
+            pendingEvents.removeFirst(PATCH_SIZE)
           } else {
               pendingEvents = [];
           }
           setPendingTrackEvents(pendingEvents)
         }, failure: { (errorCode:Int, message:String?) in
-          NSLog("[Pushdy] pushPendingEvents: error: \(errorCode) , message: \(String(describing: message))")
+//          NSLog("[Pushdy] pushPendingEvents: error: \(errorCode) , message: \(String(describing: message))")
         })
       } else {
-        NSLog("[Pushdy] pushPendingEvents: pendingEvents empty");
+//        NSLog("[Pushdy] pushPendingEvents: pendingEvents empty");
       }
     } else {
-      NSLog("[Pushdy] pushPendingEvents: playerID empty");
+//      NSLog("[Pushdy] pushPendingEvents: playerID empty");
     }
   }
 }

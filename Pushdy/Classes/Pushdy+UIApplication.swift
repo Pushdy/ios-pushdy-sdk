@@ -90,7 +90,7 @@ public extension UIApplication {
         
         // push pending events to Pushdy server when app was come to foreground again
         PDYThread.perform(onBackGroundThread: {
-            Pushdy.pushPendingEvents()
+            try? Pushdy.pushPendingEvents()
         }, after: 0.5)
     }
     
@@ -109,7 +109,7 @@ public extension UIApplication {
         
         // push pending events to Pushdy server when app was come to foreground again
         PDYThread.perform(onBackGroundThread: {
-            Pushdy.pushPendingEvents()
+            try? Pushdy.pushPendingEvents()
         }, after: 0.5)
     }
     

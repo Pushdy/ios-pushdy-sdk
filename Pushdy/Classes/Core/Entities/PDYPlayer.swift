@@ -26,7 +26,8 @@ import Foundation
     
     @objc public func edit(playerID:String, params:[String:Any], completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock?) throws {
         let request = PDYRequest()
-        try request.put(url: self.url()+"/"+playerID, headers: self.headers(), params: params, completion: { (response:AnyObject?) in
+        let newParams = self.defaultParams().merging(params) { (_, new) in new }
+        try request.put(url: self.url()+"/"+playerID, headers: self.headers(), params: newParams, completion: { (response:AnyObject?) in
             completion?(response as AnyObject)
         }, failure: { (code:Int, message:String?) in
             failure?(code, message)
