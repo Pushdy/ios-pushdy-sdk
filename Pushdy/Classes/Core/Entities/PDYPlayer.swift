@@ -66,4 +66,34 @@ import Foundation
           failure?(code, message)
       })
     }
+    
+    @objc public func subscribe(applicationID: String?, playerID: String?, completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock? ) throws {
+        if applicationID == nil {
+          print("ERROR: PDYNotification: applicationID list is empty")
+          return
+        }
+        if playerID == nil {
+          print("ERROR: PDYNotification: playerID isBlank")
+          return
+        }
+        let request = PDYRequest()
+        let reqUrl = try self.baseUrl() + "/application/" + applicationID! + "/player/" + playerID! + "/subscribe"
+        let params:[String: Any] = [:]
+        NSLog("[Pushdy] subscribe: \(reqUrl)")
+        try request.post(url: reqUrl, headers: self.headers(), params: params, completion: { (response:AnyObject?) in
+            completion?(response as AnyObject)
+        }, failure: { (code:Int, message:String?) in
+            failure?(code, message)
+        })
+    }
+
+    @objc public func trackBanner(applicationId: String?, playerID: String?, data: Any?, completion:  PDYRequest.CompletionBlock?, failure: PDYRequest.FailureBlock? ) throws {
+        let request = PDYRequest();
+        let reqUrl = try self.baseUrl() + "/application/" + applicationId! + "/player/" + playerID! + "/subscribe"
+        try request.post(url: reqUrl, headers: self.headers(), params: data, completion: { (response:AnyObject?) in
+            completion?(response as AnyObject)
+        }, failure: { (code:Int, message:String?) in
+            failure?(code, message)
+        })
+    }
 }

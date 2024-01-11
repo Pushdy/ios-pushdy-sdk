@@ -346,45 +346,5 @@ public extension Pushdy {
         }
     }
 
-    @objc static func subscribeBanner () {
-       guard let url = URL(string: "https://api.pushdi.com/application/pushdy/player/96655d2e-ce02-3ec7-a0f6-273e5458fe67/subscribe") else {
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            if let error = error {
-                print("Error with fetching films: \(error)")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(response)")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            do{
-                let result = try JSONSerialization.jsonObject(with: data, options: []) as Any
-                
-                if let resultDict = result as? [String: Any] {
-                    if let banners = resultDict["banners"] {
-                        print("banners: \(banners)")
-                        PDYStorage.set(key: PUSHDY_BANNER_KEY, value: banners)
-                    }
-                }
-                print("Result: \(result)")
-            }catch{
-                print("Error decoding JSON: \(error)")
-            }
-           })
-           task.resume()
-    }
 }
 

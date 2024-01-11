@@ -1,6 +1,6 @@
 {
   "name": "PushdySDK",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "summary": "Pushdy SDK for iOS platform",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/Pushdy/ios-pushdy-sdk",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Pushdy/ios-pushdy-sdk.git",
-    "tag": "0.5.0"
+    "tag": "0.5.1"
   },
   "platforms": {
     "ios": "9.0"

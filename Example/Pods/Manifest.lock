@@ -1,5 +1,5 @@
 PODS:
-  - PushdySDK (0.5.0)
+  - PushdySDK (0.5.1)
 
 DEPENDENCIES:
   - PushdySDK (from `../PushdySDK.podspec`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../PushdySDK.podspec"
 
 SPEC CHECKSUMS:
-  PushdySDK: 7e7513588a56e4883fa4d94d20c1977ca3746f89
+  PushdySDK: 2ff2a638989120b990b35bb029c4b0a683ce6b7c
 
 PODFILE CHECKSUM: 0a843d5d3cd724b5047e42188aace9fbc319ef45
 

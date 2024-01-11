@@ -16,8 +16,8 @@ public extension Pushdy {
     internal static let PENDING_TRACKING_OPEN_IDS = "PENDING_TRACKING_OPEN_IDS"
     internal static let PENDING_TRACKING_EVENTS = "PENDING_TRACKING_EVENTS"
     internal static let APPLICATION_ID = "PUSHDY_APPLICATION_ID"
-    internal static let PUSHDY_BANNER_KEY = "PUSHDY_BANNER"
-
+    internal static let BANNERS = "PUSHDY_BANNER"
+    internal static let BANNER_OBJECT = "PUSHDY_BANNER_OBJECT_"
     
     internal static var _deviceID:String?
     
@@ -32,19 +32,6 @@ public extension Pushdy {
     internal static func setFirstTimeOpenApp(_ firstTime:Bool) {
         PDYStorage.setBool(key: "PUSHDY_FIRST_TIME_OPEN_APP", value: firstTime)
     }
-
-      /**
-     Get banner data
-     
-     - Returns: A player id string.
-     */
-    @objc static func getAllBanners() -> Any? {
-        if let banners = PDYStorage.get(key: PUSHDY_BANNER_KEY) {
-            return banners
-        }
-        return nil
-    }
-    
     
     /**
      Get player id
@@ -571,5 +558,45 @@ public extension Pushdy {
         return PDYStorage.set(key: PREV_ATTTRIBUTE_PREFIX+name, value: value)
     }
     
+
+    // BANNER
+    internal static func setBanners(banners: [NSObject] ) {
+        NSLog("setBanners %@", banners)
+        if let jsonStr = banners.jsonString {
+            NSLog("setBanner json String %@", jsonStr)
+            PDYStorage.setString(key: BANNERS, value: jsonStr)
+        }
+    }
+
+     internal static func getBanners() -> [NSObject] {
+        // NSLog("getBanners %@", banners)
+        if let jsonStr = PDYStorage.getString(key: BANNERS) {
+            NSLog("getBanners jsonString %@", jsonStr)
+            if let banners = jsonStr.asArrayOfDictionary() {
+                NSLog("getBanners getbanners %@", banners)
+                return banners.map{$0 as NSObject}
+            }
+        }
+        return []
+    }
     
+    internal static func getBannerObject(id: String) -> Dictionary<String, Any>? {
+        if let bannerObject = PDYStorage.getString(key: BANNER_OBJECT+id) {
+            if let dataB = bannerObject.data(using: .utf8) {
+                if let dict = try? JSONSerialization.jsonObject(with: dataB, options: []) as? [String: Any] {
+                    NSLog("getBannerObject dict %@", dict);
+                    return dict;
+                }
+            }
+        }
+        return nil
+    }
+    
+    internal static func setBannerObject(id: String, bannerObject: NSDictionary) {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: bannerObject) {
+            if let jsonStr = String(data: jsonData, encoding: .utf8) {
+                PDYStorage.setString(key: BANNER_OBJECT + id, value: jsonStr)
+            }
+        }
+    }
 }

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     private let button: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemRed
-        button.setTitle("Test SDK", for: .normal)
+        button.setTitle("Subcibes", for: .normal)
         button.layer.cornerRadius = 7
         return button
     }()
@@ -29,7 +29,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        self.getAllBanner()
         self.button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -55,14 +54,8 @@ class ViewController: UIViewController {
     
     @objc func didTapButton(){
         print("TapButton");
-        Pushdy.subscribeBanner();
+        //Pushdy.subscribe();
+        Pushdy.trackBanner(bannerId: "a506b0ce-1b8b-440f-b415-1acc3ade855d", type: "impression");
     }
-    
-    @objc func getAllBanner(){
-        if let allBanner = Pushdy.getAllBanners() {
-            print("allBanner \(allBanner)");
-        };
-    }
-    
 }
 
