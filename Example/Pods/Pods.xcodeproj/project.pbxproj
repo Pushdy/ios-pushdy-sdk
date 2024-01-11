@@ -7,48 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AE71C89211D4AF6AD07764E832DDD6F /* PDYNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FA9EA425231F9E50B4973D74DA76F8 /* PDYNotificationHandler.swift */; };
-		110FD960C8BE317CEFC3D88A8D8ADB7D /* PDYKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8189C754496243167EEAA1889F845D /* PDYKeychain.swift */; };
-		138AC9D464007E0563EB0F46EC6E7B69 /* PDYAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6EC16FF915AEC520B593EBDF78C4D /* PDYAttribute.swift */; };
-		21398687EF99FFEF68AC5B572A54069F /* PDYDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8444083A5E65BA6062BA123AEDBE6F0 /* PDYDeviceInfo.swift */; };
-		358A78654F96C8101A4EF075A48E260F /* PDYThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD960DC2E66D0C5C88A2BB0B5F009D54 /* PDYThread.swift */; };
-		35B3D83D09B8BFF2CF955B03DA96B107 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8F92CB313F01038F27459222AAD99E /* Dictionary+Extension.swift */; };
-		421415DE0791C03624E20777EBEF01EC /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CBB784E7AC2F4334DFAC52E8B21B03 /* UIImageView+Extension.swift */; };
-		48592932DBE97D801758B812D389377E /* PDYNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D20B69261C52DD8126C5F3253ABE31 /* PDYNotificationView.swift */; };
-		4D01A8A9A7585E955E25EDBEB35CECC6 /* PDYRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789BD4E131D73CD587598D4D865CADA /* PDYRequest.swift */; };
-		511A35B7CF96174D0D565AFDBCE09AC7 /* Pushdy+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99A00C9A4F7B29872BAB455C4A5D2CD /* Pushdy+UIApplication.swift */; };
-		530FD336B2608E10D6458C7BDE2A58BD /* PDYPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E08EDF58056B2CC617E028D48CCFE5 /* PDYPlist.swift */; };
-		5B8BE537C7DF275249AC67C7804F546B /* ic_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42877C5C05CCAE5E4A59B186399293C6 /* ic_close@2x.png */; };
-		5E829CBADE327F683FFEEADC8A8A6635 /* PushdySDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F313FA5AEB93EDE6BD9F8B8C5720252 /* PushdySDK-dummy.m */; };
-		7364F466CA33EC742089857885FCE9D6 /* PDYPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69422255540C1EAE461EDB6AE02A958 /* PDYPlayer.swift */; };
-		82F01E05B55958E2D813744C1B46D1EE /* ic_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 419A8723E0106C0B276E19929AA7346A /* ic_notification@2x.png */; };
-		8848C26A7649BE43A6C3CEE04A615777 /* PDYVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B30F93FE02611DC5AE154E35E047C98 /* PDYVersion.swift */; };
-		89C8C1E4B4BF8E6C27373F4B9DA3D175 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4A8E1DF13D576500D87C8E79174435 /* String+Extension.swift */; };
-		8C62E09D38AB67226BB350827BC0D438 /* PDYNotificationHandler+UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120EF5BB4847F49C4D8D2808DEE78E41 /* PDYNotificationHandler+UserNotification.swift */; };
-		91260D2E3B55A7CF5D67C82FBC127858 /* PDYRequestObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5827891F5E87156EAABF60621CBCEC /* PDYRequestObject.swift */; };
-		932C0A9DBFCCD2CD5286B8BD47739611 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA94013B57C376F8DFAF5277EA8E482F /* UIView+Extension.swift */; };
-		987DE3B6F8BF96B4DF9B5588C8A0D4B8 /* Pushdy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337D5BB0A40C17B2F3A9E7426FFFC88 /* Pushdy.swift */; };
-		9B5FF09A2A9848ADC2A9492B01F45C8A /* PDYParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333AC5C9B28F7FD47C144E9788880CAE /* PDYParam.swift */; };
-		9C96B7B530D60730F1D4EC8288F83805 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFBDADB6DC0FDFB4C3CDE6EE02AEC2 /* UIViewController+Extension.swift */; };
-		A0DB8CCA551C9AB3C7610FF1B0F486E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		A2F1CCAA2DF8AA227C0DB9B11B04AF74 /* Pushdy+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535EBE4BCF9C18823E58BCDD41C9BCF0 /* Pushdy+Notification.swift */; };
-		A44968616147EBB2C74035C790E9D3B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		BBB0511D4BCC4C6EFAD6D5EF8CB5593B /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E8A373882634F2D513A2A1AFF3F952 /* Array+Extension.swift */; };
-		BF1339C99F43F2AD67697B5343ED7E49 /* Pods-Pushdy_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 028F15C3D686B32F2F82D72D2B095586 /* Pods-Pushdy_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9F23AAAD963F0AAB570F3B62E85CD14 /* Pushdy+InAppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD33E666188079F59AA467C507721F1 /* Pushdy+InAppNotification.swift */; };
-		CDC1F66D5C191ADF6AF68639735067BB /* Pushdy+LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2DA959ECE28BFE2DC63CAC070CB02E /* Pushdy+LocalData.swift */; };
-		CE8DF93CF9E2DB9D8194B37442445162 /* Pods-Pushdy_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8488BEB64483DD499F44E641DCF7827 /* Pods-Pushdy_Example-dummy.m */; };
-		CFD76916D13BDED78612070E92403D7B /* PDYNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB01EF222C56460BA3D590CCCC123E5 /* PDYNotification.swift */; };
-		D00295A1E6E06A48CA3FE9929CB5060A /* PDYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4A1220156F3609FAC5C6DDF39BB507 /* PDYStorage.swift */; };
-		D3CB80F2BDE386DB133FFC566A664D18 /* PushdySDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0CF7A32214225653C2D6B0FE0431941 /* PushdySDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EB04AA8A554BEA29256E6F6B49C2E733 /* PDYUUIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E946E5D432C55B4997F7BBE8B057111 /* PDYUUIDGenerator.swift */; };
-		ECFDF9EA68E5D9CA992841456657BC88 /* Pushdy+Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B1A39F271FBE5AF18C187D27F9465 /* Pushdy+Swizzling.swift */; };
-		F398676BFFAA7D9FF0614985B9EB3D25 /* PDYNotificationView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 537440028542182D53B1F042FA99EC1B /* PDYNotificationView.xib */; };
-		F454D1895FA43C31A67562E985B7670F /* Pushdy+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3629C6C1F915F3EC8091D3D7ED3C79A3 /* Pushdy+Request.swift */; };
+		00FDAA80773AA474EB901AAA97FE4E89 /* PDYKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A8DC5F01E8207F124238825F34701 /* PDYKeychain.swift */; };
+		04BCCCB839694C12AFC5CF890744E68A /* PDYVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF928A0FC8CEA66AAD7A80A0629744C3 /* PDYVersion.swift */; };
+		0AA6AB2E21D330761650F1DCF51ABCD9 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4D0F00DAF5435669B79D7C938FADE /* UIViewController+Extension.swift */; };
+		19007E2AF8FCC04F0A7ABF01E0B8D510 /* PDYPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C1607850D843EFCA3B6BE47152E9BF /* PDYPlayer.swift */; };
+		1C37943E880C9DACF1BBC374A1690691 /* PDYRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF586B2BBE17E698F2428023AB1AC2FD /* PDYRequest.swift */; };
+		1FD27F19A1686CFF33FBC828CF6EE097 /* Pods-Pushdy_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 028F15C3D686B32F2F82D72D2B095586 /* Pods-Pushdy_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FEBE195327654DDDB2F538E2B3D9BE4 /* PDYNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD38180535E8E83760CB96E0AF89AC1 /* PDYNotificationView.xib */; };
+		21D44D9146F3C24C69E318F649370982 /* Pushdy+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30FFFC436ACB3D291E8EFBA2572B254 /* Pushdy+UIApplication.swift */; };
+		2704C26A00B02710BAF02442FBCA9CA9 /* ic_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85E4E7D74FB040B207C0201934CD1813 /* ic_close@2x.png */; };
+		2A73660348C2B170E02CB7C66F483AE7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE91CA674B71D6487DE10654D32EF80 /* String+Extension.swift */; };
+		2B5B1E558019C5008E46301CCE7D27D7 /* ic_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24083139127B6FE7056220C30406DAB0 /* ic_notification@2x.png */; };
+		2B83DFB22ED5E6639CBA0EC88FAAE57C /* PDYNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51881BB98001C5A0D57CF5B97327E7BD /* PDYNotificationHandler.swift */; };
+		369575819856964AD10EE84FF832F9A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		3995378CBABE1896F251DC67BE98ED40 /* PDYDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9D7FB0176A4DAC6AA87DF7405C94D /* PDYDeviceInfo.swift */; };
+		3B40BE50D63877DCF72983238F62C11E /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B875D94D2DE760FD15D7239AD36B07B2 /* Dictionary+Extension.swift */; };
+		402DCF947F7D5E4712312DABE2531B4E /* PDYParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1672EF9549A462D24C93F64B2A36F3EA /* PDYParam.swift */; };
+		4C945E89740F63D91FA9AD246AE9B452 /* Pushdy+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F9ACBC3F701589D3E49F4B2C4CDBFE /* Pushdy+Request.swift */; };
+		5941FBCF48611070D833D30F6C21C172 /* Pods-Pushdy_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8488BEB64483DD499F44E641DCF7827 /* Pods-Pushdy_Example-dummy.m */; };
+		68D98416772B537191D012F730E5975E /* PDYAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F7ED5781187CDC484C2CAEF82CA705 /* PDYAttribute.swift */; };
+		68FA9045185469F1718239E6E4672C22 /* PDYRequestObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311DEDE35A9BD6EF1294DD50322B90B /* PDYRequestObject.swift */; };
+		6AB9E767407B9AD275D4587F8B040278 /* Pushdy+InAppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7E7DA22CB18C195597B6EB5DE7799F /* Pushdy+InAppNotification.swift */; };
+		6C85010CDC8509622DE2A30397389F37 /* PDYNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A74C96E1032F92C10F0E74C9A1CAA8F /* PDYNotificationView.swift */; };
+		723D1D5FD7D2BA9A685BDAAE83EC0C42 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E07DDBACE4D655E36C393ACB1659E /* UIView+Extension.swift */; };
+		748CF22685CE8C99AE656A55253DD8B8 /* Pushdy+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC1C3B2EB9727D953343D373FE4DC0A /* Pushdy+Notification.swift */; };
+		7D095D7FC5023271296FC774978F3FE8 /* PDYPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3B1665D68E25E8D9B199D8EBEF207 /* PDYPlist.swift */; };
+		7E8668DD297821801C04203E2FC4B686 /* Pushdy+LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA690E1B9AF4124AB2F0507A0055C550 /* Pushdy+LocalData.swift */; };
+		9865173DEFD4A639304B67B5E9D26FDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		A1BA1EE98B60C22299C019AA1A0DAD44 /* Pushdy+Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259964F2E6138B14CDE3421D5265431 /* Pushdy+Tracking.swift */; };
+		A528C1A035837B9CDEEF87639A78A197 /* PDYEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FDB25C243EE410511195BB90BF8FA5 /* PDYEvent.swift */; };
+		A9F4AA2B47A5C1A09451AFDAB8E700F7 /* PushdySDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C60DB4E8A29C0A3BE5DF8300F4EE47C2 /* PushdySDK-dummy.m */; };
+		B25BFAD42F26E4E6B12B83ED6936F34E /* PDYUUIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0912DF9265D562FE7295764CFC8B8A /* PDYUUIDGenerator.swift */; };
+		CC4DE00A784DC3AB465142C7C5CED71C /* PDYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3441B0180853354540EC7E72B987321 /* PDYStorage.swift */; };
+		D6B657EE6054AE0D227962E28828B59B /* PDYThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D5659B61DF68230ED754DF57A94FE /* PDYThread.swift */; };
+		DC222C4A3F80B314631DE97C4DADEA2F /* Pushdy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C369550D202FCC643F3E72588038C65 /* Pushdy.swift */; };
+		DF753E977E2E260213180B3E440CBDF2 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2744F1D8DF86238B22F680DF44E859 /* UIImageView+Extension.swift */; };
+		E8E019548ED1DF5FEBB9D5ED00985C2B /* PDYNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA58405DCFD4DC73DAD76C612CEED8 /* PDYNotification.swift */; };
+		E97F4656A2D8CCB69BB6B23453250CD6 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1D6C19DE2F265AE153C0A024056499 /* Array+Extension.swift */; };
+		F6B4F9410D2553D7081A03D4D50CD107 /* Pushdy+Swizzling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970E87BA5616DC0BF6B8D91DEB8C758D /* Pushdy+Swizzling.swift */; };
+		FD5FB248629C0165A7711B7F1FADF3AE /* PushdySDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0A40A2489EFEBF36251B463B8B3A5E /* PushdySDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD844A87FBA9DB5766FA62FAFADCCD81 /* PDYNotificationHandler+UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3D434EB3DC5E286034B0F04FD56CAD /* PDYNotificationHandler+UserNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AF2CB6AC49A050E4C7FCE4771FCEE663 /* PBXContainerItemProxy */ = {
+		BCB5FF3951D3F2262F3E340B6A1C6FCD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -60,136 +62,162 @@
 /* Begin PBXFileReference section */
 		028F15C3D686B32F2F82D72D2B095586 /* Pods-Pushdy_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Pushdy_Example-umbrella.h"; sourceTree = "<group>"; };
 		0A60E147E79EC72505E89F1A231270D2 /* Pods-Pushdy_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pushdy_Example-frameworks.sh"; sourceTree = "<group>"; };
-		0F2DA959ECE28BFE2DC63CAC070CB02E /* Pushdy+LocalData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+LocalData.swift"; path = "Pushdy/Classes/Pushdy+LocalData.swift"; sourceTree = "<group>"; };
-		120EF5BB4847F49C4D8D2808DEE78E41 /* PDYNotificationHandler+UserNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "PDYNotificationHandler+UserNotification.swift"; sourceTree = "<group>"; };
-		1622CE63D0A147061A42E3DFDBF3F477 /* Pods_Pushdy_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pushdy_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F2BB4BE4B7737FB2724DD43611F9D8E /* PushdySDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PushdySDK.modulemap; sourceTree = "<group>"; };
-		2D4A1220156F3609FAC5C6DDF39BB507 /* PDYStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYStorage.swift; sourceTree = "<group>"; };
-		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		333AC5C9B28F7FD47C144E9788880CAE /* PDYParam.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYParam.swift; sourceTree = "<group>"; };
-		3629C6C1F915F3EC8091D3D7ED3C79A3 /* Pushdy+Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Request.swift"; path = "Pushdy/Classes/Pushdy+Request.swift"; sourceTree = "<group>"; };
-		3789BD4E131D73CD587598D4D865CADA /* PDYRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYRequest.swift; sourceTree = "<group>"; };
-		38D20B69261C52DD8126C5F3253ABE31 /* PDYNotificationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotificationView.swift; sourceTree = "<group>"; };
-		419A8723E0106C0B276E19929AA7346A /* ic_notification@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_notification@2x.png"; path = "Resources/Icons/ic_notification@2x.png"; sourceTree = "<group>"; };
-		42877C5C05CCAE5E4A59B186399293C6 /* ic_close@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_close@2x.png"; path = "Resources/Icons/ic_close@2x.png"; sourceTree = "<group>"; };
-		42E8A373882634F2D513A2A1AFF3F952 /* Array+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		48B6EC16FF915AEC520B593EBDF78C4D /* PDYAttribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYAttribute.swift; sourceTree = "<group>"; };
-		4D3B1A39F271FBE5AF18C187D27F9465 /* Pushdy+Swizzling.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Swizzling.swift"; path = "Pushdy/Classes/Pushdy+Swizzling.swift"; sourceTree = "<group>"; };
-		535EBE4BCF9C18823E58BCDD41C9BCF0 /* Pushdy+Notification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Notification.swift"; path = "Pushdy/Classes/Pushdy+Notification.swift"; sourceTree = "<group>"; };
-		537440028542182D53B1F042FA99EC1B /* PDYNotificationView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = PDYNotificationView.xib; sourceTree = "<group>"; };
-		5DD33E666188079F59AA467C507721F1 /* Pushdy+InAppNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+InAppNotification.swift"; path = "Pushdy/Classes/Pushdy+InAppNotification.swift"; sourceTree = "<group>"; };
-		5E946E5D432C55B4997F7BBE8B057111 /* PDYUUIDGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYUUIDGenerator.swift; sourceTree = "<group>"; };
-		6337D5BB0A40C17B2F3A9E7426FFFC88 /* Pushdy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pushdy.swift; path = Pushdy/Classes/Pushdy.swift; sourceTree = "<group>"; };
-		6B30F93FE02611DC5AE154E35E047C98 /* PDYVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYVersion.swift; sourceTree = "<group>"; };
-		6D5827891F5E87156EAABF60621CBCEC /* PDYRequestObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYRequestObject.swift; sourceTree = "<group>"; };
-		6F313FA5AEB93EDE6BD9F8B8C5720252 /* PushdySDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PushdySDK-dummy.m"; sourceTree = "<group>"; };
+		0D9E07DDBACE4D655E36C393ACB1659E /* UIView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		0F0912DF9265D562FE7295764CFC8B8A /* PDYUUIDGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYUUIDGenerator.swift; sourceTree = "<group>"; };
+		1622CE63D0A147061A42E3DFDBF3F477 /* Pods-Pushdy_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Pushdy_Example"; path = Pods_Pushdy_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1672EF9549A462D24C93F64B2A36F3EA /* PDYParam.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYParam.swift; sourceTree = "<group>"; };
+		2259964F2E6138B14CDE3421D5265431 /* Pushdy+Tracking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Tracking.swift"; path = "Pushdy/Classes/Pushdy+Tracking.swift"; sourceTree = "<group>"; };
+		2311DEDE35A9BD6EF1294DD50322B90B /* PDYRequestObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYRequestObject.swift; sourceTree = "<group>"; };
+		24083139127B6FE7056220C30406DAB0 /* ic_notification@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "ic_notification@2x.png"; sourceTree = "<group>"; };
+		29F9ACBC3F701589D3E49F4B2C4CDBFE /* Pushdy+Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Request.swift"; path = "Pushdy/Classes/Pushdy+Request.swift"; sourceTree = "<group>"; };
+		3AE91CA674B71D6487DE10654D32EF80 /* String+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		40805B08B6858AE175C99066CAA4CAB4 /* PushdySDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PushdySDK-Info.plist"; sourceTree = "<group>"; };
+		46FDB25C243EE410511195BB90BF8FA5 /* PDYEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYEvent.swift; sourceTree = "<group>"; };
+		4CD9D7FB0176A4DAC6AA87DF7405C94D /* PDYDeviceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYDeviceInfo.swift; sourceTree = "<group>"; };
+		4D2744F1D8DF86238B22F680DF44E859 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		51881BB98001C5A0D57CF5B97327E7BD /* PDYNotificationHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotificationHandler.swift; sourceTree = "<group>"; };
+		58A04772737B42BA9C21D21ADAB8299D /* PushdySDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = PushdySDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5AC1C3B2EB9727D953343D373FE4DC0A /* Pushdy+Notification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Notification.swift"; path = "Pushdy/Classes/Pushdy+Notification.swift"; sourceTree = "<group>"; };
+		5F1D6C19DE2F265AE153C0A024056499 /* Array+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		64BA58405DCFD4DC73DAD76C612CEED8 /* PDYNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotification.swift; sourceTree = "<group>"; };
+		69779BA1D5A7FA53A07D98A26B8D5BF8 /* PushdySDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PushdySDK-prefix.pch"; sourceTree = "<group>"; };
+		6C369550D202FCC643F3E72588038C65 /* Pushdy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pushdy.swift; path = Pushdy/Classes/Pushdy.swift; sourceTree = "<group>"; };
+		6D3D434EB3DC5E286034B0F04FD56CAD /* PDYNotificationHandler+UserNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "PDYNotificationHandler+UserNotification.swift"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		74E319ECAD837D7651F8D376C93F66A2 /* Pods-Pushdy_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pushdy_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		78CFBDADB6DC0FDFB4C3CDE6EE02AEC2 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		7D7E7DA22CB18C195597B6EB5DE7799F /* Pushdy+InAppNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+InAppNotification.swift"; path = "Pushdy/Classes/Pushdy+InAppNotification.swift"; sourceTree = "<group>"; };
 		822701793CE5B9FFFC76EBD33FBD1EA0 /* Pods-Pushdy_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pushdy_Example-Info.plist"; sourceTree = "<group>"; };
-		8A8EA72FAB63C359A62756A46C78954F /* PushdySDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = PushdySDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PushdySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7C38E7F2BA8AE966AB7615E8D5F24A1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		85A0F1C80BB9B5B846986C8194D8F952 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		85E4E7D74FB040B207C0201934CD1813 /* ic_close@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "ic_close@2x.png"; sourceTree = "<group>"; };
+		876A8DC5F01E8207F124238825F34701 /* PDYKeychain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYKeychain.swift; sourceTree = "<group>"; };
+		970E87BA5616DC0BF6B8D91DEB8C758D /* Pushdy+Swizzling.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+Swizzling.swift"; path = "Pushdy/Classes/Pushdy+Swizzling.swift"; sourceTree = "<group>"; };
+		9A74C96E1032F92C10F0E74C9A1CAA8F /* PDYNotificationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotificationView.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PushdySDK; path = PushdySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A196868B3E41F8245E36593A697B6312 /* PushdySDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PushdySDK.modulemap; sourceTree = "<group>"; };
 		A8488BEB64483DD499F44E641DCF7827 /* Pods-Pushdy_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Pushdy_Example-dummy.m"; sourceTree = "<group>"; };
-		B349D9A8ED7C2D2633C17CE2E5E1CAF7 /* PushdySDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PushdySDK.xcconfig; sourceTree = "<group>"; };
-		B4CBB784E7AC2F4334DFAC52E8B21B03 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		B69422255540C1EAE461EDB6AE02A958 /* PDYPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYPlayer.swift; sourceTree = "<group>"; };
-		BA8F92CB313F01038F27459222AAD99E /* Dictionary+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
-		BD960DC2E66D0C5C88A2BB0B5F009D54 /* PDYThread.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYThread.swift; sourceTree = "<group>"; };
+		A9D4D3AC9676768E76EA68ABAAEBBE05 /* PushdySDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PushdySDK.debug.xcconfig; sourceTree = "<group>"; };
+		AB0A40A2489EFEBF36251B463B8B3A5E /* PushdySDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PushdySDK-umbrella.h"; sourceTree = "<group>"; };
+		AF928A0FC8CEA66AAD7A80A0629744C3 /* PDYVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYVersion.swift; sourceTree = "<group>"; };
+		B30FFFC436ACB3D291E8EFBA2572B254 /* Pushdy+UIApplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+UIApplication.swift"; path = "Pushdy/Classes/Pushdy+UIApplication.swift"; sourceTree = "<group>"; };
+		B49D5659B61DF68230ED754DF57A94FE /* PDYThread.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYThread.swift; sourceTree = "<group>"; };
+		B875D94D2DE760FD15D7239AD36B07B2 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		BCB7839800247E8E107A0121A54FFADD /* PushdySDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PushdySDK.release.xcconfig; sourceTree = "<group>"; };
 		BFC980BF8CD45A7F8035783B7CE084E1 /* Pods-Pushdy_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Pushdy_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C4A39A4D9F3D21C51CF90DBAAB35583E /* Pods-Pushdy_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pushdy_Example.release.xcconfig"; sourceTree = "<group>"; };
-		CD5267B08036447139F09998EA6DBB71 /* PushdySDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PushdySDK-Info.plist"; sourceTree = "<group>"; };
-		D0CF7A32214225653C2D6B0FE0431941 /* PushdySDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PushdySDK-umbrella.h"; sourceTree = "<group>"; };
-		D3E08EDF58056B2CC617E028D48CCFE5 /* PDYPlist.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYPlist.swift; sourceTree = "<group>"; };
+		C60DB4E8A29C0A3BE5DF8300F4EE47C2 /* PushdySDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PushdySDK-dummy.m"; sourceTree = "<group>"; };
+		CEB3B1665D68E25E8D9B199D8EBEF207 /* PDYPlist.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYPlist.swift; sourceTree = "<group>"; };
+		D0F4D0F00DAF5435669B79D7C938FADE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D3441B0180853354540EC7E72B987321 /* PDYStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYStorage.swift; sourceTree = "<group>"; };
+		D8C1607850D843EFCA3B6BE47152E9BF /* PDYPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYPlayer.swift; sourceTree = "<group>"; };
+		DA690E1B9AF4124AB2F0507A0055C550 /* Pushdy+LocalData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+LocalData.swift"; path = "Pushdy/Classes/Pushdy+LocalData.swift"; sourceTree = "<group>"; };
 		DAF5CE9649C7FF8885BCFC59EA5B6B9C /* Pods-Pushdy_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Pushdy_Example.modulemap"; sourceTree = "<group>"; };
-		E2D68D9BB27B48CE7660D679718DDEBA /* PushdySDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PushdySDK-prefix.pch"; sourceTree = "<group>"; };
-		E4FA9EA425231F9E50B4973D74DA76F8 /* PDYNotificationHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotificationHandler.swift; sourceTree = "<group>"; };
-		EA94013B57C376F8DFAF5277EA8E482F /* UIView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		EBB01EF222C56460BA3D590CCCC123E5 /* PDYNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYNotification.swift; sourceTree = "<group>"; };
-		F1FD0D5244F9706CE054EE47EBC37FE9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		F8444083A5E65BA6062BA123AEDBE6F0 /* PDYDeviceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYDeviceInfo.swift; sourceTree = "<group>"; };
+		DF586B2BBE17E698F2428023AB1AC2FD /* PDYRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYRequest.swift; sourceTree = "<group>"; };
+		DF78C6F731F835F332F982A2D5FD084C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		EDD38180535E8E83760CB96E0AF89AC1 /* PDYNotificationView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = PDYNotificationView.xib; sourceTree = "<group>"; };
+		F3F7ED5781187CDC484C2CAEF82CA705 /* PDYAttribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYAttribute.swift; sourceTree = "<group>"; };
 		F92FE0ACF101D50C12327BC82F174B36 /* Pods-Pushdy_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pushdy_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		F99A00C9A4F7B29872BAB455C4A5D2CD /* Pushdy+UIApplication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Pushdy+UIApplication.swift"; path = "Pushdy/Classes/Pushdy+UIApplication.swift"; sourceTree = "<group>"; };
-		FB8189C754496243167EEAA1889F845D /* PDYKeychain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDYKeychain.swift; sourceTree = "<group>"; };
-		FD4A8E1DF13D576500D87C8E79174435 /* String+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DF0DD66916AED93EE7DE29B018278336 /* Frameworks */ = {
+		631E162D24C08ECC1B46E17A70B0FF6A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0DB8CCA551C9AB3C7610FF1B0F486E4 /* Foundation.framework in Frameworks */,
+				369575819856964AD10EE84FF832F9A3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EFFCBEB5B0193C304E078D64C1C9D3BE /* Frameworks */ = {
+		7E02662362CD0885613A292055D579E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A44968616147EBB2C74035C790E9D3B2 /* Foundation.framework in Frameworks */,
+				9865173DEFD4A639304B67B5E9D26FDF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0074804DBBE0F76F8F4FCBBB4C0616BD /* Development Pods */ = {
+		180FC371AF5FFE66A7D91218D5AAB69E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				87EE75AA60159EF1D5D435F918F9946B /* PushdySDK */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		1B5440D156DD77D3B5F4AE06A8AC9AD7 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				42877C5C05CCAE5E4A59B186399293C6 /* ic_close@2x.png */,
-				419A8723E0106C0B276E19929AA7346A /* ic_notification@2x.png */,
+				A209933218F8B9D00A4EF9CD1F7C6578 /* Icons */,
 			);
 			name = Resources;
+			path = Pushdy/Classes/Resources;
 			sourceTree = "<group>";
 		};
-		297D9A76004F46DA4558EDACC23E1415 /* Pod */ = {
+		1E3924E6DBBCB03559596E90D23A8162 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				F1FD0D5244F9706CE054EE47EBC37FE9 /* LICENSE */,
-				8A8EA72FAB63C359A62756A46C78954F /* PushdySDK.podspec */,
-				A7C38E7F2BA8AE966AB7615E8D5F24A1 /* README.md */,
+				85A0F1C80BB9B5B846986C8194D8F952 /* LICENSE */,
+				58A04772737B42BA9C21D21ADAB8299D /* PushdySDK.podspec */,
+				DF78C6F731F835F332F982A2D5FD084C /* README.md */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		312C5DF473C421C31BD9149DF82FD30A /* Core */ = {
+		1ED57879A10177B97F0C796D15E72D12 /* Ultility */ = {
 			isa = PBXGroup;
 			children = (
-				333AC5C9B28F7FD47C144E9788880CAE /* PDYParam.swift */,
-				E8BACA59740DA4184624D73CA124D769 /* Entities */,
-				5EF13B1425814A0ADD6A138BA8091547 /* Network */,
-				8F5324CDABE14A18AD655376D29DA9C1 /* Ultility */,
+				4CD9D7FB0176A4DAC6AA87DF7405C94D /* PDYDeviceInfo.swift */,
+				876A8DC5F01E8207F124238825F34701 /* PDYKeychain.swift */,
+				CEB3B1665D68E25E8D9B199D8EBEF207 /* PDYPlist.swift */,
+				D3441B0180853354540EC7E72B987321 /* PDYStorage.swift */,
+				B49D5659B61DF68230ED754DF57A94FE /* PDYThread.swift */,
+				0F0912DF9265D562FE7295764CFC8B8A /* PDYUUIDGenerator.swift */,
+				AF928A0FC8CEA66AAD7A80A0629744C3 /* PDYVersion.swift */,
+			);
+			name = Ultility;
+			path = Ultility;
+			sourceTree = "<group>";
+		};
+		230F8CCA0C41FC7BBF72256EAE1A49F5 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F3F7ED5781187CDC484C2CAEF82CA705 /* PDYAttribute.swift */,
+				46FDB25C243EE410511195BB90BF8FA5 /* PDYEvent.swift */,
+				64BA58405DCFD4DC73DAD76C612CEED8 /* PDYNotification.swift */,
+				D8C1607850D843EFCA3B6BE47152E9BF /* PDYPlayer.swift */,
+				2311DEDE35A9BD6EF1294DD50322B90B /* PDYRequestObject.swift */,
+			);
+			name = Entities;
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		27E462923785287AE754F6DD5C906AF1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1672EF9549A462D24C93F64B2A36F3EA /* PDYParam.swift */,
+				230F8CCA0C41FC7BBF72256EAE1A49F5 /* Entities */,
+				51102D91838AE349AEC2A0BC49C41E66 /* Network */,
+				1ED57879A10177B97F0C796D15E72D12 /* Ultility */,
 			);
 			name = Core;
 			path = Pushdy/Classes/Core;
 			sourceTree = "<group>";
 		};
-		35066E7355C2B7E5FDA694DB48A35B5C /* Products */ = {
+		2DD737757BEA3D76DF409D435A1D2A44 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1622CE63D0A147061A42E3DFDBF3F477 /* Pods_Pushdy_Example.framework */,
-				A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK.framework */,
+				5F1D6C19DE2F265AE153C0A024056499 /* Array+Extension.swift */,
+				B875D94D2DE760FD15D7239AD36B07B2 /* Dictionary+Extension.swift */,
+				3AE91CA674B71D6487DE10654D32EF80 /* String+Extension.swift */,
+				4D2744F1D8DF86238B22F680DF44E859 /* UIImageView+Extension.swift */,
+				0D9E07DDBACE4D655E36C393ACB1659E /* UIView+Extension.swift */,
+				D0F4D0F00DAF5435669B79D7C938FADE /* UIViewController+Extension.swift */,
 			);
-			name = Products;
+			name = Extensions;
+			path = Pushdy/Classes/Extensions;
 			sourceTree = "<group>";
 		};
-		385C57B5D2079A2BED1A73EA859431C3 /* Views */ = {
+		385737D675D1836DC64870B639B3FEF4 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				38D20B69261C52DD8126C5F3253ABE31 /* PDYNotificationView.swift */,
-				537440028542182D53B1F042FA99EC1B /* PDYNotificationView.xib */,
+				73010EBC01A26E169240FF4AF5FCFCE8 /* PushdySDK */,
 			);
-			name = Views;
-			path = Pushdy/Classes/Views;
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		41DB31FF61F047FCF2D63D9ECD54A91B /* Targets Support Files */ = {
@@ -200,72 +228,54 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		4892A2AACC778ABA0663B20F79E96FC1 /* Extensions */ = {
+		51102D91838AE349AEC2A0BC49C41E66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				42E8A373882634F2D513A2A1AFF3F952 /* Array+Extension.swift */,
-				BA8F92CB313F01038F27459222AAD99E /* Dictionary+Extension.swift */,
-				FD4A8E1DF13D576500D87C8E79174435 /* String+Extension.swift */,
-				B4CBB784E7AC2F4334DFAC52E8B21B03 /* UIImageView+Extension.swift */,
-				EA94013B57C376F8DFAF5277EA8E482F /* UIView+Extension.swift */,
-				78CFBDADB6DC0FDFB4C3CDE6EE02AEC2 /* UIViewController+Extension.swift */,
+				DF586B2BBE17E698F2428023AB1AC2FD /* PDYRequest.swift */,
 			);
-			name = Extensions;
-			path = Pushdy/Classes/Extensions;
-			sourceTree = "<group>";
-		};
-		5325648F7F61BFC673D0D8C60278BE9F /* Notification */ = {
-			isa = PBXGroup;
-			children = (
-				E4FA9EA425231F9E50B4973D74DA76F8 /* PDYNotificationHandler.swift */,
-				120EF5BB4847F49C4D8D2808DEE78E41 /* PDYNotificationHandler+UserNotification.swift */,
-			);
-			name = Notification;
-			path = Pushdy/Classes/Notification;
-			sourceTree = "<group>";
-		};
-		5EF13B1425814A0ADD6A138BA8091547 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				3789BD4E131D73CD587598D4D865CADA /* PDYRequest.swift */,
-			);
+			name = Network;
 			path = Network;
 			sourceTree = "<group>";
 		};
-		87EE75AA60159EF1D5D435F918F9946B /* PushdySDK */ = {
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6337D5BB0A40C17B2F3A9E7426FFFC88 /* Pushdy.swift */,
-				5DD33E666188079F59AA467C507721F1 /* Pushdy+InAppNotification.swift */,
-				0F2DA959ECE28BFE2DC63CAC070CB02E /* Pushdy+LocalData.swift */,
-				535EBE4BCF9C18823E58BCDD41C9BCF0 /* Pushdy+Notification.swift */,
-				3629C6C1F915F3EC8091D3D7ED3C79A3 /* Pushdy+Request.swift */,
-				4D3B1A39F271FBE5AF18C187D27F9465 /* Pushdy+Swizzling.swift */,
-				F99A00C9A4F7B29872BAB455C4A5D2CD /* Pushdy+UIApplication.swift */,
-				312C5DF473C421C31BD9149DF82FD30A /* Core */,
-				4892A2AACC778ABA0663B20F79E96FC1 /* Extensions */,
-				5325648F7F61BFC673D0D8C60278BE9F /* Notification */,
-				297D9A76004F46DA4558EDACC23E1415 /* Pod */,
-				1B5440D156DD77D3B5F4AE06A8AC9AD7 /* Resources */,
-				AF14682C66F07B7266D71A7CA3C15F98 /* Support Files */,
-				385C57B5D2079A2BED1A73EA859431C3 /* Views */,
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6549EBBE66EE57DB52D07BA4CF413981 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A74C96E1032F92C10F0E74C9A1CAA8F /* PDYNotificationView.swift */,
+				EDD38180535E8E83760CB96E0AF89AC1 /* PDYNotificationView.xib */,
+			);
+			name = Views;
+			path = Pushdy/Classes/Views;
+			sourceTree = "<group>";
+		};
+		73010EBC01A26E169240FF4AF5FCFCE8 /* PushdySDK */ = {
+			isa = PBXGroup;
+			children = (
+				6C369550D202FCC643F3E72588038C65 /* Pushdy.swift */,
+				7D7E7DA22CB18C195597B6EB5DE7799F /* Pushdy+InAppNotification.swift */,
+				DA690E1B9AF4124AB2F0507A0055C550 /* Pushdy+LocalData.swift */,
+				5AC1C3B2EB9727D953343D373FE4DC0A /* Pushdy+Notification.swift */,
+				29F9ACBC3F701589D3E49F4B2C4CDBFE /* Pushdy+Request.swift */,
+				970E87BA5616DC0BF6B8D91DEB8C758D /* Pushdy+Swizzling.swift */,
+				2259964F2E6138B14CDE3421D5265431 /* Pushdy+Tracking.swift */,
+				B30FFFC436ACB3D291E8EFBA2572B254 /* Pushdy+UIApplication.swift */,
+				27E462923785287AE754F6DD5C906AF1 /* Core */,
+				2DD737757BEA3D76DF409D435A1D2A44 /* Extensions */,
+				BCF6F0C465F6E9D06215468B73B2A8C6 /* Notification */,
+				1E3924E6DBBCB03559596E90D23A8162 /* Pod */,
+				180FC371AF5FFE66A7D91218D5AAB69E /* Resources */,
+				FD6894C4224908C5370B96D1726A3164 /* Support Files */,
+				6549EBBE66EE57DB52D07BA4CF413981 /* Views */,
 			);
 			name = PushdySDK;
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		8F5324CDABE14A18AD655376D29DA9C1 /* Ultility */ = {
-			isa = PBXGroup;
-			children = (
-				F8444083A5E65BA6062BA123AEDBE6F0 /* PDYDeviceInfo.swift */,
-				FB8189C754496243167EEAA1889F845D /* PDYKeychain.swift */,
-				D3E08EDF58056B2CC617E028D48CCFE5 /* PDYPlist.swift */,
-				2D4A1220156F3609FAC5C6DDF39BB507 /* PDYStorage.swift */,
-				BD960DC2E66D0C5C88A2BB0B5F009D54 /* PDYThread.swift */,
-				5E946E5D432C55B4997F7BBE8B057111 /* PDYUUIDGenerator.swift */,
-				6B30F93FE02611DC5AE154E35E047C98 /* PDYVersion.swift */,
-			);
-			path = Ultility;
 			sourceTree = "<group>";
 		};
 		9C886BEC5B732E69C9A9AC10917BF261 /* Pods-Pushdy_Example */ = {
@@ -285,35 +295,42 @@
 			path = "Target Support Files/Pods-Pushdy_Example";
 			sourceTree = "<group>";
 		};
-		AF14682C66F07B7266D71A7CA3C15F98 /* Support Files */ = {
+		A209933218F8B9D00A4EF9CD1F7C6578 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				1F2BB4BE4B7737FB2724DD43611F9D8E /* PushdySDK.modulemap */,
-				B349D9A8ED7C2D2633C17CE2E5E1CAF7 /* PushdySDK.xcconfig */,
-				6F313FA5AEB93EDE6BD9F8B8C5720252 /* PushdySDK-dummy.m */,
-				CD5267B08036447139F09998EA6DBB71 /* PushdySDK-Info.plist */,
-				E2D68D9BB27B48CE7660D679718DDEBA /* PushdySDK-prefix.pch */,
-				D0CF7A32214225653C2D6B0FE0431941 /* PushdySDK-umbrella.h */,
+				85E4E7D74FB040B207C0201934CD1813 /* ic_close@2x.png */,
+				24083139127B6FE7056220C30406DAB0 /* ic_notification@2x.png */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/PushdySDK";
+			name = Icons;
+			path = Icons;
 			sourceTree = "<group>";
 		};
-		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+		BCF6F0C465F6E9D06215468B73B2A8C6 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+				51881BB98001C5A0D57CF5B97327E7BD /* PDYNotificationHandler.swift */,
+				6D3D434EB3DC5E286034B0F04FD56CAD /* PDYNotificationHandler+UserNotification.swift */,
 			);
-			name = iOS;
+			name = Notification;
+			path = Pushdy/Classes/Notification;
+			sourceTree = "<group>";
+		};
+		C750772A1EA30829863E50E884B51B76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1622CE63D0A147061A42E3DFDBF3F477 /* Pods-Pushdy_Example */,
+				A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				0074804DBBE0F76F8F4FCBBB4C0616BD /* Development Pods */,
+				385737D675D1836DC64870B639B3FEF4 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				35066E7355C2B7E5FDA694DB48A35B5C /* Products */,
+				C750772A1EA30829863E50E884B51B76 /* Products */,
 				41DB31FF61F047FCF2D63D9ECD54A91B /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -321,38 +338,42 @@
 		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E8BACA59740DA4184624D73CA124D769 /* Entities */ = {
+		FD6894C4224908C5370B96D1726A3164 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				48B6EC16FF915AEC520B593EBDF78C4D /* PDYAttribute.swift */,
-				EBB01EF222C56460BA3D590CCCC123E5 /* PDYNotification.swift */,
-				B69422255540C1EAE461EDB6AE02A958 /* PDYPlayer.swift */,
-				6D5827891F5E87156EAABF60621CBCEC /* PDYRequestObject.swift */,
+				A196868B3E41F8245E36593A697B6312 /* PushdySDK.modulemap */,
+				C60DB4E8A29C0A3BE5DF8300F4EE47C2 /* PushdySDK-dummy.m */,
+				40805B08B6858AE175C99066CAA4CAB4 /* PushdySDK-Info.plist */,
+				69779BA1D5A7FA53A07D98A26B8D5BF8 /* PushdySDK-prefix.pch */,
+				AB0A40A2489EFEBF36251B463B8B3A5E /* PushdySDK-umbrella.h */,
+				A9D4D3AC9676768E76EA68ABAAEBBE05 /* PushdySDK.debug.xcconfig */,
+				BCB7839800247E8E107A0121A54FFADD /* PushdySDK.release.xcconfig */,
 			);
-			path = Entities;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/PushdySDK";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		BFCD17AAD8F66E928D403E70A074B5FA /* Headers */ = {
+		46BA93AFCDD2D9C07EF1864452A77D6C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF1339C99F43F2AD67697B5343ED7E49 /* Pods-Pushdy_Example-umbrella.h in Headers */,
+				FD5FB248629C0165A7711B7F1FADF3AE /* PushdySDK-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED04EF2720AA178B15C6F0DE1553BA19 /* Headers */ = {
+		4D7E6E74DEDE234E468D15C1FBEEB1C6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CB80F2BDE386DB133FFC566A664D18 /* PushdySDK-umbrella.h in Headers */,
+				1FD27F19A1686CFF33FBC828CF6EE097 /* Pods-Pushdy_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,31 +382,31 @@
 /* Begin PBXNativeTarget section */
 		87BABDBD2D84A81B3A802EA67F6C1FB4 /* Pods-Pushdy_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D726F7F10D0DF4CEFC2E930ED7EB3967 /* Build configuration list for PBXNativeTarget "Pods-Pushdy_Example" */;
+			buildConfigurationList = B2C38677D700E93D703913E76AD49D35 /* Build configuration list for PBXNativeTarget "Pods-Pushdy_Example" */;
 			buildPhases = (
-				BFCD17AAD8F66E928D403E70A074B5FA /* Headers */,
-				482D3C903A7CDB004F5057887F7CAF4A /* Sources */,
-				DF0DD66916AED93EE7DE29B018278336 /* Frameworks */,
-				03BF8EF987370561EF3BB08DD3E0DCBA /* Resources */,
+				4D7E6E74DEDE234E468D15C1FBEEB1C6 /* Headers */,
+				82F6A954B346AC3289D8D290C5C51A06 /* Sources */,
+				7E02662362CD0885613A292055D579E5 /* Frameworks */,
+				7F17180556A38EF5383AEFB0DB614DC5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8CE099193828F59E2CD84F59CD2AE44B /* PBXTargetDependency */,
+				6B51F2A6C64113CBEABFDF2AD7EF3FB6 /* PBXTargetDependency */,
 			);
 			name = "Pods-Pushdy_Example";
-			productName = "Pods-Pushdy_Example";
-			productReference = 1622CE63D0A147061A42E3DFDBF3F477 /* Pods_Pushdy_Example.framework */;
+			productName = Pods_Pushdy_Example;
+			productReference = 1622CE63D0A147061A42E3DFDBF3F477 /* Pods-Pushdy_Example */;
 			productType = "com.apple.product-type.framework";
 		};
 		DC8607CCF6720043BECE5FC36AB2DFDF /* PushdySDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E0C6888A1DC90656A81B7312F35FF60 /* Build configuration list for PBXNativeTarget "PushdySDK" */;
+			buildConfigurationList = 16129BD8DE299CBE55095D8510AB3BD2 /* Build configuration list for PBXNativeTarget "PushdySDK" */;
 			buildPhases = (
-				ED04EF2720AA178B15C6F0DE1553BA19 /* Headers */,
-				905A17BA0AA3DAA923E70B9398DBE881 /* Sources */,
-				EFFCBEB5B0193C304E078D64C1C9D3BE /* Frameworks */,
-				B67D15C18B2A39266C4D310ECC39578D /* Resources */,
+				46BA93AFCDD2D9C07EF1864452A77D6C /* Headers */,
+				1B07354DC6B5C4245C25D2A1C5DEE466 /* Sources */,
+				631E162D24C08ECC1B46E17A70B0FF6A /* Frameworks */,
+				1417CD07114CE872263F43CDB4CDD7BE /* Resources */,
 			);
 			buildRules = (
 			);
@@ -393,7 +414,7 @@
 			);
 			name = PushdySDK;
 			productName = PushdySDK;
-			productReference = A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK.framework */;
+			productReference = A169A63F8BF43544A6DC5B18CF994CE5 /* PushdySDK */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -402,18 +423,19 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				Base,
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 35066E7355C2B7E5FDA694DB48A35B5C /* Products */;
+			productRefGroup = C750772A1EA30829863E50E884B51B76 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -424,89 +446,90 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		03BF8EF987370561EF3BB08DD3E0DCBA /* Resources */ = {
+		1417CD07114CE872263F43CDB4CDD7BE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2704C26A00B02710BAF02442FBCA9CA9 /* ic_close@2x.png in Resources */,
+				2B5B1E558019C5008E46301CCE7D27D7 /* ic_notification@2x.png in Resources */,
+				1FEBE195327654DDDB2F538E2B3D9BE4 /* PDYNotificationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B67D15C18B2A39266C4D310ECC39578D /* Resources */ = {
+		7F17180556A38EF5383AEFB0DB614DC5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B8BE537C7DF275249AC67C7804F546B /* ic_close@2x.png in Resources */,
-				82F01E05B55958E2D813744C1B46D1EE /* ic_notification@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		482D3C903A7CDB004F5057887F7CAF4A /* Sources */ = {
+		1B07354DC6B5C4245C25D2A1C5DEE466 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8DF93CF9E2DB9D8194B37442445162 /* Pods-Pushdy_Example-dummy.m in Sources */,
+				E97F4656A2D8CCB69BB6B23453250CD6 /* Array+Extension.swift in Sources */,
+				3B40BE50D63877DCF72983238F62C11E /* Dictionary+Extension.swift in Sources */,
+				68D98416772B537191D012F730E5975E /* PDYAttribute.swift in Sources */,
+				3995378CBABE1896F251DC67BE98ED40 /* PDYDeviceInfo.swift in Sources */,
+				A528C1A035837B9CDEEF87639A78A197 /* PDYEvent.swift in Sources */,
+				00FDAA80773AA474EB901AAA97FE4E89 /* PDYKeychain.swift in Sources */,
+				E8E019548ED1DF5FEBB9D5ED00985C2B /* PDYNotification.swift in Sources */,
+				2B83DFB22ED5E6639CBA0EC88FAAE57C /* PDYNotificationHandler.swift in Sources */,
+				FD844A87FBA9DB5766FA62FAFADCCD81 /* PDYNotificationHandler+UserNotification.swift in Sources */,
+				6C85010CDC8509622DE2A30397389F37 /* PDYNotificationView.swift in Sources */,
+				402DCF947F7D5E4712312DABE2531B4E /* PDYParam.swift in Sources */,
+				19007E2AF8FCC04F0A7ABF01E0B8D510 /* PDYPlayer.swift in Sources */,
+				7D095D7FC5023271296FC774978F3FE8 /* PDYPlist.swift in Sources */,
+				1C37943E880C9DACF1BBC374A1690691 /* PDYRequest.swift in Sources */,
+				68FA9045185469F1718239E6E4672C22 /* PDYRequestObject.swift in Sources */,
+				CC4DE00A784DC3AB465142C7C5CED71C /* PDYStorage.swift in Sources */,
+				D6B657EE6054AE0D227962E28828B59B /* PDYThread.swift in Sources */,
+				B25BFAD42F26E4E6B12B83ED6936F34E /* PDYUUIDGenerator.swift in Sources */,
+				04BCCCB839694C12AFC5CF890744E68A /* PDYVersion.swift in Sources */,
+				DC222C4A3F80B314631DE97C4DADEA2F /* Pushdy.swift in Sources */,
+				6AB9E767407B9AD275D4587F8B040278 /* Pushdy+InAppNotification.swift in Sources */,
+				7E8668DD297821801C04203E2FC4B686 /* Pushdy+LocalData.swift in Sources */,
+				748CF22685CE8C99AE656A55253DD8B8 /* Pushdy+Notification.swift in Sources */,
+				4C945E89740F63D91FA9AD246AE9B452 /* Pushdy+Request.swift in Sources */,
+				F6B4F9410D2553D7081A03D4D50CD107 /* Pushdy+Swizzling.swift in Sources */,
+				A1BA1EE98B60C22299C019AA1A0DAD44 /* Pushdy+Tracking.swift in Sources */,
+				21D44D9146F3C24C69E318F649370982 /* Pushdy+UIApplication.swift in Sources */,
+				A9F4AA2B47A5C1A09451AFDAB8E700F7 /* PushdySDK-dummy.m in Sources */,
+				2A73660348C2B170E02CB7C66F483AE7 /* String+Extension.swift in Sources */,
+				DF753E977E2E260213180B3E440CBDF2 /* UIImageView+Extension.swift in Sources */,
+				723D1D5FD7D2BA9A685BDAAE83EC0C42 /* UIView+Extension.swift in Sources */,
+				0AA6AB2E21D330761650F1DCF51ABCD9 /* UIViewController+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		905A17BA0AA3DAA923E70B9398DBE881 /* Sources */ = {
+		82F6A954B346AC3289D8D290C5C51A06 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBB0511D4BCC4C6EFAD6D5EF8CB5593B /* Array+Extension.swift in Sources */,
-				35B3D83D09B8BFF2CF955B03DA96B107 /* Dictionary+Extension.swift in Sources */,
-				138AC9D464007E0563EB0F46EC6E7B69 /* PDYAttribute.swift in Sources */,
-				21398687EF99FFEF68AC5B572A54069F /* PDYDeviceInfo.swift in Sources */,
-				110FD960C8BE317CEFC3D88A8D8ADB7D /* PDYKeychain.swift in Sources */,
-				CFD76916D13BDED78612070E92403D7B /* PDYNotification.swift in Sources */,
-				8C62E09D38AB67226BB350827BC0D438 /* PDYNotificationHandler+UserNotification.swift in Sources */,
-				0AE71C89211D4AF6AD07764E832DDD6F /* PDYNotificationHandler.swift in Sources */,
-				48592932DBE97D801758B812D389377E /* PDYNotificationView.swift in Sources */,
-				F398676BFFAA7D9FF0614985B9EB3D25 /* PDYNotificationView.xib in Sources */,
-				9B5FF09A2A9848ADC2A9492B01F45C8A /* PDYParam.swift in Sources */,
-				7364F466CA33EC742089857885FCE9D6 /* PDYPlayer.swift in Sources */,
-				530FD336B2608E10D6458C7BDE2A58BD /* PDYPlist.swift in Sources */,
-				4D01A8A9A7585E955E25EDBEB35CECC6 /* PDYRequest.swift in Sources */,
-				91260D2E3B55A7CF5D67C82FBC127858 /* PDYRequestObject.swift in Sources */,
-				D00295A1E6E06A48CA3FE9929CB5060A /* PDYStorage.swift in Sources */,
-				358A78654F96C8101A4EF075A48E260F /* PDYThread.swift in Sources */,
-				EB04AA8A554BEA29256E6F6B49C2E733 /* PDYUUIDGenerator.swift in Sources */,
-				8848C26A7649BE43A6C3CEE04A615777 /* PDYVersion.swift in Sources */,
-				C9F23AAAD963F0AAB570F3B62E85CD14 /* Pushdy+InAppNotification.swift in Sources */,
-				CDC1F66D5C191ADF6AF68639735067BB /* Pushdy+LocalData.swift in Sources */,
-				A2F1CCAA2DF8AA227C0DB9B11B04AF74 /* Pushdy+Notification.swift in Sources */,
-				F454D1895FA43C31A67562E985B7670F /* Pushdy+Request.swift in Sources */,
-				ECFDF9EA68E5D9CA992841456657BC88 /* Pushdy+Swizzling.swift in Sources */,
-				511A35B7CF96174D0D565AFDBCE09AC7 /* Pushdy+UIApplication.swift in Sources */,
-				987DE3B6F8BF96B4DF9B5588C8A0D4B8 /* Pushdy.swift in Sources */,
-				5E829CBADE327F683FFEEADC8A8A6635 /* PushdySDK-dummy.m in Sources */,
-				89C8C1E4B4BF8E6C27373F4B9DA3D175 /* String+Extension.swift in Sources */,
-				421415DE0791C03624E20777EBEF01EC /* UIImageView+Extension.swift in Sources */,
-				932C0A9DBFCCD2CD5286B8BD47739611 /* UIView+Extension.swift in Sources */,
-				9C96B7B530D60730F1D4EC8288F83805 /* UIViewController+Extension.swift in Sources */,
+				5941FBCF48611070D833D30F6C21C172 /* Pods-Pushdy_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8CE099193828F59E2CD84F59CD2AE44B /* PBXTargetDependency */ = {
+		6B51F2A6C64113CBEABFDF2AD7EF3FB6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PushdySDK;
 			target = DC8607CCF6720043BECE5FC36AB2DFDF /* PushdySDK */;
-			targetProxy = AF2CB6AC49A050E4C7FCE4771FCEE663 /* PBXContainerItemProxy */;
+			targetProxy = BCB5FF3951D3F2262F3E340B6A1C6FCD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		08449EC517967D8ACA177B3EBEA5A0EE /* Release */ = {
+		8F63EB939FBAFC3B9B63370F6AA5A93A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4A39A4D9F3D21C51CF90DBAAB35583E /* Pods-Pushdy_Example.release.xcconfig */;
+			baseConfigurationReference = BCB7839800247E8E107A0121A54FFADD /* PushdySDK.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -515,19 +538,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/PushdySDK/PushdySDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PushdySDK/PushdySDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/PushdySDK/PushdySDK.modulemap";
+				PRODUCT_MODULE_NAME = PushdySDK;
+				PRODUCT_NAME = PushdySDK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -535,10 +557,11 @@
 			};
 			name = Release;
 		};
-		4BE66A09A74FD25164AAB3C2645B9B93 /* Release */ = {
+		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -561,6 +584,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -583,21 +607,123 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		7EF7227D9B20A1D549000096ACCB23D7 /* Debug */ = {
+		97C9313DC7C6BBD5C9F22C1CCB08433D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74E319ECAD837D7651F8D376C93F66A2 /* Pods-Pushdy_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9B1C4A88DA475208B43458611406FC0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9D4D3AC9676768E76EA68ABAAEBBE05 /* PushdySDK.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PushdySDK/PushdySDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PushdySDK/PushdySDK-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PushdySDK/PushdySDK.modulemap";
+				PRODUCT_MODULE_NAME = PushdySDK;
+				PRODUCT_NAME = PushdySDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B4768D631C7691F1605D8FAB1839697B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4A39A4D9F3D21C51CF90DBAAB35583E /* Pods-Pushdy_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -620,6 +746,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -645,7 +772,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -658,128 +785,32 @@
 			};
 			name = Debug;
 		};
-		9A6FDEAF90C8D931ABD093A9BEFED2F9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B349D9A8ED7C2D2633C17CE2E5E1CAF7 /* PushdySDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PushdySDK/PushdySDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PushdySDK/PushdySDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PushdySDK/PushdySDK.modulemap";
-				PRODUCT_MODULE_NAME = PushdySDK;
-				PRODUCT_NAME = PushdySDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C0CB453969DB00B229F6DC0A89311BD3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74E319ECAD837D7651F8D376C93F66A2 /* Pods-Pushdy_Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Pushdy_Example/Pods-Pushdy_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C7F1BD63914FB361B3407E0CBEACD62B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B349D9A8ED7C2D2633C17CE2E5E1CAF7 /* PushdySDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PushdySDK/PushdySDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PushdySDK/PushdySDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PushdySDK/PushdySDK.modulemap";
-				PRODUCT_MODULE_NAME = PushdySDK;
-				PRODUCT_NAME = PushdySDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		16129BD8DE299CBE55095D8510AB3BD2 /* Build configuration list for PBXNativeTarget "PushdySDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B1C4A88DA475208B43458611406FC0B /* Debug */,
+				8F63EB939FBAFC3B9B63370F6AA5A93A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EF7227D9B20A1D549000096ACCB23D7 /* Debug */,
-				4BE66A09A74FD25164AAB3C2645B9B93 /* Release */,
+				B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */,
+				903A0004D3E6651EFD5D2E16214D101B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E0C6888A1DC90656A81B7312F35FF60 /* Build configuration list for PBXNativeTarget "PushdySDK" */ = {
+		B2C38677D700E93D703913E76AD49D35 /* Build configuration list for PBXNativeTarget "Pods-Pushdy_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9A6FDEAF90C8D931ABD093A9BEFED2F9 /* Debug */,
-				C7F1BD63914FB361B3407E0CBEACD62B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D726F7F10D0DF4CEFC2E930ED7EB3967 /* Build configuration list for PBXNativeTarget "Pods-Pushdy_Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C0CB453969DB00B229F6DC0A89311BD3 /* Debug */,
-				08449EC517967D8ACA177B3EBEA5A0EE /* Release */,
+				97C9313DC7C6BBD5C9F22C1CCB08433D /* Debug */,
+				B4768D631C7691F1605D8FAB1839697B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

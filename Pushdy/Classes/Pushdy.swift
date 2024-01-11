@@ -119,7 +119,10 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         self.observeAttributesChanged()
       
         self.restoreSecondaryDataFromStorage()
+        
+        self.subscribe()
     }
+    
     
     /**
      Module react-native-pushdy need to initWith without Handler at function RNPushy.registerSdk
@@ -146,6 +149,94 @@ public typealias PushdyFailureBlock = (NSError) -> Void
 
     public static func setBadgeOnForeground(badge_on_foreground:Bool) {
         _badge_on_foreground = badge_on_foreground
+    }
+
+    public static func subscribe() {
+        return self._subscribe();
+    }
+    
+    public static func getAllBanners() -> [NSObject] {
+        return getBanners();
+    }
+    
+    public static func trackBanner(bannerId: String, type: String ) {
+        NSLog("[Pushdy] trackBanner: bannerId: \(bannerId), type \(type)")
+        var playerID = getPlayerID();
+        var applicationId = _applicationId ;
+        // FIXME: remove this line; for testing only
+//        playerID = "96655d2e-ce02-3ec7-a0f6-273e5458fe67";
+//        applicationId = "pushdy"
+        
+        if(playerID != nil) {
+            if let key = _clientKey {
+                var player = PDYPlayer(clientKey:key, deviceID: _deviceID)
+                NSLog("[Pushdy] trackBanner: player: \(player)")
+                var bannerTrackingData = getBannerObject(id: bannerId) ?? Dictionary();
+                switch type {
+                    case "impression":
+                    var impressionCount = bannerTrackingData["imp"] ?? 0 ;
+                        let timestamp = Int64(NSDate().timeIntervalSince1970)
+                        bannerTrackingData["imp"] = impressionCount as! Int + 1;
+                        bannerTrackingData["last_imp_ts"] = timestamp
+                    break;
+                    case "click":
+                    var clickCount = bannerTrackingData["click"] ?? 0 ;
+                        let timestamp = Int64(NSDate().timeIntervalSince1970)
+                        bannerTrackingData["click"] = clickCount as! Int + 1;
+                        bannerTrackingData["last_click_ts"] = timestamp
+                    break;
+                    case "close":
+                    var closeCount = bannerTrackingData["close"] ?? 0 ;
+                        let timestamp = Int64(NSDate().timeIntervalSince1970)
+                        bannerTrackingData["close"] = closeCount as! Int + 1;
+                        bannerTrackingData["last_close_ts"] = timestamp
+                    break;
+                    case "loaded":
+                    var loadedCount = bannerTrackingData["loaded"] ?? 0 ;
+                        let timestamp = Int64(NSDate().timeIntervalSince1970)
+                        bannerTrackingData["loaded"] = loadedCount as! Int + 1;
+                        bannerTrackingData["last_loaded_ts"] = timestamp
+                    break;
+                default:
+                    break;
+                }
+                
+                setBannerObject(id: bannerId, bannerObject: bannerTrackingData as NSDictionary)
+                
+                NSLog("[Pushdy] trackBanner: bannerTrackingData final: \(bannerTrackingData)")
+                let dataParams: [String: Any]  = [
+                    "imp": [
+                        "b": [
+                            bannerId: bannerTrackingData["imp"] ?? 0
+                        ]
+                    ],
+                    "click": [
+                        "b": [
+                           bannerId: bannerTrackingData["click"] ?? 0
+                       ]
+                    ],
+                    "close": [
+                        "b": [
+                       bannerId: bannerTrackingData["close"] ?? 0
+                    ]],
+                    "loaded": [
+                        "b": [
+                           bannerId: bannerTrackingData["loaded"] ?? 0
+                       ]
+                    ],
+                ]
+                print("[Pushdy] dataParams:  \(dataParams)")
+
+               try? player.trackBanner(applicationId: applicationId, playerID: playerID, data: dataParams, completion: { (response:AnyObject?) in
+                   print("[Pushdy] Successfully to Tracking  \(response)")
+               }, failure: { (errorCode:Int, message:String?) in
+                   print("[Pushdy] Failed to Tracking  \(applicationId) with error \(errorCode) : \(String(describing: message))")
+               })            }
+        }
+    }
+    
+    public static func getBannerData(bannerId: String) -> Dictionary<String, Any>? {
+        return getBannerObject(id: bannerId);
     }
     
     //MARK: Pusdy Error/Exception
@@ -270,5 +361,37 @@ public typealias PushdyFailureBlock = (NSError) -> Void
             editPlayer()
         }
     }
-    
+
+    /**
+     Banner Function
+     */
+    internal static func _subscribe() {
+         let playerID = getPlayerID();
+         let applicationId = _applicationId ;
+
+
+        // FIXME: remove this line; for testing only
+//        playerID = "96655d2e-ce02-3ec7-a0f6-273e5458fe67";
+//        applicationId = "pushdy"
+        
+        NSLog("[Pushdy] _subscribe: PLAYER ID: \(playerID)")
+        NSLog("[Pushdy] _subscribe: applicationId: \(applicationId)")
+        
+        if(playerID != nil) {
+            NSLog("[Pushdy] _subscribe: _clientKey: \(_clientKey)")
+            if let key = _clientKey {
+                let player = PDYPlayer(clientKey:key, deviceID: _deviceID)
+                try? player.subscribe(applicationID: applicationId, playerID: playerID, completion: {
+                    (response:AnyObject?) in
+                    if let banners = response?["banners"] as? [NSObject] {
+                        print("[Pushdy] subscribe banners: \(banners) \(type(of: banners))");
+                          setBanners(banners: banners)
+                    }
+                }, failure: { (errorCode:Int, message:String?) in
+                    print("[Pushdy] Failed to Subcrible \(applicationId) with error \(errorCode) : \(String(describing: message))")
+                  })
+            }
+            // try ? player.subscribe(applicationId:applicationId, playerID: playerID)
+        }
+    }
 }
