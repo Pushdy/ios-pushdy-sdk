@@ -204,16 +204,23 @@ public typealias PushdyFailureBlock = (NSError) -> Void
                 NSLog("[Pushdy] trackBanner: bannerTrackingData final: \(bannerTrackingData)")
                 let dataParams: [String: Any]  = [
                     "imp": [
-                       bannerId: bannerTrackingData["imp"] ?? 0
+                        "b": [
+                            bannerId: [bannerTrackingData["imp"] ?? 0]
+                        ]
                     ],
                     "click": [
-                       bannerId: bannerTrackingData["click"] ?? 0
+                        "b": [
+                           bannerId: bannerTrackingData["click"] ?? 0
+                       ]
                     ],
                     "close": [
+                        "b": [
                        bannerId: bannerTrackingData["close"] ?? 0
-                    ],
+                    ]],
                     "loaded": [
-                       bannerId: bannerTrackingData["loaded"] ?? 0
+                        "b": [
+                           bannerId: bannerTrackingData["loaded"] ?? 0
+                       ]
                     ],
                 ]
                 print("[Pushdy] dataParams:  \(dataParams)")
