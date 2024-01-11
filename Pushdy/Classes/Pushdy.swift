@@ -119,6 +119,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         self.observeAttributesChanged()
       
         self.restoreSecondaryDataFromStorage()
+        
+        self.subscribe()
     }
     
     
