@@ -8,11 +8,11 @@
 import UIKit
 
 @objc extension UIViewController {
-    public class func topViewController() -> UIViewController {
-        return UIViewController.topViewController(withRoot: (UIApplication.shared.keyWindow?.rootViewController)!)
+    public class func topViewController() -> UIViewController? {
+        return UIViewController.topViewController(withRoot: (UIApplication.shared.keyWindow?.rootViewController))
     }
     
-    public class func topViewController(withRoot rootViewController:UIViewController) -> UIViewController {
+    public class func topViewController(withRoot rootViewController:UIViewController?) -> UIViewController? {
         if rootViewController is UITabBarController {
             let tabBarController = rootViewController as! UITabBarController
             if let selectedController = tabBarController.selectedViewController {
@@ -25,7 +25,7 @@ import UIKit
                 return self.topViewController(withRoot:visibleController)
             }
         }
-        else if let presentedController = rootViewController.presentedViewController {
+        else if let presentedController = rootViewController?.presentedViewController {
             return self.topViewController(withRoot:presentedController)
         }
         return rootViewController

@@ -119,11 +119,13 @@ import UserNotificationsUI
         } else {
             // --- Handle push in active state --- //
             let topViewController = UIViewController.topViewController()
-            if topViewController.isVisible() {
-                self.handleNotificationInActiveState(notification)
-            }
-            else {
-                self.handleNotificationInInactiveState(notification)
+            if topViewController != nil {
+                if topViewController!.isVisible() {
+                    self.handleNotificationInActiveState(notification)
+                }
+                else {
+                    self.handleNotificationInInactiveState(notification)
+                }
             }
         }
     }
@@ -153,14 +155,17 @@ import UserNotificationsUI
         }
         
         if (activeState) {
+
             let topViewController = UIViewController.topViewController();
-            if topViewController.isVisible() {
-                if (UIApplication.shared.applicationState == UIApplication.State.inactive) {
-                    AudioServicesPlaySystemSound(1002);
-                    self.handleNotificationInInactiveState(notification)
-                }
-                else {
-                    self.handleNotificationInActiveState(notification)
+            if (topViewController != nil) {
+                if topViewController!.isVisible() {
+                    if (UIApplication.shared.applicationState == UIApplication.State.inactive) {
+                        AudioServicesPlaySystemSound(1002);
+                        self.handleNotificationInInactiveState(notification)
+                    }
+                    else {
+                        self.handleNotificationInActiveState(notification)
+                    }
                 }
             }
         }
