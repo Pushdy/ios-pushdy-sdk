@@ -94,6 +94,8 @@ public typealias PushdyFailureBlock = (NSError) -> Void
         self.observeAttributesChanged()
       
         self.restoreSecondaryDataFromStorage()
+        
+        self.subscribe()
     }
 
     @objc public static func initWith(clientKey:String, delegate:UIApplicationDelegate, delegaleHandler:AnyObject, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
