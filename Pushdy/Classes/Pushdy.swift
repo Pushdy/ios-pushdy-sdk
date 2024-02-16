@@ -174,62 +174,78 @@ public typealias PushdyFailureBlock = (NSError) -> Void
                 var player = PDYPlayer(clientKey:key, deviceID: _deviceID)
                 NSLog("[Pushdy] trackBanner: player: \(player)")
                 var bannerTrackingData = getBannerObject(id: bannerId) ?? Dictionary();
+                var bannerTrackingDataReset = getBannerObject(id: "tracking_" + bannerId) ?? Dictionary();
                 switch type {
                     case "impression":
-                    var impressionCount = bannerTrackingData["imp"] ?? 0 ;
+                        var impressionCount = bannerTrackingData["imp"] ?? 0 ;
                         let timestamp = Int64(NSDate().timeIntervalSince1970)
                         bannerTrackingData["imp"] = impressionCount as! Int + 1;
                         bannerTrackingData["last_imp_ts"] = timestamp
-                    break;
+                        
+                        var impressionCountReset = bannerTrackingDataReset["imp"] ?? 0;
+                        bannerTrackingDataReset["imp"] = impressionCountReset as! Int + 1;
+                        break;
                     case "click":
-                    var clickCount = bannerTrackingData["click"] ?? 0 ;
+                        var clickCount = bannerTrackingData["click"] ?? 0 ;
                         let timestamp = Int64(NSDate().timeIntervalSince1970)
                         bannerTrackingData["click"] = clickCount as! Int + 1;
-                        bannerTrackingData["last_click_ts"] = timestamp
-                    break;
+                        bannerTrackingData["last_click_ts"] = timestamp;
+                        
+                        var clickCounntReset = bannerTrackingDataReset["click"] ?? 0;
+                        bannerTrackingDataReset["click"] = clickCounntReset as! Int + 1;
+                        break;
                     case "close":
-                    var closeCount = bannerTrackingData["close"] ?? 0 ;
+                        var closeCount = bannerTrackingData["close"] ?? 0 ;
                         let timestamp = Int64(NSDate().timeIntervalSince1970)
                         bannerTrackingData["close"] = closeCount as! Int + 1;
                         bannerTrackingData["last_close_ts"] = timestamp
-                    break;
+                    
+                        var closeCountReset = bannerTrackingDataReset["close"] ?? 0;
+                        bannerTrackingDataReset["close"] = closeCountReset as! Int + 1;
+                        break;
                     case "loaded":
-                    var loadedCount = bannerTrackingData["loaded"] ?? 0 ;
+                        var loadedCount = bannerTrackingData["loaded"] ?? 0 ;
                         let timestamp = Int64(NSDate().timeIntervalSince1970)
                         bannerTrackingData["loaded"] = loadedCount as! Int + 1;
                         bannerTrackingData["last_loaded_ts"] = timestamp
-                    break;
-                default:
-                    break;
+                    
+                        var loadedCountReset = bannerTrackingDataReset["loaded"] ?? 0;
+                        bannerTrackingDataReset["loaded"] = loadedCountReset as! Int + 1;
+                        break;
+                    default:
+                        break;
                 }
                 
                 setBannerObject(id: bannerId, bannerObject: bannerTrackingData as NSDictionary)
+                setBannerObject(id: "tracking_" + bannerId, bannerObject: bannerTrackingDataReset as NSDictionary)
                 
-                NSLog("[Pushdy] trackBanner: bannerTrackingData final: \(bannerTrackingData)")
+                NSLog("[Pushdy] trackBanner: bannerTrackingData final: \(bannerTrackingDataReset)")
                 let dataParams: [String: Any]  = [
                     "imp": [
                         "b": [
-                            bannerId: bannerTrackingData["imp"] ?? 0
+                            bannerId: bannerTrackingDataReset["imp"] ?? 0
                         ]
                     ],
                     "click": [
                         "b": [
-                           bannerId: bannerTrackingData["click"] ?? 0
+                           bannerId: bannerTrackingDataReset["click"] ?? 0
                        ]
                     ],
                     "close": [
                         "b": [
-                       bannerId: bannerTrackingData["close"] ?? 0
+                       bannerId: bannerTrackingDataReset["close"] ?? 0
                     ]],
                     "loaded": [
                         "b": [
-                           bannerId: bannerTrackingData["loaded"] ?? 0
+                           bannerId: bannerTrackingDataReset["loaded"] ?? 0
                        ]
                     ],
                 ]
                 print("[Pushdy] dataParams:  \(dataParams)")
 
                try? player.trackBanner(applicationId: applicationId, playerID: playerID, data: dataParams, completion: { (response:AnyObject?) in
+                   // reset the tracking banner data that sent to the server
+                   setBannerObject(id: "tracking_" + bannerId, bannerObject: NSDictionary())
                    print("[Pushdy] Successfully to Tracking  \(response)")
                }, failure: { (errorCode:Int, message:String?) in
                    print("[Pushdy] Failed to Tracking  \(applicationId) with error \(errorCode) : \(String(describing: message))")
